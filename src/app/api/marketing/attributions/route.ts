@@ -6,14 +6,18 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const appTag = searchParams.get("app_tag");
+    const campaignId = searchParams.get("campaign_id");
 
     let query = supabase
-      .from("marketing_ai_insights")
-      .select("*")
-      .order("created_at", { ascending: false });
+      .from("marketing_attributions")
+      .select("*, marketing_campaigns(campaign_name, platform)")
+      .order("attributed_at", { ascending: false });
 
     if (appTag) {
       query = query.eq("app_tag", appTag);
+    }
+    if (campaignId) {
+      query = query.eq("campaign_id", campaignId);
     }
 
     const { data, error } = await query;
@@ -36,7 +40,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const required = ["app_tag", "insight_type", "title", "body"];
+    const required = ["campaign_id", "app_tag", "event_type"];
     const missing = required.filter((field) => !body[field]);
     if (missing.length > 0) {
       return NextResponse.json(
@@ -46,15 +50,16 @@ export async function POST(request: NextRequest) {
     }
 
     const { data, error } = await supabase
-      .from("marketing_ai_insights")
+      .from("marketing_attributions")
       .insert({
-        analysis_date: body.analysis_date || new Date().toISOString().split("T")[0],
+        campaign_id: body.campaign_id,
         app_tag: body.app_tag,
-        insight_type: body.insight_type,
-        title: body.title,
-        body: body.body,
-        recommendations: body.recommendations || null,
-        applied: false,
+        referral_code: body.referral_code || null,
+        device_id: body.device_id || null,
+        user_id: body.user_id || null,
+        event_type: body.event_type,
+        event_metadata: body.event_metadata || null,
+        attributed_at: body.attributed_at || new Date().toISOString(),
       })
       .select()
       .single();

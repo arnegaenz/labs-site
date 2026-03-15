@@ -5,15 +5,23 @@ export async function GET(request: NextRequest) {
   const supabase = getSupabase();
   try {
     const { searchParams } = new URL(request.url);
-    const appTag = searchParams.get("app_tag");
+    const campaignId = searchParams.get("campaign_id");
+    const from = searchParams.get("from");
+    const to = searchParams.get("to");
 
     let query = supabase
-      .from("marketing_ai_insights")
-      .select("*")
-      .order("created_at", { ascending: false });
+      .from("marketing_daily_metrics")
+      .select("*, marketing_campaigns(campaign_name, app_tag, platform)")
+      .order("date", { ascending: false });
 
-    if (appTag) {
-      query = query.eq("app_tag", appTag);
+    if (campaignId) {
+      query = query.eq("campaign_id", campaignId);
+    }
+    if (from) {
+      query = query.gte("date", from);
+    }
+    if (to) {
+      query = query.lte("date", to);
     }
 
     const { data, error } = await query;
@@ -36,7 +44,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const required = ["app_tag", "insight_type", "title", "body"];
+    const required = ["campaign_id", "date"];
     const missing = required.filter((field) => !body[field]);
     if (missing.length > 0) {
       return NextResponse.json(
@@ -45,17 +53,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const row = {
+      campaign_id: body.campaign_id,
+      date: body.date,
+      impressions: body.impressions || 0,
+      clicks: body.clicks || 0,
+      installs: body.installs || 0,
+      signups: body.signups || 0,
+      subscriptions: body.subscriptions || 0,
+      revenue_cents: body.revenue_cents || 0,
+      spend_cents: body.spend_cents || 0,
+    };
+
     const { data, error } = await supabase
-      .from("marketing_ai_insights")
-      .insert({
-        analysis_date: body.analysis_date || new Date().toISOString().split("T")[0],
-        app_tag: body.app_tag,
-        insight_type: body.insight_type,
-        title: body.title,
-        body: body.body,
-        recommendations: body.recommendations || null,
-        applied: false,
-      })
+      .from("marketing_daily_metrics")
+      .upsert(row, { onConflict: "campaign_id,date" })
       .select()
       .single();
 
