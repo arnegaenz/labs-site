@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HearZ — Architecture &amp; Integration Reference</title>
+<style>
+  @page { size: A4; margin: 1.5cm; }
+  @media print {
+    body { font-size: 10pt; }
+    .page-break { page-break-before: always; }
+    h2 { page-break-after: avoid; }
+    .diagram { page-break-inside: avoid; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    color: #1a1a2e;
+    background: #fff;
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem; color: #08080F; }
+  h2 { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 0.75rem; color: #08080F; border-bottom: 2px solid #00E5A0; padding-bottom: 0.25rem; }
+  h3 { font-size: 1.1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: #333; }
+  p { margin-bottom: 0.75rem; }
+  .subtitle { color: #666; font-size: 1rem; margin-bottom: 0.5rem; }
+  .meta { color: #999; font-size: 0.85rem; margin-bottom: 2rem; }
+  .brand-bar { height: 4px; background: linear-gradient(90deg, #00E5A0, #00D4FF, #8B5CF6); border-radius: 2px; margin-bottom: 1.5rem; }
+
+  /* Diagram boxes */
+  .diagram { margin: 1rem 0 1.5rem; }
+  .diagram svg { width: 100%; height: auto; }
+  .box-grid { display: grid; gap: 0.75rem; margin: 1rem 0; }
+  .box-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .box-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .box-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .box {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0.75rem;
+    background: #fafafa;
+  }
+  .box.highlight { border-color: #00E5A0; background: #f0fdf8; }
+  .box.accent { border-color: #00D4FF; background: #f0faff; }
+  .box.purple { border-color: #8B5CF6; background: #f5f0ff; }
+  .box.dark { border-color: #333; background: #08080F; color: #eee; }
+  .box h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .box p, .box ul { font-size: 0.8rem; line-height: 1.5; }
+  .box ul { padding-left: 1rem; }
+  .box code { font-size: 0.75rem; background: rgba(0,0,0,0.06); padding: 1px 4px; border-radius: 3px; }
+
+  /* Flow arrows */
+  .flow { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 1rem 0; flex-wrap: wrap; }
+  .flow-item {
+    background: #f0fdf8;
+    border: 1px solid #00E5A0;
+    border-radius: 6px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .flow-arrow { color: #00D4FF; font-weight: 700; font-size: 1.2rem; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+  th { background: #08080F; color: #fff; text-align: left; padding: 0.5rem 0.75rem; font-weight: 600; }
+  td { padding: 0.5rem 0.75rem; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) td { background: #fafafa; }
+
+  /* Architecture layer diagram */
+  .layer { border-left: 3px solid; padding: 0.5rem 0 0.5rem 1rem; margin: 0.5rem 0; }
+  .layer.l-app { border-color: #00E5A0; }
+  .layer.l-service { border-color: #00D4FF; }
+  .layer.l-data { border-color: #8B5CF6; }
+  .layer.l-infra { border-color: #F59E0B; }
+  .layer-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #999; }
+
+  .tag { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-right: 4px; }
+  .tag.green { background: #d1fae5; color: #065f46; }
+  .tag.blue { background: #dbeafe; color: #1e40af; }
+  .tag.purple { background: #ede9fe; color: #5b21b6; }
+  .tag.orange { background: #ffedd5; color: #9a3412; }
+  .tag.gray { background: #f3f4f6; color: #374151; }
+  .tag.red { background: #fee2e2; color: #991b1b; }
+
+  .toc { column-count: 2; column-gap: 2rem; margin: 1rem 0 2rem; }
+  .toc a { text-decoration: none; color: #1a1a2e; font-size: 0.9rem; display: block; padding: 2px 0; }
+  .toc a:hover { color: #00E5A0; }
+  .toc .num { color: #00D4FF; font-weight: 700; margin-right: 0.5rem; }
+</style>
+</head>
+<body>
+
+<div class="brand-bar"></div>
+<h1>HearZ</h1>
+<p class="subtitle">Architecture &amp; Integration Reference</p>
+<p class="meta">Version 2.0 &bull; Build 70 &bull; March 16, 2026 &bull; SkoobiLabs</p>
+
+<!-- TABLE OF CONTENTS -->
+<h2>Contents</h2>
+<div class="toc">
+  <a href="#overview"><span class="num">01</span> Product Overview</a>
+  <a href="#stack"><span class="num">02</span> Tech Stack</a>
+  <a href="#high-level"><span class="num">03</span> High-Level Architecture</a>
+  <a href="#frontend"><span class="num">04</span> Frontend Structure</a>
+  <a href="#routing"><span class="num">05</span> App Routing &amp; Navigation</a>
+  <a href="#components"><span class="num">06</span> Component Library</a>
+  <a href="#state"><span class="num">07</span> State Management</a>
+  <a href="#tts"><span class="num">08</span> TTS System &mdash; The Core Feature</a>
+  <a href="#audio"><span class="num">09</span> Audio Playback Pipeline</a>
+  <a href="#home"><span class="num">10</span> Vote-Based Home Screen</a>
+  <a href="#ranking"><span class="num">11</span> Smart Ranking Algorithm</a>
+  <a href="#fingerprint"><span class="num">12</span> Content Fingerprinting</a>
+  <a href="#taste"><span class="num">13</span> Taste Profile &amp; Source Preferences</a>
+  <a href="#audio-ads"><span class="num">14</span> Audio Ad System</a>
+  <a href="#monetization"><span class="num">15</span> Monetization</a>
+  <a href="#analytics"><span class="num">16</span> Analytics System</a>
+  <a href="#database"><span class="num">17</span> Local Database (SQLite)</a>
+  <a href="#auth"><span class="num">18</span> Authentication &amp; Sync</a>
+  <a href="#backend"><span class="num">19</span> Backend Architecture</a>
+  <a href="#api"><span class="num">20</span> API Endpoints</a>
+  <a href="#d1"><span class="num">21</span> Backend Database (D1)</a>
+  <a href="#cron"><span class="num">22</span> Scheduled Jobs</a>
+  <a href="#data-flows"><span class="num">23</span> Data Flows</a>
+  <a href="#local-news"><span class="num">24</span> Local News Pipeline</a>
+  <a href="#deep-links"><span class="num">25</span> Deep Links &amp; Referrals</a>
+  <a href="#widget"><span class="num">26</span> iOS Widget (In Progress)</a>
+  <a href="#theme"><span class="num">27</span> Theming &amp; Accessibility</a>
+  <a href="#external"><span class="num">28</span> External Services Map</a>
+  <a href="#security"><span class="num">29</span> Security Model</a>
+  <a href="#build"><span class="num">30</span> Build &amp; Deploy</a>
+  <a href="#roadmap"><span class="num">31</span> Pending Integrations</a>
+</div>
+
+<!-- 01 PRODUCT OVERVIEW -->
+<h2 id="overview">01 &mdash; Product Overview</h2>
+<p>HearZ is a curated audio feed app that reads the best articles from the web aloud using <strong>AI-generated voices (OpenAI TTS)</strong>. Open the app, tap play &mdash; like a radio station for articles. The <strong>primary audience is elderly users</strong>. Every UX decision filters through: "would a 75-year-old understand this without help?" Accessibility-first, zero friction to value.</p>
+
+<div class="box-grid cols-3">
+  <div class="box highlight">
+    <h4>Listen</h4>
+    <p>OpenAI TTS reads every article with premium AI voices, teleprompter-style word highlighting, and auto-scroll. This is the entire product.</p>
+  </div>
+  <div class="box accent">
+    <h4>Vote</h4>
+    <p>One article at a time, like Tinder. Skip, Listen, or Love. Three big buttons. No scrolling, no choice paralysis. Feed gets smarter with every vote.</p>
+  </div>
+  <div class="box purple">
+    <h4>Personalize</h4>
+    <p>AI fingerprinting + vote-based taste profile + source preferences. The ranking algorithm learns what you love and surfaces more of it.</p>
+  </div>
+</div>
+
+<div class="box-grid cols-2">
+  <div class="box">
+    <h4>Product Vision</h4>
+    <ul>
+      <li>Zero friction: Download &rarr; Open &rarr; It's already playing</li>
+      <li>No account required, no onboarding wall &mdash; just works</li>
+      <li>Ad-supported free tier, Pro upgrade for power users</li>
+      <li>Audio ads between articles (the big money &mdash; 5-10x banner CPMs)</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h4>Naming</h4>
+    <ul>
+      <li><strong>Product:</strong> HearZ (always)</li>
+      <li><strong>Repo:</strong> HearZee (legacy, do not rename)</li>
+      <li><strong>Bundle ID:</strong> com.skoobilabs.hearzee</li>
+      <li><strong>Internal persona:</strong> "HearZer" (never in app UI)</li>
+      <li><strong>Studio:</strong> SkoobiLabs</li>
+      <li><strong>Tagline:</strong> "Your feed, out loud."</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 02 TECH STACK -->
+<h2 id="stack">02 &mdash; Tech Stack</h2>
+<table>
+  <tr><th>Layer</th><th>Technology</th><th>Purpose</th></tr>
+  <tr><td>Language</td><td>TypeScript</td><td>Everywhere &mdash; frontend, backend, scripts</td></tr>
+  <tr><td>Mobile</td><td>React Native 0.83 + Expo SDK 55</td><td>iOS + Android from single codebase</td></tr>
+  <tr><td>Routing</td><td>expo-router</td><td>File-based routing with typed routes</td></tr>
+  <tr><td>Backend Runtime</td><td>Cloudflare Workers (Hono.js)</td><td>Serverless edge compute</td></tr>
+  <tr><td>Backend DB</td><td>Cloudflare D1</td><td>SQLite at the edge &mdash; articles, sources, signals, analytics</td></tr>
+  <tr><td>Backend Cache</td><td>Cloudflare KV</td><td>Feed cache, rate limiting</td></tr>
+  <tr><td>Audio Storage</td><td>Cloudflare R2</td><td>Cached TTS audio files (hearzee-audio bucket)</td></tr>
+  <tr><td>Local DB</td><td>expo-sqlite</td><td>Articles, queue, history, taste, votes, source prefs</td></tr>
+  <tr><td>Local Storage</td><td>MMKV (react-native-mmkv)</td><td>Settings, onboarding state, daily counts</td></tr>
+  <tr><td>TTS (Primary)</td><td><strong>OpenAI TTS API via backend</strong></td><td>Premium AI voices &mdash; THE core product feature</td></tr>
+  <tr><td>TTS (Fallback)</td><td>iOS AVSpeechSynthesizer</td><td>Safety net only &mdash; robotic, used if backend unreachable</td></tr>
+  <tr><td>Timestamps</td><td>OpenAI Whisper</td><td>Word-level timestamps for teleprompter sync</td></tr>
+  <tr><td>Fingerprinting</td><td>Anthropic Claude Haiku</td><td>AI content classification (sentiment, complexity, tone)</td></tr>
+  <tr><td>Auth</td><td>Supabase</td><td>Apple Sign-In, Google, email, anonymous &rarr; upgrade</td></tr>
+  <tr><td>Cloud Sync</td><td>Supabase</td><td>Taste profile, entitlements across devices</td></tr>
+  <tr><td>IAP</td><td>RevenueCat (react-native-purchases)</td><td>Subscription management &mdash; 3 products configured</td></tr>
+  <tr><td>Banner Ads</td><td>Google AdMob (react-native-google-mobile-ads)</td><td>Free tier banner monetization</td></tr>
+  <tr><td>Audio Ads</td><td>AudioAdService (custom)</td><td>Between-article audio ads &mdash; primary revenue</td></tr>
+  <tr><td>Widget</td><td>@bacons/apple-targets</td><td>iOS WidgetKit integration (in progress)</td></tr>
+  <tr><td>Widget Bridge</td><td>react-native-shared-group-preferences</td><td>App &harr; widget data sharing</td></tr>
+  <tr><td>Deep Links</td><td>expo-linking</td><td>Referral tracking + share URLs (hearz:// scheme)</td></tr>
+  <tr><td>Builds</td><td>EAS Build (local on M1 Max)</td><td>Free local builds, TestFlight submission</td></tr>
+</table>
+
+<!-- 03 HIGH-LEVEL ARCHITECTURE -->
+<div class="page-break"></div>
+<h2 id="high-level">03 &mdash; High-Level Architecture</h2>
+
+<div class="diagram">
+  <div class="layer l-app">
+    <span class="layer-label">Presentation Layer</span>
+    <div class="box-grid cols-4" style="margin-top:0.5rem">
+      <div class="box"><h4>Screens</h4><p>Home (vote cards), Discover, Library, Profile, Settings, Article Player, Paywall, Onboarding, Auth, Paste URL</p></div>
+      <div class="box"><h4>Player UI</h4><p>NowPlaying, MiniPlayer, Teleprompter (word highlighting), PlaybackControls, SpeedSelector</p></div>
+      <div class="box"><h4>Components</h4><p>VoteCard, ArticleCard, AdBanner, AudioAdOverlay, TasteBubbles, TextSizePopover, Skeleton</p></div>
+      <div class="box"><h4>Theme</h4><p>Dark/light mode, brand colors, 4 text sizes, 60pt+ tap targets for elderly users</p></div>
+    </div>
+  </div>
+
+  <div class="layer l-service">
+    <span class="layer-label">Service Layer</span>
+    <div class="box-grid cols-4" style="margin-top:0.5rem">
+      <div class="box accent"><h4>Audio</h4><p>AudioService, PreviewService, NowPlayingService, AudioMutex, AudioAdService</p></div>
+      <div class="box accent"><h4>TTS</h4><p>StreamedTTS (OpenAI, default), NativeTTS (fallback), SectionSplitter, TextProcessor</p></div>
+      <div class="box accent"><h4>Monetization</h4><p>Entitlements, Purchases (RevenueCat), AudioAdService (audio ads), AdBanner</p></div>
+      <div class="box accent"><h4>Intelligence</h4><p>getRankedArticles, TasteProfile, SourcePreferences, AnalyticsService, BehaviorTracking</p></div>
+    </div>
+  </div>
+
+  <div class="layer l-data">
+    <span class="layer-label">Data Layer</span>
+    <div class="box-grid cols-3" style="margin-top:0.5rem">
+      <div class="box purple"><h4>SQLite (expo-sqlite)</h4><p>articles (+ fingerprint), queue, history, saved, signals, taste_profile, source_preferences, vote_history, listening_stats</p></div>
+      <div class="box purple"><h4>MMKV</h4><p>Onboarding, subscription tier, text size, daily play count, TTS engine, ad cycle counter</p></div>
+      <div class="box purple"><h4>Supabase</h4><p>Auth state, cloud-synced taste profile, entitlements</p></div>
+    </div>
+  </div>
+
+  <div class="layer l-infra">
+    <span class="layer-label">Backend Infrastructure</span>
+    <div class="box-grid cols-4" style="margin-top:0.5rem">
+      <div class="box" style="border-color:#F59E0B;background:#fffbeb"><h4>Cloudflare Workers</h4><p>Hono.js routes, CORS, cron triggers, TTS + Whisper orchestration</p></div>
+      <div class="box" style="border-color:#F59E0B;background:#fffbeb"><h4>D1 Database</h4><p>Articles (+ fingerprint), sources, digests, signals, analytics_events</p></div>
+      <div class="box" style="border-color:#F59E0B;background:#fffbeb"><h4>KV Cache</h4><p>Feed cache, rate limits</p></div>
+      <div class="box" style="border-color:#F59E0B;background:#fffbeb"><h4>R2 Storage</h4><p>Cached TTS audio (content-hash keyed, deduped)</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 FRONTEND STRUCTURE -->
+<h2 id="frontend">04 &mdash; Frontend Structure</h2>
+<div class="box" style="font-family: monospace; font-size: 0.8rem; line-height: 1.8; background: #08080F; color: #e0e0e0; padding: 1rem; border-radius: 8px;">
+src/<br>
+├── app/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00E5A0">// Expo Router file-based routing</span><br>
+│&nbsp;&nbsp; ├── _layout.tsx &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00D4FF">Root layout, TTS init, analytics init, deep links</span><br>
+│&nbsp;&nbsp; ├── auth.tsx &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00D4FF">Apple, Google, email sign-in</span><br>
+│&nbsp;&nbsp; ├── onboarding.tsx &nbsp;&nbsp;<span style="color:#00D4FF">Topic selection flow</span><br>
+│&nbsp;&nbsp; ├── paywall.tsx &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00D4FF">Pro subscription plans + purchase</span><br>
+│&nbsp;&nbsp; ├── paste-url.tsx &nbsp;&nbsp;&nbsp;<span style="color:#00D4FF">Manual article URL input</span><br>
+│&nbsp;&nbsp; ├── article/[id].tsx &nbsp;<span style="color:#00D4FF">Full player + teleprompter</span><br>
+│&nbsp;&nbsp; └── (tabs)/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00E5A0">// Tab navigator</span><br>
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── _layout.tsx &nbsp;<span style="color:#00D4FF">Tab bar, MiniPlayer, AudioAdOverlay</span><br>
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── index.tsx &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00D4FF">Home: vote-based feed (Skip/Listen/Love)</span><br>
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── discover.tsx &nbsp;<span style="color:#00D4FF">Topic filters, scrollable grid</span><br>
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── library.tsx &nbsp;&nbsp;<span style="color:#00D4FF">History + saved/bookmarked</span><br>
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── profile.tsx &nbsp;&nbsp;<span style="color:#00D4FF">Taste bubbles, stats, about</span><br>
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── settings.tsx &nbsp;<span style="color:#00D4FF">TTS engine/voice, text size, theme, topics</span><br>
+├── components/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00E5A0">// Reusable UI</span><br>
+│&nbsp;&nbsp; ├── player/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8B5CF6">NowPlaying, MiniPlayer, Teleprompter</span><br>
+│&nbsp;&nbsp; ├── article/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8B5CF6">ArticleCard, VoteCard, ContinueListeningCard</span><br>
+│&nbsp;&nbsp; ├── profile/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8B5CF6">TasteBubbles, StatCard</span><br>
+│&nbsp;&nbsp; ├── ads/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8B5CF6">AdBanner, AudioAdOverlay</span><br>
+│&nbsp;&nbsp; ├── brand/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8B5CF6">SkoobiSplash</span><br>
+│&nbsp;&nbsp; └── ui/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8B5CF6">Text, Button, Card, Skeleton, TextSizePopover</span><br>
+├── services/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00E5A0">// Business logic</span><br>
+│&nbsp;&nbsp; ├── audio/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">AudioService, AudioMutex, NowPlayingService, PreviewService</span><br>
+│&nbsp;&nbsp; ├── tts/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">StreamedTTS (default), NativeTTS (fallback)</span><br>
+│&nbsp;&nbsp; ├── ads/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">AudioAdService (between-article ads)</span><br>
+│&nbsp;&nbsp; ├── analytics/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">AnalyticsService (batched events)</span><br>
+│&nbsp;&nbsp; ├── db/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">SQLite: articles, taste, queue, history, votes</span><br>
+│&nbsp;&nbsp; ├── api/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">HTTP client + endpoints</span><br>
+│&nbsp;&nbsp; ├── supabase/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">Auth + cloud sync</span><br>
+│&nbsp;&nbsp; ├── widget/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">WidgetBridge (iOS widget data)</span><br>
+│&nbsp;&nbsp; ├── entitlements.ts &nbsp;<span style="color:#F59E0B">Free vs Pro tier checks</span><br>
+│&nbsp;&nbsp; ├── purchases.ts &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">RevenueCat SDK integration</span><br>
+│&nbsp;&nbsp; ├── referrals.ts &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">Deep link tracking</span><br>
+│&nbsp;&nbsp; └── location.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">Geolocation</span><br>
+├── hooks/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00E5A0">// usePlayback, usePreview, useBehaviorTracking</span><br>
+├── stores/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00E5A0">// MMKV storage (mmkv.ts)</span><br>
+├── theme/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00E5A0">// Colors, spacing, typography</span><br>
+├── constants/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00E5A0">// Topics, defaults</span><br>
+└── utils/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00E5A0">// Haptics, formatters</span>
+</div>
+
+<!-- 05 ROUTING -->
+<div class="page-break"></div>
+<h2 id="routing">05 &mdash; App Routing &amp; Navigation</h2>
+<p>Uses Expo Router (file-based routing with typed routes enabled). The root layout handles splash screen, TTS initialization, analytics initialization, purchase init, and deep link capture.</p>
+
+<div class="diagram">
+  <div class="box-grid cols-2">
+    <div class="box highlight">
+      <h4>App Launch Flow</h4>
+      <ol style="font-size:0.8rem; padding-left:1.2rem;">
+        <li>Splash screen shown</li>
+        <li>Load settings from MMKV</li>
+        <li>Initialize SQLite database</li>
+        <li>Initialize TTS engine (StreamedTTS default)</li>
+        <li>Initialize purchases (RevenueCat)</li>
+        <li>Initialize analytics service</li>
+        <li>Capture deep link URL (referral)</li>
+        <li>Check onboarding status</li>
+        <li>If first launch &rarr; onboarding screen</li>
+        <li>Otherwise &rarr; tab navigator (Home with auto-preview)</li>
+      </ol>
+    </div>
+    <div class="box accent">
+      <h4>Tab Navigator</h4>
+      <ul style="font-size:0.8rem; padding-left:1rem;">
+        <li><strong>Home</strong> &mdash; Vote-based single article feed (Skip/Listen/Love)</li>
+        <li><strong>Discover</strong> &mdash; Scrollable article grid with topic filters, "See All"</li>
+        <li><strong>Library</strong> &mdash; Listening history + saved/bookmarked articles</li>
+        <li><strong>Profile</strong> &mdash; Taste bubble chart, listening stats, about section</li>
+        <li><strong>Settings</strong> &mdash; TTS engine/voice, text size, theme, topic selection, reset</li>
+      </ul>
+      <p style="font-size:0.8rem; margin-top:0.5rem;"><strong>Persistent overlays:</strong> MiniPlayer (bottom bar) + AudioAdOverlay (ad badge + skip)</p>
+    </div>
+  </div>
+</div>
+
+<!-- 06 COMPONENTS -->
+<h2 id="components">06 &mdash; Component Library</h2>
+<div class="box-grid cols-2">
+  <div class="box">
+    <h4>Player Components</h4>
+    <ul>
+      <li><code>NowPlaying.tsx</code> &mdash; Full-screen player with artwork, share button</li>
+      <li><code>MiniPlayer.tsx</code> &mdash; Floating bottom bar with play/pause</li>
+      <li><code>TeleprompterText.tsx</code> &mdash; Word-highlighted scrolling text (auto-scroll + jitter suppression)</li>
+      <li><code>PlaybackControls.tsx</code> &mdash; Play/pause, skip, rewind</li>
+      <li><code>SpeedSelector.tsx</code> &mdash; 0.5x to 2.0x speed</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h4>Article &amp; Vote Components</h4>
+    <ul>
+      <li><code>VoteCard.tsx</code> &mdash; Large card with image, title, source, duration + 3 vote buttons</li>
+      <li><code>ArticleCard.tsx</code> &mdash; OG image with gradient overlay, translation badge</li>
+      <li><code>ContinueListeningCard.tsx</code> &mdash; Resume cards with progress bar</li>
+      <li><code>TextSizePopover.tsx</code> &mdash; [Aa] button popover (Small/Default/Large/Extra Large)</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h4>Monetization Components</h4>
+    <ul>
+      <li><code>AdBanner.tsx</code> &mdash; AdMob banner (test IDs, free tier only)</li>
+      <li><code>AudioAdOverlay.tsx</code> &mdash; "AD" badge + skip button (5s delay) during audio ads</li>
+      <li><code>paywall.tsx</code> &mdash; Pro plan cards, feature comparison, purchase/restore</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h4>Profile &amp; UI Primitives</h4>
+    <ul>
+      <li><code>TasteBubbles.tsx</code> &mdash; Animated bubble chart with staggered entrance</li>
+      <li><code>StatCard.tsx</code> &mdash; Listening statistics grid</li>
+      <li><code>Text.tsx</code> &mdash; Themed text with variants (largeTitle, headline, body, caption)</li>
+      <li><code>Button.tsx</code>, <code>Card.tsx</code>, <code>Skeleton.tsx</code>, <code>ProgressBar.tsx</code>, <code>IconButton.tsx</code></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 07 STATE -->
+<h2 id="state">07 &mdash; State Management</h2>
+<p>HearZ uses a layered state approach &mdash; no Redux or global store. Each layer has clear ownership.</p>
+
+<table>
+  <tr><th>Store</th><th>Technology</th><th>Data</th><th>Persistence</th></tr>
+  <tr><td>React state</td><td>useState / useReducer</td><td>UI state, loading flags, vote animations</td><td>None (ephemeral)</td></tr>
+  <tr><td>Hooks</td><td>Custom hooks</td><td>usePlayback, usePreview, useBehaviorTracking, useAuth</td><td>Delegates to services</td></tr>
+  <tr><td>MMKV</td><td>react-native-mmkv</td><td>Settings, onboarding, tier, text size, TTS engine, daily count, ad cycle</td><td>Encrypted local KV</td></tr>
+  <tr><td>SQLite</td><td>expo-sqlite</td><td>Articles, queue, history, saved, taste_profile, source_preferences, vote_history</td><td>Local database file</td></tr>
+  <tr><td>AsyncStorage</td><td>@react-native-async-storage</td><td>Analytics event batches, ad cycle counter</td><td>Local key-value</td></tr>
+  <tr><td>Supabase</td><td>@supabase/supabase-js</td><td>Auth tokens, synced taste + entitlements</td><td>Cloud (cross-device)</td></tr>
+</table>
+
+<!-- 08 TTS SYSTEM -->
+<div class="page-break"></div>
+<h2 id="tts">08 &mdash; TTS System &mdash; The Core Feature</h2>
+
+<div class="box highlight" style="border-width:2px; margin-bottom:1rem;">
+  <h4 style="color:#065f46; font-size:1rem;">HearZ uses AI to read every article aloud. This is the entire product. Without this, there is no product.</h4>
+  <p>OpenAI TTS generates premium AI voices. Whisper provides word-level timestamps. The teleprompter highlights each word in real-time as it's spoken. Audio is cached in R2 so the same text is never generated twice.</p>
+</div>
+
+<h3>Step-by-Step TTS Flow</h3>
+<div class="box-grid cols-2">
+  <div class="box accent">
+    <h4>Generation (Backend)</h4>
+    <ol style="font-size:0.8rem; padding-left:1.2rem;">
+      <li>Article text split into sections by <code>SectionSplitter.ts</code></li>
+      <li>Each section POSTed to backend <code>/api/audio</code></li>
+      <li>Backend calls <strong>OpenAI TTS API</strong> to generate MP3</li>
+      <li>Backend calls <strong>OpenAI Whisper</strong> for word-level timestamps</li>
+      <li>MP3 cached in <strong>R2 bucket</strong> with content-hash key</li>
+      <li>Returns: MP3 URL + array of <code>{ word, startTime, endTime }</code></li>
+    </ol>
+  </div>
+  <div class="box accent">
+    <h4>Playback (Client)</h4>
+    <ol style="font-size:0.8rem; padding-left:1.2rem;">
+      <li>App plays MP3 via <code>expo-audio</code></li>
+      <li>Teleprompter highlights words as timestamps are reached</li>
+      <li>Text scrolls in sync with the voice</li>
+      <li>Next 2 sections pre-fetched for gapless playback</li>
+      <li>When all sections finish &rarr; audio ad may play &rarr; next article</li>
+    </ol>
+  </div>
+</div>
+
+<h3>TTS Engine Selection</h3>
+<table>
+  <tr><th>Engine</th><th>File</th><th>Source</th><th>Quality</th><th>Cost</th><th>Status</th></tr>
+  <tr><td><strong>Streamed (DEFAULT)</strong></td><td>StreamedTTS.ts</td><td>OpenAI TTS API via backend</td><td>Premium AI voices</td><td>~$0.015/1K chars</td><td><span class="tag green">Live</span></td></tr>
+  <tr><td>Native (fallback)</td><td>NativeTTS.ts</td><td>iOS AVSpeechSynthesizer</td><td>Robotic</td><td>Free</td><td><span class="tag gray">Safety net</span></td></tr>
+</table>
+
+<p><strong>Available voices:</strong> alloy, echo, fable, onyx, nova, shimmer (OpenAI voice IDs). Setting: <code>ttsEngine</code> in MMKV, default is <code>'streamed'</code>.</p>
+
+<!-- 09 AUDIO PIPELINE -->
+<h2 id="audio">09 &mdash; Audio Playback Pipeline</h2>
+<p>The audio system orchestrates TTS synthesis, playback, state tracking, ad slots, and UI synchronization.</p>
+
+<div class="flow">
+  <div class="flow-item">Vote: Listen/Love</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">AudioService.play()</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">TextProcessor</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">SectionSplitter</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">StreamedTTS</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">MP3 + Timestamps</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Teleprompter</div>
+</div>
+
+<div class="box-grid cols-2">
+  <div class="box accent">
+    <h4>AudioService.ts <span class="tag green">singleton</span></h4>
+    <p>Main orchestrator. Manages play, pause, resume, stop, seek, speed. Section-loop architecture: iterates through sections sequentially. Prefetches next 2 sections. Coordinates with AudioMutex for concurrency safety. Emits state via subscriber pattern.</p>
+    <p><span class="tag blue">play()</span> <span class="tag blue">pause()</span> <span class="tag blue">resume()</span> <span class="tag blue">stop()</span> <span class="tag blue">seek()</span> <span class="tag blue">setSpeed()</span></p>
+  </div>
+  <div class="box accent">
+    <h4>AudioMutex.ts</h4>
+    <p>Prevents two things playing at once (e.g., preview + full playback). Uses generation-based token invalidation &mdash; if a new play() starts, the old one's token becomes invalid and it stops gracefully.</p>
+  </div>
+  <div class="box accent">
+    <h4>NowPlayingService.ts</h4>
+    <p>iOS lock screen + Control Center integration. Runs a silent <code>expo-audio</code> player to claim the audio session (because AVSpeechSynthesizer doesn't register with MPNowPlayingInfoCenter). Proxies remote commands to AudioService.</p>
+  </div>
+  <div class="box accent">
+    <h4>PreviewService.ts</h4>
+    <p>Short 5-10 second previews of article title + first sentence. Pre-warms audio on Home screen load via <code>warmup()</code>. Auto-plays when a new vote card appears. Separate from full playback &mdash; uses AudioMutex to coordinate.</p>
+  </div>
+</div>
+
+<!-- 10 VOTE-BASED HOME SCREEN -->
+<div class="page-break"></div>
+<h2 id="home">10 &mdash; Vote-Based Home Screen</h2>
+<p>The Home screen is <strong>NOT a scrollable feed</strong>. It shows ONE article at a time, like Tinder for articles. Designed for elderly users &mdash; one decision at a time, no scrolling, no choice paralysis.</p>
+
+<div class="box-grid cols-2">
+  <div class="box highlight">
+    <h4>How It Works</h4>
+    <ol style="font-size:0.8rem; padding-left:1.2rem;">
+      <li>On load: <code>getRankedArticles()</code> fetches 50 articles, scored and sorted</li>
+      <li>Top-ranked article displayed as large card with image, title, source, duration</li>
+      <li>Article title + first sentence <strong>auto-plays as preview</strong> (AI voice, ~5-10s)</li>
+      <li>User sees three big buttons (60pt+ tap targets):</li>
+    </ol>
+    <div class="box-grid cols-3" style="margin-top:0.5rem;">
+      <div class="box" style="text-align:center; border-color:#ef4444;">
+        <h4>Skip</h4>
+        <p>Card animates left. Topics -2, source -1. Recorded in vote_history.</p>
+      </div>
+      <div class="box" style="text-align:center; border-color:#00E5A0;">
+        <h4>Listen</h4>
+        <p>Opens full player. Passive topic boost +1 on play.</p>
+      </div>
+      <div class="box" style="text-align:center; border-color:#8B5CF6;">
+        <h4>Love</h4>
+        <p>Card animates right. Topics +3, source +1. Opens player.</p>
+      </div>
+    </div>
+  </div>
+  <div class="box accent">
+    <h4>Why This Design</h4>
+    <ul style="font-size:0.8rem; padding-left:1rem;">
+      <li><strong>Elderly users</strong> &mdash; one decision at a time</li>
+      <li><strong>Three big buttons</strong> &mdash; universal icons, 60pt+ targets</li>
+      <li><strong>Audio preview auto-plays</strong> &mdash; hear what it's about before deciding</li>
+      <li><strong>Feels like radio</strong> &mdash; "Here's what's next, want to hear it?"</li>
+      <li><strong>Feed gets smarter</strong> &mdash; every vote teaches the algorithm</li>
+    </ul>
+    <h4 style="margin-top:0.75rem;">Also on Home Screen</h4>
+    <ul style="font-size:0.8rem; padding-left:1rem;">
+      <li>[Aa] button (top right) &mdash; TextSizePopover</li>
+      <li>Continue Listening section below card</li>
+      <li>Banner ad for free-tier users</li>
+      <li>Queue counter: "12 articles in your feed"</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 11 SMART RANKING ALGORITHM -->
+<h2 id="ranking">11 &mdash; Smart Ranking Algorithm</h2>
+<p>The ranking algorithm determines what article the user sees next. Implemented in <code>src/services/db/articles.ts &rarr; getRankedArticles()</code>.</p>
+
+<div class="box highlight">
+  <h4>Scoring Pipeline</h4>
+  <ol style="font-size:0.8rem; padding-left:1.2rem;">
+    <li><strong>Fetch:</strong> All successful articles (3x limit for headroom)</li>
+    <li><strong>Exclude:</strong> Articles already voted on (from vote_history table)</li>
+    <li><strong>Deduplicate:</strong> Near-identical articles (&gt;70% title word overlap)</li>
+    <li><strong>Score each article:</strong></li>
+  </ol>
+</div>
+
+<table>
+  <tr><th>Factor</th><th>Weight</th><th>Source</th></tr>
+  <tr><td>Topic score</td><td>Sum of taste_profile weights for matching topics</td><td>taste_profile table</td></tr>
+  <tr><td>Refined topic score</td><td>Fingerprint topics_refined matched at 0.5x weight</td><td>Fingerprint JSON</td></tr>
+  <tr><td>Source score</td><td>source_preferences weight &times; 2 (source matters more)</td><td>source_preferences table</td></tr>
+  <tr><td>Fingerprint bonus</td><td>+1 simple complexity, +0.5 positive sentiment, +0.5 inspirational tone</td><td>Fingerprint JSON</td></tr>
+  <tr><td>Recency bonus</td><td>Up to +10 for brand new, decays linearly over 60 hours</td><td>published_at</td></tr>
+</table>
+
+<div class="box accent" style="margin-top:0.75rem;">
+  <h4>Post-Scoring</h4>
+  <p style="font-size:0.8rem;"><strong>Source interleaving:</strong> max 2 from same source in any 6-item window. <strong>Zero-vote fallback:</strong> algorithm works well even with no votes &mdash; recency and source diversity provide a good default. Votes make it progressively better.</p>
+</div>
+
+<!-- 12 CONTENT FINGERPRINTING -->
+<h2 id="fingerprint">12 &mdash; Content Fingerprinting</h2>
+<p>After content extraction, <strong>Claude Haiku</strong> classifies each article to enable smarter ranking and personalization.</p>
+
+<div class="flow">
+  <div class="flow-item">Article extracted</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">First 1500 chars</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Claude Haiku classifier</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">JSON fingerprint</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">articles.fingerprint column</div>
+</div>
+
+<div class="box-grid cols-2">
+  <div class="box purple">
+    <h4>Fingerprint Fields</h4>
+    <ul>
+      <li><code>sentiment</code> &mdash; positive, negative, neutral</li>
+      <li><code>complexity</code> &mdash; simple, moderate, complex</li>
+      <li><code>format</code> &mdash; news, opinion, how-to, listicle, etc.</li>
+      <li><code>tone</code> &mdash; informational, inspirational, critical, humorous</li>
+      <li><code>topics_refined</code> &mdash; precise topics replacing coarse source-level ones</li>
+      <li><code>entities</code> &mdash; people, companies, places mentioned</li>
+      <li><code>length_category</code> &mdash; short (&lt;450), medium (&lt;1200), long (1200+) words</li>
+    </ul>
+  </div>
+  <div class="box purple">
+    <h4>Implementation Details</h4>
+    <ul>
+      <li><strong>File:</strong> <code>backend/src/services/fingerprint/classifier.ts</code></li>
+      <li><strong>Runs:</strong> every 15 min cron, 10 articles per batch</li>
+      <li><strong>Cost:</strong> ~$0.001 per article</li>
+      <li><strong>Secret:</strong> <code>ANTHROPIC_API_KEY</code> on Worker</li>
+      <li><strong>Failure handling:</strong> stores <code>'{}'</code> to prevent retrying</li>
+      <li><strong>Topic upgrade:</strong> coarse source topics (e.g., "technology") replaced with Claude's refined topics (e.g., "artificial intelligence", "self-driving cars")</li>
+    </ul>
+    <p><span class="tag red">blocker</span> <code>ANTHROPIC_API_KEY</code> not yet set on Cloudflare</p>
+  </div>
+</div>
+
+<!-- 13 TASTE PROFILE & SOURCE PREFERENCES -->
+<h2 id="taste">13 &mdash; Taste Profile &amp; Source Preferences</h2>
+<p>Every user interaction updates the taste profile and source preferences, personalizing the feed over time.</p>
+
+<div class="box-grid cols-2">
+  <div class="box highlight">
+    <h4>Taste Profile (taste_profile table)</h4>
+    <p>Per-topic weights that drive article ranking.</p>
+    <table style="margin-top:0.5rem;">
+      <tr><th>Action</th><th>Weight</th></tr>
+      <tr><td>Play article</td><td>+1 topic weight</td></tr>
+      <tr><td>Complete article</td><td>+2 topic weight</td></tr>
+      <tr><td>Vote up (Love)</td><td>+3 topic weight</td></tr>
+      <tr><td>Vote down (Skip)</td><td>-2 topic weight</td></tr>
+    </table>
+    <p style="font-size:0.8rem; margin-top:0.5rem;">Weight never goes below 0. Visualized as animated bubble chart on Profile tab.</p>
+  </div>
+  <div class="box accent">
+    <h4>Source Preferences (source_preferences table)</h4>
+    <p>Per-source weights that track user affinity for specific publications.</p>
+    <table style="margin-top:0.5rem;">
+      <tr><th>Action</th><th>Weight</th></tr>
+      <tr><td>Vote up (Love)</td><td>+1 source weight</td></tr>
+      <tr><td>Vote down (Skip)</td><td>-1 source weight</td></tr>
+    </table>
+    <p style="font-size:0.8rem; margin-top:0.5rem;">Tracks <code>up_count</code> and <code>down_count</code> separately for pattern detection. "Always downvotes Fox News" = source preference, not topic preference.</p>
+  </div>
+</div>
+
+<div class="box-grid cols-2">
+  <div class="box">
+    <h4>Vote History (vote_history table)</h4>
+    <p style="font-size:0.8rem;">Full thumbs up/down log with article_id, source, topics, vote_type, timestamp. Used by ranking to exclude already-voted articles and for pattern analysis.</p>
+  </div>
+  <div class="box">
+    <h4>Behavior Signals (useBehaviorTracking)</h4>
+    <p style="font-size:0.8rem;">Playback events: play_start, pause, resume, skip_forward/backward, seek, speed_change, save, share, vote_up, vote_down. Synced to backend every 5 minutes + on app foreground.</p>
+  </div>
+</div>
+
+<!-- 14 AUDIO AD SYSTEM -->
+<div class="page-break"></div>
+<h2 id="audio-ads">14 &mdash; Audio Ad System</h2>
+<p>Audio ads play <strong>between articles</strong>, not during. Like radio commercials between songs. Audio ad CPMs are 5-10x higher than banner ads &mdash; this is the primary revenue model.</p>
+
+<div class="flow">
+  <div class="flow-item">Article complete</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">maybePlayAd()</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Every 3rd article?</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Network ad or Self-promo</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">AudioAdOverlay</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Next article</div>
+</div>
+
+<div class="box-grid cols-2">
+  <div class="box highlight">
+    <h4>AudioAdService.ts</h4>
+    <ul>
+      <li><strong>Frequency:</strong> every 3rd article transition (<code>AD_FREQUENCY = 3</code>)</li>
+      <li><strong>Alternating cycle</strong> tracked in AsyncStorage:</li>
+      <li>Cycle 0: <strong>Network ad slot</strong> &mdash; currently TTS placeholder, future real ad network</li>
+      <li>Cycle 1: <strong>Self-promo</strong> &mdash; drives Pro upgrades ("Upgrade to HearZ Pro for $4.99/mo")</li>
+      <li><strong>Pattern:</strong> Article 1 &rarr; 2 &rarr; 3 &rarr; [Network ad] &rarr; 4 &rarr; 5 &rarr; 6 &rarr; [Self-promo] &rarr; repeat</li>
+      <li>Skip available after 5 seconds, auto-stops at 15 seconds max</li>
+      <li><strong>Pro users hear ZERO ads</strong> &mdash; checks entitlements first</li>
+    </ul>
+  </div>
+  <div class="box accent">
+    <h4>AudioAdOverlay Component</h4>
+    <ul>
+      <li>"AD" badge displayed during audio ad playback</li>
+      <li>Skip button appears after 5-second delay</li>
+      <li>All events tracked: impressions, skips, elapsed time at skip</li>
+      <li>Renders in tab layout alongside MiniPlayer</li>
+    </ul>
+    <h4 style="margin-top:0.75rem;">Future: Real Ad Networks</h4>
+    <p style="font-size:0.8rem;"><code>getNetworkAd()</code> currently returns TTS-spoken tips. At 1K+ users, integrate Google Ad Manager or AdsWizz for real paid audio ads via VAST tags.</p>
+  </div>
+</div>
+
+<!-- 15 MONETIZATION -->
+<h2 id="monetization">15 &mdash; Monetization</h2>
+
+<h3>Subscription Tiers</h3>
+<table>
+  <tr><th>Tier</th><th>Price</th><th>Articles/Day</th><th>Ads</th><th>Voices</th></tr>
+  <tr><td><span class="tag gray">Free</span></td><td>$0</td><td>5</td><td>Banner + Audio</td><td>All</td></tr>
+  <tr><td><span class="tag green">Pro Monthly</span></td><td>$4.99/mo</td><td>Unlimited</td><td>None</td><td>All</td></tr>
+  <tr><td><span class="tag blue">Pro Annual</span></td><td>$29.99/yr</td><td>Unlimited</td><td>None</td><td>All</td></tr>
+  <tr><td><span class="tag purple">Lifetime</span></td><td>$79.99</td><td>Unlimited</td><td>None</td><td>All</td></tr>
+</table>
+
+<div class="box-grid cols-2">
+  <div class="box highlight">
+    <h4>entitlements.ts</h4>
+    <p>Core entitlement engine. <code>getEntitlements()</code> returns: <code>canPlay</code>, <code>showAds</code>, <code>availableVoices</code>, <code>dailyLimit</code>. Tracks daily play count in MMKV. Resets at midnight.</p>
+  </div>
+  <div class="box accent">
+    <h4>purchases.ts (RevenueCat)</h4>
+    <p>RevenueCat SDK integrated. <code>initPurchases()</code>, <code>getOfferings()</code>, <code>purchasePackage()</code>, <code>restorePurchases()</code>, <code>syncEntitlements()</code>. iOS API key: <code>appl_KiwjlILsulTvlbjKQJFWsWEYEIl</code>.</p>
+    <p>Products: hearz_pro_monthly, hearz_pro_annual, hearz_lifetime. Entitlement: "HearZ Pro".</p>
+  </div>
+</div>
+
+<h3>Ad Revenue Streams</h3>
+<div class="box-grid cols-2">
+  <div class="box" style="border-color:#F59E0B; background:#fffbeb;">
+    <h4>Banner Ads (passive, low CPM)</h4>
+    <ul>
+      <li>AdMob SDK: <code>react-native-google-mobile-ads</code></li>
+      <li>App ID: <code>ca-app-pub-2092614136459898~9037470779</code></li>
+      <li>Currently using <code>TestIds.BANNER</code> &mdash; not real ad units yet</li>
+      <li>Placed as <code>ListHeaderComponent</code> on Home feed</li>
+      <li>Only shows for free-tier users (<code>entitlements.showAds</code>)</li>
+      <li>Gracefully hides if ad fails to load</li>
+    </ul>
+  </div>
+  <div class="box" style="border-color:#F59E0B; background:#fffbeb;">
+    <h4>Audio Ads (primary revenue, high CPM)</h4>
+    <ul>
+      <li>5-10x higher CPMs than banner ads</li>
+      <li>Plays between articles via AudioAdService</li>
+      <li>Alternating: network slot + self-promo</li>
+      <li>Skip after 5s, auto-stop at 15s</li>
+      <li>All events tracked (impressions, skips, timing)</li>
+      <li>Pro users excluded from all ads</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 16 ANALYTICS SYSTEM -->
+<h2 id="analytics">16 &mdash; Analytics System</h2>
+<p>Full analytics pipeline from client events through backend storage to a live dashboard.</p>
+
+<div class="flow">
+  <div class="flow-item">User action</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">AnalyticsService</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">AsyncStorage batch</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">POST /api/analytics/events</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">D1 analytics_events</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Dashboard</div>
+</div>
+
+<div class="box-grid cols-3">
+  <div class="box highlight">
+    <h4>Client: AnalyticsService.ts</h4>
+    <p>Batched events persisted to AsyncStorage, synced to backend periodically.</p>
+    <p style="font-size:0.75rem;"><strong>Events:</strong> session_start, session_end, screen_view, ad_impression, ad_skip, ad_click, paywall_view, purchase_start, purchase_complete, purchase_fail, purchase_restore, daily_limit_reached, referral_used, error, onboarding_step</p>
+  </div>
+  <div class="box accent">
+    <h4>Backend Routes</h4>
+    <ul>
+      <li><code>POST /api/analytics/events</code> &mdash; receive event batches from clients</li>
+      <li><code>GET /api/analytics/summary</code> &mdash; dashboard summary (sessions, events, top events)</li>
+    </ul>
+    <p style="font-size:0.8rem;">Events stored in <code>analytics_events</code> table in D1.</p>
+  </div>
+  <div class="box purple">
+    <h4>Dashboard</h4>
+    <p><strong>labs.skoobi.com/marketing/analytics</strong> (auth-protected)</p>
+    <ul>
+      <li>KPI cards: sessions, total events, ad impressions, purchases</li>
+      <li>Subscription funnel: paywall views &rarr; started &rarr; completed</li>
+      <li>Period selector: Today, 7d, 30d, 90d</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 17 LOCAL DATABASE -->
+<div class="page-break"></div>
+<h2 id="database">17 &mdash; Local Database (SQLite)</h2>
+<p>expo-sqlite powers the local-first data layer. Schema managed via migration in <code>services/db/schema.ts</code>.</p>
+
+<div class="box-grid cols-3">
+  <div class="box purple">
+    <h4>articles</h4>
+    <p>id, title, source_name, image_url, content, audio_url, topic, estimated_duration_seconds, translated_from, <strong>fingerprint</strong> (JSON), created_at</p>
+  </div>
+  <div class="box purple">
+    <h4>queue</h4>
+    <p>id, article_id, position, added_at</p>
+  </div>
+  <div class="box purple">
+    <h4>history</h4>
+    <p>id, article_id, progress_seconds, total_seconds, completed, last_played_at</p>
+  </div>
+  <div class="box purple">
+    <h4>saved_articles</h4>
+    <p>id, article_id, saved_at</p>
+  </div>
+  <div class="box purple">
+    <h4>pending_signals</h4>
+    <p>id, article_id, signal_type, elapsed_seconds, total_seconds, timestamp</p>
+  </div>
+  <div class="box purple">
+    <h4>taste_profile</h4>
+    <p>topic, weight, play_count, skip_count, complete_count, updated_at</p>
+  </div>
+  <div class="box purple">
+    <h4>source_preferences <span class="tag blue">new</span></h4>
+    <p>source_name, weight, up_count, down_count, updated_at</p>
+  </div>
+  <div class="box purple">
+    <h4>vote_history <span class="tag blue">new</span></h4>
+    <p>id, article_id, source_name, topics (JSON), vote_type (up/down), created_at</p>
+  </div>
+  <div class="box purple">
+    <h4>listening_stats</h4>
+    <p>date, articles_played, seconds_listened, articles_completed</p>
+  </div>
+</div>
+
+<h3>Repository Pattern</h3>
+<table>
+  <tr><th>File</th><th>Key Functions</th></tr>
+  <tr><td>articles.ts</td><td>upsertArticles, getArticleById, <strong>getRankedArticles</strong>, getArticles, deleteArticle</td></tr>
+  <tr><td>queue.ts</td><td>addToQueue, removeFromQueue, getQueue, reorderQueue</td></tr>
+  <tr><td>history.ts</td><td>updateProgress, getHistory, getRecentlyPlayed</td></tr>
+  <tr><td>saved.ts</td><td>saveArticle, unsaveArticle, getSavedArticles</td></tr>
+  <tr><td>signals.ts</td><td>addSignal, getPendingSignals, clearSentSignals</td></tr>
+  <tr><td>taste.ts</td><td>updateTaste, getTasteProfile, resetProfile, <strong>recordVote</strong></td></tr>
+</table>
+
+<!-- 18 AUTH -->
+<h2 id="auth">18 &mdash; Authentication &amp; Sync</h2>
+
+<div class="flow">
+  <div class="flow-item">Anonymous Use</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Apple / Google / Email</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Supabase Auth</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Cloud Sync</div>
+</div>
+
+<div class="box-grid cols-3">
+  <div class="box">
+    <h4>supabase/client.ts</h4>
+    <p>Supabase client initialization with project URL and publishable key. AsyncStorage for session persistence.</p>
+  </div>
+  <div class="box">
+    <h4>supabase/auth.ts</h4>
+    <p>Apple Sign In, Google Sign In, email login/signup, password reset. Anonymous &rarr; account upgrade path.</p>
+  </div>
+  <div class="box">
+    <h4>supabase/sync.ts</h4>
+    <p>Two-way sync of taste profile and entitlements. Runs on login and periodically.</p>
+  </div>
+</div>
+
+<!-- 19 BACKEND -->
+<div class="page-break"></div>
+<h2 id="backend">19 &mdash; Backend Architecture</h2>
+<p>Cloudflare Workers with Hono.js framework. Serverless, globally distributed edge compute.</p>
+
+<div class="box" style="font-family: monospace; font-size: 0.8rem; line-height: 1.8; background: #08080F; color: #e0e0e0; padding: 1rem; border-radius: 8px;">
+backend/<br>
+├── src/<br>
+│&nbsp;&nbsp; ├── index.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00E5A0">Hono app entry, CORS, route mounting</span><br>
+│&nbsp;&nbsp; ├── routes/<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── articles.ts &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00D4FF">GET feed (curated, filtered)</span><br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── topics.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00D4FF">GET available topics</span><br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── behavior.ts &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00D4FF">POST user signals (votes, playback)</span><br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── analytics.ts &nbsp;&nbsp;&nbsp;<span style="color:#00D4FF">POST events, GET summary</span><br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── extraction.ts &nbsp;&nbsp;<span style="color:#00D4FF">POST manual URL extraction</span><br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── audio.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00D4FF">POST TTS synthesis (OpenAI + Whisper)</span><br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── local-news.ts &nbsp;&nbsp;<span style="color:#00D4FF">GET location-based articles</span><br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── admin.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#00D4FF">Admin controls (seed, poll, extract)</span><br>
+│&nbsp;&nbsp; ├── services/<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── rss/poller.ts &nbsp;&nbsp;<span style="color:#F59E0B">RSS feed polling (50+ sources)</span><br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── tts/synthesizer.ts <span style="color:#F59E0B">OpenAI TTS + Whisper timestamps</span><br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── extraction/readability.ts <span style="color:#F59E0B">Content extraction + OG images</span><br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── fingerprint/classifier.ts <span style="color:#F59E0B">Claude Haiku content classification</span><br>
+│&nbsp;&nbsp; ├── scheduled/<br>
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── handler.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8B5CF6">Cron: poll → extract → fingerprint + digest</span><br>
+│&nbsp;&nbsp; ├── db/seed.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8B5CF6">Initial source data</span><br>
+│&nbsp;&nbsp; └── types.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8B5CF6">Env, Source, Article, Signal, Fingerprint types</span><br>
+├── wrangler.toml &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F59E0B">Workers config, D1/KV/R2 bindings, crons</span><br>
+└── package.json
+</div>
+
+<h3>Cloudflare Bindings (wrangler.toml)</h3>
+<table>
+  <tr><th>Binding</th><th>Type</th><th>Name / ID</th><th>Purpose</th></tr>
+  <tr><td>DB</td><td>D1</td><td>hearzee-db (e44b3b0e-...)</td><td>Articles, sources, signals, analytics</td></tr>
+  <tr><td>CACHE</td><td>KV</td><td>hearzee-cache (ddb181f2...)</td><td>Feed caching, rate limits</td></tr>
+  <tr><td>AUDIO</td><td>R2</td><td>hearzee-audio</td><td>Cached TTS audio files</td></tr>
+  <tr><td>OPENAI_API_KEY</td><td>Secret</td><td>&mdash;</td><td>TTS synthesis + Whisper</td></tr>
+  <tr><td>ANTHROPIC_API_KEY</td><td>Secret</td><td>&mdash;</td><td>Content fingerprinting (Claude Haiku)</td></tr>
+</table>
+
+<!-- 20 API ENDPOINTS -->
+<h2 id="api">20 &mdash; API Endpoints</h2>
+<p>Base URL: <code>https://hearzee-api.arneg-fb8.workers.dev</code></p>
+<table>
+  <tr><th>Method</th><th>Path</th><th>Description</th></tr>
+  <tr><td><span class="tag green">GET</span></td><td>/</td><td>Health check</td></tr>
+  <tr><td><span class="tag green">GET</span></td><td>/api/articles</td><td>Curated feed with optional topic/source filters</td></tr>
+  <tr><td><span class="tag green">GET</span></td><td>/api/topics</td><td>Available topics with article counts</td></tr>
+  <tr><td><span class="tag blue">POST</span></td><td>/api/behavior/signals</td><td>Submit behavior signals (play, skip, complete, save, vote)</td></tr>
+  <tr><td><span class="tag blue">POST</span></td><td>/api/analytics/events</td><td>Submit analytics event batches</td></tr>
+  <tr><td><span class="tag green">GET</span></td><td>/api/analytics/summary</td><td>Dashboard summary (sessions, events, top events)</td></tr>
+  <tr><td><span class="tag blue">POST</span></td><td>/api/extraction</td><td>Extract article from manual URL</td></tr>
+  <tr><td><span class="tag blue">POST</span></td><td>/api/audio</td><td>Synthesize TTS audio (OpenAI TTS + Whisper timestamps)</td></tr>
+  <tr><td><span class="tag green">GET</span></td><td>/api/local-news</td><td>Location-based articles (lat/lon &rarr; city &rarr; RSS)</td></tr>
+  <tr><td><span class="tag red">POST</span></td><td>/api/admin/*</td><td>Seed data, rescan sources, force digest, force fingerprint</td></tr>
+</table>
+
+<!-- 21 D1 DATABASE -->
+<div class="page-break"></div>
+<h2 id="d1">21 &mdash; Backend Database (D1)</h2>
+<p>Cloudflare D1 (SQLite at the edge). Stores all server-side article data, source configurations, aggregated signals, and analytics.</p>
+
+<div class="box-grid cols-2">
+  <div class="box" style="border-color:#F59E0B; background:#fffbeb;">
+    <h4>sources</h4>
+    <p>id, name, url, type (rss/web), topic, language, active, last_polled_at</p>
+  </div>
+  <div class="box" style="border-color:#F59E0B; background:#fffbeb;">
+    <h4>articles</h4>
+    <p>id, source_id, title, url, content, summary, image_url, audio_url, topic, language, duration_seconds, <strong>fingerprint</strong> (JSON), extraction_status, published_at</p>
+  </div>
+  <div class="box" style="border-color:#F59E0B; background:#fffbeb;">
+    <h4>daily_digests</h4>
+    <p>id, date, article_ids (JSON array), generated_at</p>
+  </div>
+  <div class="box" style="border-color:#F59E0B; background:#fffbeb;">
+    <h4>behavior_signals</h4>
+    <p>id, device_id, article_id, signal_type, elapsed_seconds, total_seconds, created_at</p>
+  </div>
+  <div class="box" style="border-color:#F59E0B; background:#fffbeb;">
+    <h4>analytics_events <span class="tag blue">new</span></h4>
+    <p>id, device_id, event_type, event_data (JSON), session_id, created_at</p>
+  </div>
+</div>
+
+<!-- 22 CRON -->
+<h2 id="cron">22 &mdash; Scheduled Jobs</h2>
+<p>Cloudflare Workers cron triggers defined in <code>wrangler.toml</code>.</p>
+<table>
+  <tr><th>Schedule</th><th>Job</th><th>Description</th></tr>
+  <tr><td>*/15 * * * *</td><td>RSS Poller + Extract + Fingerprint</td><td>Polls all active sources (50+), extracts content via Readability, then runs Claude Haiku fingerprinting on new articles (10 per batch)</td></tr>
+  <tr><td>0 5 * * *</td><td>Daily Digest</td><td>Generates curated daily picks (top 20 balanced by topic)</td></tr>
+</table>
+
+<div class="flow">
+  <div class="flow-item">Cron trigger</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Poll RSS (50+ sources)</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Create articles (pending)</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Readability extract</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Claude Haiku fingerprint</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">D1 (success)</div>
+</div>
+
+<!-- 23 DATA FLOWS -->
+<h2 id="data-flows">23 &mdash; Data Flows</h2>
+
+<h3>Article Ingestion</h3>
+<div class="flow">
+  <div class="flow-item">RSS Feeds (50+)</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Poller (cron)</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Readability Extract</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Claude Haiku Fingerprint</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">D1 Database</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">GET /api/articles</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Local SQLite</div>
+</div>
+
+<h3>Playback Flow</h3>
+<div class="flow">
+  <div class="flow-item">User taps Listen/Love</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">AudioService</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">SectionSplitter</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">POST /api/audio</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">OpenAI TTS + Whisper</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">R2 cache</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">MP3 + timestamps</div>
+</div>
+<div class="flow">
+  <div class="flow-item">expo-audio plays MP3</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Teleprompter word highlight</div>
+  <span class="flow-arrow">&nbsp;&nbsp;&nbsp;</span>
+  <div class="flow-item">NowPlaying / Lock Screen</div>
+</div>
+
+<h3>Vote Flow</h3>
+<div class="flow">
+  <div class="flow-item">Skip / Listen / Love</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">recordVote()</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">taste_profile updated</div>
+  <span class="flow-arrow">&nbsp;&nbsp;&nbsp;</span>
+  <div class="flow-item">source_preferences updated</div>
+  <span class="flow-arrow">&nbsp;&nbsp;&nbsp;</span>
+  <div class="flow-item">vote_history logged</div>
+</div>
+<div class="flow">
+  <div class="flow-item">Next getRankedArticles()</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Improved ranking</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Better next card</div>
+</div>
+
+<h3>Audio Ad Flow</h3>
+<div class="flow">
+  <div class="flow-item">Article complete</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">AudioAdService.maybePlayAd()</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Check: 3rd article? Pro user?</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Play ad (network or self-promo)</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Track impression</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Next article</div>
+</div>
+
+<h3>Analytics Flow</h3>
+<div class="flow">
+  <div class="flow-item">User action</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">AnalyticsService.track()</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">AsyncStorage batch</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">POST /api/analytics/events</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">D1 analytics_events</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Dashboard UI</div>
+</div>
+
+<h3>Behavior Signal Flow</h3>
+<div class="flow">
+  <div class="flow-item">Playback event</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">useBehaviorTracking</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">SQLite pending_signals</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Batch POST /api/behavior/signals</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">D1 signals table</div>
+</div>
+
+<!-- 24 LOCAL NEWS -->
+<div class="page-break"></div>
+<h2 id="local-news">24 &mdash; Local News Pipeline</h2>
+
+<div class="flow">
+  <div class="flow-item">Device GPS</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">location.ts</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">GET /api/local-news?lat=&amp;lon=</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">City detection</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Local RSS feeds</div>
+</div>
+<div class="flow">
+  <div class="flow-item">Foreign language?</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Translate title + content</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Set translated_from</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">"IT &rarr; EN" badge on card</div>
+</div>
+
+<p>The backend detects the user's city from coordinates, finds local RSS sources, fetches articles, and translates non-English content. The <code>translated_from</code> field flows through the API &rarr; SQLite &rarr; ArticleCard component, showing a translation badge.</p>
+
+<!-- 25 DEEP LINKS -->
+<h2 id="deep-links">25 &mdash; Deep Links &amp; Referrals</h2>
+
+<div class="box-grid cols-2">
+  <div class="box highlight">
+    <h4>Share Flow</h4>
+    <ol style="font-size:0.8rem; padding-left:1.2rem;">
+      <li>User taps Share on article (NowPlaying screen)</li>
+      <li><code>createShareUrl(id, title)</code> generates URL</li>
+      <li>URL: <code>https://hearz.app/article/{id}?ref={code}</code></li>
+      <li>Referral code = first 8 chars of device ID</li>
+      <li>Native share sheet opens (title + URL)</li>
+    </ol>
+  </div>
+  <div class="box accent">
+    <h4>Capture Flow</h4>
+    <ol style="font-size:0.8rem; padding-left:1.2rem;">
+      <li>App opens from deep link</li>
+      <li><code>Linking.getInitialURL()</code> in root layout</li>
+      <li><code>captureReferral(url)</code> extracts ref param</li>
+      <li>First referral stored in AsyncStorage</li>
+      <li>Referral count tracked per device</li>
+    </ol>
+  </div>
+</div>
+
+<p>URL scheme: <code>hearz://</code> (registered in app.json). Web fallback: <code>hearz.app</code> <span class="tag orange">domain not yet purchased</span></p>
+
+<!-- 26 iOS WIDGET -->
+<h2 id="widget">26 &mdash; iOS Widget (In Progress)</h2>
+
+<div class="box-grid cols-2">
+  <div class="box" style="border-color:#F59E0B; background:#fffbeb;">
+    <h4>Widget Architecture</h4>
+    <ul>
+      <li><strong>Code:</strong> <code>targets/widget/HearZWidget.swift</code></li>
+      <li><strong>Config:</strong> <code>targets/widget/expo-target.config.js</code></li>
+      <li><strong>Plugin:</strong> <code>@bacons/apple-targets</code> (installed but removed from app.json)</li>
+      <li><strong>Bridge:</strong> <code>src/services/widget/WidgetBridge.ts</code></li>
+      <li><strong>Data sharing:</strong> react-native-shared-group-preferences (App Groups)</li>
+    </ul>
+  </div>
+  <div class="box" style="border-color:#ef4444; background:#fef2f2;">
+    <h4>Blocker: Provisioning <span class="tag red">blocked</span></h4>
+    <ul>
+      <li>Widget extension needs provisioning profile with App Groups</li>
+      <li>EAS couldn't set this up automatically</li>
+      <li>Widget builds locally but fails signing</li>
+      <li><strong>Need:</strong> manually register App ID + App Group in Apple Developer Portal</li>
+    </ul>
+    <h4 style="margin-top:0.75rem;">Planned Widget Sizes</h4>
+    <ul>
+      <li><strong>Small:</strong> "Tap to listen" with current/next article title</li>
+      <li><strong>Medium:</strong> 2-3 article titles for quick access</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 27 THEME -->
+<h2 id="theme">27 &mdash; Theming &amp; Accessibility</h2>
+
+<div class="box-grid cols-3">
+  <div class="box" style="background: #08080F; color: #eee; border-color: #333;">
+    <h4 style="color: #00E5A0;">Dark Mode (Default)</h4>
+    <p>Background: #08080F<br>Surface: #12121A<br>Primary: #00E5A0<br>Text: #FFFFFF</p>
+  </div>
+  <div class="box">
+    <h4>Light Mode</h4>
+    <p>Background: #FFFFFF<br>Surface: #F5F5F5<br>Primary: #00E5A0<br>Text: #1A1A2E</p>
+  </div>
+  <div class="box accent">
+    <h4>Accessibility (Elderly Focus)</h4>
+    <ul>
+      <li>4 text sizes (Small/Default/Large/Extra Large)</li>
+      <li>[Aa] popover on Home screen for quick adjustment</li>
+      <li>60pt+ tap targets on vote buttons</li>
+      <li>Teleprompter auto-scroll with jitter suppression</li>
+      <li>Word highlighting for reading focus</li>
+      <li>Haptic feedback on interactions</li>
+      <li>One article at a time &mdash; no scroll, no paralysis</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Brand Colors</h3>
+<div style="display:flex; gap:1rem; margin:1rem 0;">
+  <div style="width:80px; height:50px; background:#00E5A0; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700; color:#08080F;">Mint</div>
+  <div style="width:80px; height:50px; background:#00D4FF; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700; color:#08080F;">Cyan</div>
+  <div style="width:80px; height:50px; background:#8B5CF6; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700; color:#fff;">Purple</div>
+  <div style="width:80px; height:50px; background:#08080F; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700; color:#fff; border:1px solid #333;">Dark BG</div>
+</div>
+
+<!-- 28 EXTERNAL SERVICES -->
+<h2 id="external">28 &mdash; External Services Map</h2>
+<table>
+  <tr><th>Service</th><th>Purpose</th><th>Status</th><th>Config Location</th></tr>
+  <tr><td>Cloudflare Workers</td><td>Backend compute (hearzee-api)</td><td><span class="tag green">Live</span></td><td>wrangler.toml</td></tr>
+  <tr><td>Cloudflare D1</td><td>Backend database</td><td><span class="tag green">Live</span></td><td>wrangler.toml</td></tr>
+  <tr><td>Cloudflare KV</td><td>Cache</td><td><span class="tag green">Live</span></td><td>wrangler.toml</td></tr>
+  <tr><td>Cloudflare R2</td><td>TTS audio storage</td><td><span class="tag green">Live</span></td><td>wrangler.toml</td></tr>
+  <tr><td>OpenAI API</td><td>TTS synthesis + Whisper timestamps</td><td><span class="tag green">Live</span></td><td>Worker secret (OPENAI_API_KEY)</td></tr>
+  <tr><td>Anthropic API</td><td>Content fingerprinting (Claude Haiku)</td><td><span class="tag red">Key not set</span></td><td>Worker secret (ANTHROPIC_API_KEY)</td></tr>
+  <tr><td>Supabase</td><td>Auth + cloud sync</td><td><span class="tag green">Live</span></td><td>src/services/supabase/client.ts</td></tr>
+  <tr><td>Apple Sign In</td><td>iOS authentication</td><td><span class="tag green">Live</span></td><td>app.json plugins</td></tr>
+  <tr><td>RevenueCat</td><td>In-app purchases</td><td><span class="tag green">Configured</span></td><td>src/services/purchases.ts</td></tr>
+  <tr><td>Google AdMob</td><td>Banner ads</td><td><span class="tag orange">Test IDs</span></td><td>src/components/ads/AdBanner.tsx</td></tr>
+  <tr><td>AudioAdService</td><td>Audio ads between articles</td><td><span class="tag green">Live (placeholder)</span></td><td>src/services/ads/AudioAdService.ts</td></tr>
+  <tr><td>EAS Build</td><td>iOS builds (local)</td><td><span class="tag green">Live</span></td><td>eas.json</td></tr>
+  <tr><td>TestFlight</td><td>iOS beta distribution</td><td><span class="tag green">Live</span></td><td>Apple Developer Portal</td></tr>
+  <tr><td>App Store Connect</td><td>Distribution</td><td><span class="tag blue">Beta</span></td><td>Apple Developer Portal</td></tr>
+  <tr><td>labs.skoobi.com/marketing/analytics</td><td>Analytics dashboard</td><td><span class="tag green">Live</span></td><td>Vercel (labs-site)</td></tr>
+  <tr><td>Google Play Console</td><td>Android distribution</td><td><span class="tag gray">Deferred</span></td><td>&mdash;</td></tr>
+</table>
+
+<!-- 29 SECURITY -->
+<div class="page-break"></div>
+<h2 id="security">29 &mdash; Security Model</h2>
+<div class="box-grid cols-2">
+  <div class="box highlight">
+    <h4>Client-Side</h4>
+    <ul>
+      <li>MMKV encrypted storage for settings/tokens</li>
+      <li>Supabase session tokens in secure storage</li>
+      <li>No secrets in client code</li>
+      <li>Device ID for anonymous identification</li>
+      <li>Entitlements verified locally + synced from cloud</li>
+      <li>Analytics batched locally before server sync</li>
+    </ul>
+  </div>
+  <div class="box accent">
+    <h4>Server-Side</h4>
+    <ul>
+      <li>CORS enabled (specific origins)</li>
+      <li>API keys stored as Worker secrets (OPENAI_API_KEY, ANTHROPIC_API_KEY)</li>
+      <li>Admin routes protected</li>
+      <li>Rate limiting via KV</li>
+      <li>No PII stored in D1 (device ID only)</li>
+      <li>R2 audio keyed by content hash (no user data)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 30 BUILD & DEPLOY -->
+<h2 id="build">30 &mdash; Build &amp; Deploy</h2>
+
+<h3>Mobile (iOS)</h3>
+<div class="flow">
+  <div class="flow-item">Code change</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">eas build --local --platform ios</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">.ipa file</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">eas submit --platform ios</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">TestFlight</div>
+</div>
+
+<h3>Backend</h3>
+<div class="flow">
+  <div class="flow-item">Code change</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">npx wrangler deploy</div>
+  <span class="flow-arrow">&rarr;</span>
+  <div class="flow-item">Cloudflare Workers (global edge)</div>
+</div>
+
+<table>
+  <tr><th>Detail</th><th>Value</th></tr>
+  <tr><td>Bundle ID</td><td>com.skoobilabs.hearzee</td></tr>
+  <tr><td>Current Build</td><td>70</td></tr>
+  <tr><td>EAS Project ID</td><td>9b91b28d-2315-43bf-9a40-453a6ffdd54e</td></tr>
+  <tr><td>EAS Slug</td><td>hearzee (must match project registration)</td></tr>
+  <tr><td>Build Strategy</td><td>Local builds on M1 Max (free), EAS cloud as backup</td></tr>
+  <tr><td>Platform</td><td>iOS only (Android deferred until iOS is solid)</td></tr>
+  <tr><td>Backend Worker</td><td>hearzee-api (https://hearzee-api.arneg-fb8.workers.dev)</td></tr>
+</table>
+
+<!-- 31 PENDING -->
+<h2 id="roadmap">31 &mdash; Pending Integrations</h2>
+
+<div class="box-grid cols-2">
+  <div class="box" style="border-color:#ef4444; background:#fef2f2;">
+    <h4>ANTHROPIC_API_KEY <span class="tag red">blocker</span></h4>
+    <p style="font-size:0.8rem;">Content fingerprinting won't run until the Anthropic API key is set as a Cloudflare Worker secret.</p>
+    <p style="font-size:0.8rem;"><code>npx wrangler secret put ANTHROPIC_API_KEY</code></p>
+  </div>
+  <div class="box" style="border-color:#F59E0B;">
+    <h4>Real AdMob Ad Units <span class="tag orange">action needed</span></h4>
+    <p style="font-size:0.8rem;">Currently using <code>TestIds.BANNER</code>. Need to create real ad unit IDs at admob.google.com and update AdBanner.tsx.</p>
+    <p style="font-size:0.8rem;">App ID ready: <code>ca-app-pub-2092614136459898~9037470779</code></p>
+  </div>
+  <div class="box" style="border-color:#ef4444; background:#fef2f2;">
+    <h4>iOS Widget Provisioning <span class="tag red">blocker</span></h4>
+    <ol style="font-size:0.8rem; padding-left:1.2rem;">
+      <li>Register widget App ID in Apple Developer Portal</li>
+      <li>Create App Group for data sharing</li>
+      <li>Generate provisioning profile with App Groups</li>
+      <li>Re-add @bacons/apple-targets to app.json plugins</li>
+    </ol>
+  </div>
+  <div class="box" style="border-color:#F59E0B;">
+    <h4>App Store Metadata <span class="tag orange">action needed</span></h4>
+    <ol style="font-size:0.8rem; padding-left:1.2rem;">
+      <li>Fix "Missing Metadata" on 3 subscription products</li>
+      <li>Create 5-6 screenshots (iPhone 6.7" and 6.5")</li>
+      <li>Write ASO: subtitle (30 chars), keywords (100 chars), description</li>
+    </ol>
+  </div>
+  <div class="box" style="border-color:#F59E0B;">
+    <h4>hearz.app Domain <span class="tag orange">not purchased</span></h4>
+    <ol style="font-size:0.8rem; padding-left:1.2rem;">
+      <li>Purchase hearz.app domain</li>
+      <li>Set up apple-app-site-association for universal links</li>
+      <li>Enable Associated Domains in Apple Developer Portal</li>
+      <li>Add applinks:hearz.app to app.json</li>
+    </ol>
+  </div>
+  <div class="box" style="border-color:#F59E0B;">
+    <h4>Screen View Tracking <span class="tag orange">minor</span></h4>
+    <p style="font-size:0.8rem;"><code>Analytics.screen()</code> method exists but not called on each tab navigation yet. Wire into tab layout for full screen tracking.</p>
+  </div>
+  <div class="box" style="border-color:#F59E0B;">
+    <h4>Real Audio Ad Network <span class="tag gray">future</span></h4>
+    <p style="font-size:0.8rem;">At 1K+ users, integrate Google Ad Manager or AdsWizz for real paid audio ads via VAST tags. Currently using TTS-spoken placeholder tips.</p>
+  </div>
+  <div class="box" style="border-color:#F59E0B;">
+    <h4>Google Play <span class="tag gray">deferred</span></h4>
+    <ol style="font-size:0.8rem; padding-left:1.2rem;">
+      <li>Complete closed testing (select countries + testers)</li>
+      <li>Upload service account JSON key</li>
+      <li>Enable Play Developer API</li>
+      <li>Run first Android build + submit</li>
+    </ol>
+  </div>
+</div>
+
+<div style="margin-top:3rem; padding-top:1rem; border-top:2px solid #e0e0e0; text-align:center;">
+  <div class="brand-bar" style="max-width:200px; margin:0 auto 0.5rem;"></div>
+  <p style="font-size:0.8rem; color:#999;">SkoobiLabs &bull; labs.skoobi.com &bull; HearZ Architecture v2.0</p>
+</div>
+
+</body>
+</html>
