@@ -6,6 +6,7 @@ import { supabaseBrowser } from '@/lib/supabase-browser';
 
 const navItems = [
   { label: "Dashboard", href: "/marketing" },
+  { label: "App Analytics", href: "/marketing/analytics" },
   { label: "Campaigns", href: "/marketing/campaigns" },
   { label: "Insights", href: "/marketing/insights" },
   { label: "Attribution", href: "/marketing/attribution" },
