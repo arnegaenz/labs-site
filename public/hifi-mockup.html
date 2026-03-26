@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>HearZ — 70s Hi-Fi Design Mockup</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    background: #000000;
+    color: #FFFFFF;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* === HEADER === */
+  .header {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 4px 16px;
+  }
+  .header-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #E0E0E4;
+  }
+  .header-btn {
+    font-size: 18px;
+    font-weight: 600;
+    color: #FFB300;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  /* === ARTICLE CARD === */
+  .article-card {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  }
+  .article-image {
+    width: 100%;
+    height: 240px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    position: relative;
+  }
+  .article-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 70%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  }
+  .article-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px;
+    z-index: 1;
+  }
+  .now-playing-badge {
+    position: absolute;
+    top: 12px; left: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,179,0,0.15);
+    border: 1px solid rgba(255,179,0,0.3);
+    border-radius: 12px;
+    padding: 4px 10px;
+    z-index: 2;
+  }
+  .badge-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #FFB300;
+    box-shadow: 0 0 6px #FFB300;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .badge-text {
+    font-size: 11px;
+    font-weight: 700;
+    color: #FFB300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .article-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 4px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    line-height: 1.3;
+  }
+  .article-source {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* === FACEPLATE (brushed aluminum panel) === */
+  .faceplate {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 4px;
+    padding: 16px 12px 20px;
+    border-radius: 0 0 16px 16px;
+    position: relative;
+    overflow: hidden;
+    /* Brushed aluminum */
+    background: linear-gradient(
+      180deg,
+      #3a3a40 0%,
+      #2e2e34 15%,
+      #333338 30%,
+      #2a2a30 50%,
+      #2e2e34 70%,
+      #323238 85%,
+      #2a2a30 100%
+    );
+    border: 1px solid #444448;
+    border-top: none;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  /* Walnut trim strips */
+  .faceplate::before,
+  .faceplate::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 6px;
+    background: linear-gradient(
+      180deg,
+      #3D2614 0%,
+      #5C3A21 20%,
+      #7A5236 40%,
+      #5C3A21 60%,
+      #3D2614 80%,
+      #5C3A21 100%
+    );
+  }
+  .faceplate::before { left: 0; border-radius: 0 0 0 16px; }
+  .faceplate::after { right: 0; border-radius: 0 0 16px 0; }
+
+  .controls-inner {
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* === VU METER === */
+  .vu-meter-container {
+    display: flex;
+    justify-content: center;
+    padding: 4px 0 8px;
+  }
+  .vu-meter {
+    width: 160px;
+    height: 85px;
+    position: relative;
+    overflow: hidden;
+  }
+  .vu-meter svg {
+    width: 100%;
+    height: 100%;
+  }
+  .vu-needle {
+    transform-origin: 80px 75px;
+    animation: needle-bounce 2s ease-in-out infinite;
+  }
+  @keyframes needle-bounce {
+    0% { transform: rotate(-35deg); }
+    15% { transform: rotate(-15deg); }
+    25% { transform: rotate(-22deg); }
+    40% { transform: rotate(-8deg); }
+    55% { transform: rotate(-18deg); }
+    65% { transform: rotate(-12deg); }
+    75% { transform: rotate(-20deg); }
+    85% { transform: rotate(-10deg); }
+    100% { transform: rotate(-35deg); }
+  }
+
+  /* === SCRUBBER === */
+  .scrubber-section {
+    padding: 0 4px;
+  }
+  .time-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2px;
+    margin-bottom: 2px;
+  }
+  .time-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #C8C8CC;
+    letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
+  }
+  .scrubber-track {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(180deg, #1a1a1e, #2a2a2e, #1a1a1e);
+    border-radius: 4px;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    margin: 8px 0;
+  }
+  .scrubber-fill {
+    height: 100%;
+    width: 35%;
+    background: linear-gradient(90deg, #CC8F00, #FFB300, #FFD54F);
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(255,179,0,0.3);
+  }
+  .scrubber-thumb {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 32px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #F0F0F4 0%, #D4D4D8 40%, #B0B0B6 100%);
+    box-shadow:
+      0 2px 6px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.6);
+    border: 1px solid #6E6E74;
+  }
+  .scrubber-thumb::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 16px;
+    background: #6E6E74;
+    border-radius: 1px;
+  }
+
+  /* === TRANSPORT BUTTONS === */
+  .transport-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 8px 0;
+  }
+
+  /* Raised chrome button base */
+  .hifi-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+  .hifi-btn:active .btn-face {
+    transform: translateY(2px);
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .btn-face {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  /* Medium button (seek, curation) */
+  .btn-medium .btn-face {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(180deg, #E8E8EC 0%, #B0B0B6 50%, #8E8E94 100%);
+    box-shadow:
+      0 4px 8px rgba(0,0,0,0.5),
+      0 1px 0 rgba(255,255,255,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    border: 1px solid #6E6E74;
+  }
+
+  /* Large button (play/pause) */
+  .btn-large .btn-face {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(180deg, #E8E8EC 0%, #B0B0B6 50%, #8E8E94 100%);
+    box-shadow:
+      0 6px 12px rgba(0,0,0,0.5),
+      0 1px 0 rgba(255,255,255,0.3),
+      inset 0 2px 0 rgba(255,255,255,0.4);
+    border: 1px solid #6E6E74;
+  }
+  .btn-large.active .btn-face {
+    background: linear-gradient(180deg, #FFD54F 0%, #FFB300 50%, #CC8F00 100%);
+    box-shadow:
+      0 6px 12px rgba(0,0,0,0.5),
+      0 0 20px rgba(255,179,0,0.3),
+      inset 0 2px 0 rgba(255,255,255,0.3);
+    border-color: #CC8F00;
+  }
+
+  .btn-icon {
+    font-size: 28px;
+    color: #2a2a30;
+    line-height: 1;
+  }
+  .btn-large .btn-icon {
+    font-size: 36px;
+  }
+
+  .btn-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #A0A0A6;
+    margin-top: 6px;
+  }
+
+  /* === CURATION ROW === */
+  .curation-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 32px;
+    padding: 4px 0;
+  }
+
+  .btn-skip .btn-face {
+    background: linear-gradient(180deg, #E8E8EC 0%, #C0A0A0 50%, #8E7070 100%);
+    border-color: #8E7070;
+  }
+  .btn-love .btn-face {
+    background: linear-gradient(180deg, #FFD54F 0%, #FFB300 50%, #CC8F00 100%);
+    border-color: #CC8F00;
+    box-shadow:
+      0 4px 8px rgba(0,0,0,0.5),
+      0 0 12px rgba(255,179,0,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+
+  /* === SPEED SELECTOR (detent style) === */
+  .speed-section {
+    padding: 4px 0;
+  }
+  .speed-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #6E6E74;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .speed-track {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: relative;
+  }
+  .speed-track::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 28px;
+    right: 28px;
+    height: 3px;
+    background: linear-gradient(180deg, #1a1a1e, #2a2a2e);
+    border-radius: 2px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+    transform: translateY(-50%);
+  }
+  .speed-detent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 1;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    padding: 4px;
+  }
+  .detent-notch {
+    width: 4px;
+    height: 12px;
+    background: #6E6E74;
+    border-radius: 2px;
+  }
+  .detent-active .detent-notch {
+    background: #FFB300;
+    box-shadow: 0 0 8px rgba(255,179,0,0.4);
+  }
+  .speed-detent-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #6E6E74;
+    letter-spacing: 0.5px;
+  }
+  .detent-active .speed-detent-label {
+    color: #FFB300;
+    text-shadow: 0 0 8px rgba(255,179,0,0.3);
+  }
+  /* Active indicator capsule */
+  .detent-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #F0F0F4, #D4D4D8, #B0B0B6);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.5);
+    border: 1px solid #6E6E74;
+    display: none;
+  }
+  .detent-active .detent-indicator {
+    display: block;
+    background: linear-gradient(180deg, #FFD54F, #FFB300, #CC8F00);
+    border-color: #CC8F00;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 0 10px rgba(255,179,0,0.3);
+  }
+
+  /* === SECTION DIVIDER === */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #444448, transparent);
+    margin: 4px 0;
+  }
+
+  /* === MODE TOGGLE === */
+  .mode-toggle {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .mode-btn {
+    padding: 10px 24px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #1a1a1e;
+    color: #A0A0A6;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+  .mode-btn.active {
+    background: #FFB300;
+    color: #1a1a1e;
+    border-color: #FFB300;
+  }
+
+  /* === LIGHT THEME === */
+  body.light {
+    background: #F5F0E8;
+  }
+  .light .header-title { color: #3D2614; }
+  .light .article-card { box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+  .light .faceplate {
+    background: linear-gradient(
+      180deg,
+      #E8E2D8 0%,
+      #DDD7CD 15%,
+      #E2DCD2 30%,
+      #D8D2C8 50%,
+      #DDD7CD 70%,
+      #E0DAD0 85%,
+      #D8D2C8 100%
+    );
+    border-color: #C8C2B8;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.3),
+      0 8px 32px rgba(0,0,0,0.1);
+  }
+  .light .time-label { color: #5C3A21; }
+  .light .scrubber-track {
+    background: linear-gradient(180deg, #C8C2B8, #D8D2C8, #C8C2B8);
+  }
+  .light .btn-label { color: #5C3A21; }
+  .light .speed-label { color: #7A5236; }
+  .light .speed-detent-label { color: #7A5236; }
+  .light .speed-track::before {
+    background: linear-gradient(180deg, #C8C2B8, #D8D2C8);
+  }
+  .light .detent-notch { background: #A09080; }
+  .light .divider {
+    background: linear-gradient(90deg, transparent, #C8C2B8, transparent);
+  }
+  .light .mode-btn {
+    background: #E8E2D8;
+    border-color: #C8C2B8;
+    color: #5C3A21;
+  }
+  .light .mode-btn.active {
+    background: #FFB300;
+    color: #3D2614;
+    border-color: #FFB300;
+  }
+
+  /* === FOOTER NOTE === */
+  .design-note {
+    max-width: 600px;
+    margin-top: 32px;
+    padding: 16px;
+    background: rgba(255,179,0,0.08);
+    border: 1px solid rgba(255,179,0,0.2);
+    border-radius: 12px;
+    font-size: 12px;
+    color: #A0A0A6;
+    line-height: 1.6;
+  }
+  .design-note strong { color: #FFB300; }
+</style>
+</head>
+<body>
+
+<!-- Theme toggle -->
+<div class="mode-toggle">
+  <button class="mode-btn active" onclick="setTheme('dark')">DARK MODE</button>
+  <button class="mode-btn" onclick="setTheme('light')">LIGHT MODE</button>
+</div>
+
+<!-- Header -->
+<div class="header" style="margin-top: 16px;">
+  <span class="header-title">Now Playing</span>
+  <button class="header-btn">Aa</button>
+</div>
+
+<!-- Article Card -->
+<div class="article-card">
+  <div class="article-image">
+    <div class="now-playing-badge">
+      <div class="badge-dot"></div>
+      <span class="badge-text">Now Playing</span>
+    </div>
+  </div>
+  <div class="article-content">
+    <div class="article-title">Scientists Discover New Way to Generate Clean Energy From Ocean Waves</div>
+    <div class="article-source">CNN • 8 min read</div>
+  </div>
+</div>
+
+<!-- Faceplate / Controls -->
+<div class="faceplate">
+  <div class="controls-inner">
+
+    <!-- VU Meter -->
+    <div class="vu-meter-container">
+      <div class="vu-meter">
+        <svg viewBox="0 0 160 85" xmlns="http://www.w3.org/2000/svg">
+          <!-- Meter background -->
+          <rect x="4" y="2" width="152" height="80" rx="8" fill="#1a1a1e"
+                stroke="#444448" stroke-width="1"/>
+          <!-- Inner shadow -->
+          <rect x="8" y="6" width="144" height="72" rx="6" fill="#111114"
+                stroke="#333338" stroke-width="0.5"/>
+
+          <!-- Scale arc (green zone) -->
+          <path d="M 30 68 A 55 55 0 0 1 100 18" fill="none"
+                stroke="#00C853" stroke-width="2" opacity="0.6"/>
+          <!-- Scale arc (yellow zone) -->
+          <path d="M 100 18 A 55 55 0 0 1 120 22" fill="none"
+                stroke="#FFAB00" stroke-width="2" opacity="0.6"/>
+          <!-- Scale arc (red zone) -->
+          <path d="M 120 22 A 55 55 0 0 1 135 38" fill="none"
+                stroke="#FF1744" stroke-width="2" opacity="0.6"/>
+
+          <!-- Tick marks -->
+          <line x1="30" y1="64" x2="30" y2="58" stroke="#666" stroke-width="1"/>
+          <line x1="42" y1="50" x2="42" y2="45" stroke="#666" stroke-width="0.5"/>
+          <line x1="55" y1="38" x2="55" y2="33" stroke="#666" stroke-width="1"/>
+          <line x1="68" y1="30" x2="68" y2="25" stroke="#666" stroke-width="0.5"/>
+          <line x1="80" y1="24" x2="80" y2="18" stroke="#666" stroke-width="1"/>
+          <line x1="92" y1="22" x2="92" y2="17" stroke="#666" stroke-width="0.5"/>
+          <line x1="104" y1="20" x2="104" y2="15" stroke="#666" stroke-width="1"/>
+          <line x1="116" y1="24" x2="116" y2="19" stroke="#666" stroke-width="0.5"/>
+          <line x1="128" y1="32" x2="128" y2="27" stroke="#FF1744" stroke-width="1"/>
+
+          <!-- Scale labels -->
+          <text x="26" y="74" font-size="7" fill="#666" font-family="system-ui" font-weight="600">-20</text>
+          <text x="50" y="52" font-size="7" fill="#666" font-family="system-ui" font-weight="600">-10</text>
+          <text x="75" y="40" font-size="7" fill="#666" font-family="system-ui" font-weight="600">-5</text>
+          <text x="100" y="36" font-size="7" fill="#666" font-family="system-ui" font-weight="600">0</text>
+          <text x="124" y="46" font-size="7" fill="#FF1744" font-family="system-ui" font-weight="600">+3</text>
+
+          <!-- VU label -->
+          <text x="80" y="78" font-size="8" fill="#FFB300" font-family="system-ui" font-weight="700"
+                text-anchor="middle" letter-spacing="3">VU</text>
+
+          <!-- Needle -->
+          <g class="vu-needle">
+            <line x1="80" y1="75" x2="65" y2="28" stroke="#FF1744" stroke-width="1.5"
+                  stroke-linecap="round"/>
+            <!-- Needle pivot -->
+            <circle cx="80" cy="75" r="4" fill="url(#chrome-gradient)"/>
+          </g>
+
+          <!-- Glass bezel effect -->
+          <rect x="4" y="2" width="152" height="40" rx="8" fill="url(#glass-gradient)"/>
+
+          <defs>
+            <linearGradient id="chrome-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F0F0F4"/>
+              <stop offset="100%" stop-color="#8E8E94"/>
+            </linearGradient>
+            <linearGradient id="glass-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.06)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Scrubber -->
+    <div class="scrubber-section">
+      <div class="time-row">
+        <span class="time-label">1:23</span>
+        <span class="time-label">4:56</span>
+      </div>
+      <div class="scrubber-track">
+        <div class="scrubber-fill"></div>
+        <div class="scrubber-thumb"></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Transport Row: ⏪15  ▶  15⏩ -->
+    <div class="transport-row">
+      <button class="hifi-btn btn-medium">
+        <div class="btn-face">
+          <span class="btn-icon">⏪</span>
+        </div>
+        <span class="btn-label">-15s</span>
+      </button>
+
+      <button class="hifi-btn btn-large active">
+        <div class="btn-face">
+          <span class="btn-icon">❚❚</span>
+        </div>
+      </button>
+
+      <button class="hifi-btn btn-medium">
+        <div class="btn-face">
+          <span class="btn-icon">⏩</span>
+        </div>
+        <span class="btn-label">+15s</span>
+      </button>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Curation Row: Skip  Next  Love -->
+    <div class="curation-row">
+      <button class="hifi-btn btn-medium btn-skip">
+        <div class="btn-face">
+          <span class="btn-icon">👎</span>
+        </div>
+        <span class="btn-label">Skip</span>
+      </button>
+
+      <button class="hifi-btn btn-medium">
+        <div class="btn-face">
+          <span class="btn-icon">⏭</span>
+        </div>
+        <span class="btn-label">Next</span>
+      </button>
+
+      <button class="hifi-btn btn-medium btn-love">
+        <div class="btn-face">
+          <span class="btn-icon">👍</span>
+        </div>
+        <span class="btn-label">Love</span>
+      </button>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Speed Selector (detent style) -->
+    <div class="speed-section">
+      <div class="speed-label">Speed</div>
+      <div class="speed-track">
+        <div class="speed-detent" onclick="setSpeed(this)">
+          <div class="detent-indicator"></div>
+          <div class="detent-notch"></div>
+          <span class="speed-detent-label">0.75</span>
+        </div>
+        <div class="speed-detent detent-active" onclick="setSpeed(this)">
+          <div class="detent-indicator"></div>
+          <div class="detent-notch"></div>
+          <span class="speed-detent-label">1.0</span>
+        </div>
+        <div class="speed-detent" onclick="setSpeed(this)">
+          <div class="detent-indicator"></div>
+          <div class="detent-notch"></div>
+          <span class="speed-detent-label">1.25</span>
+        </div>
+        <div class="speed-detent" onclick="setSpeed(this)">
+          <div class="detent-indicator"></div>
+          <div class="detent-notch"></div>
+          <span class="speed-detent-label">1.5</span>
+        </div>
+        <div class="speed-detent" onclick="setSpeed(this)">
+          <div class="detent-indicator"></div>
+          <div class="detent-notch"></div>
+          <span class="speed-detent-label">1.75</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Design notes -->
+<div class="design-note">
+  <strong>Design Mockup — HearZ 70s Hi-Fi Receiver</strong><br><br>
+  Inspired by the Marantz 2270. Brushed aluminum faceplate with walnut wood trim.
+  Raised chrome buttons with physical press animation. VU meter bounces while playing.
+  Amber glow for active states. Chunky fader-style scrubber. Detent speed selector.<br><br>
+  <strong>Toggle dark/light</strong> above to see both themes. Tap buttons to feel the press animation.
+</div>
+
+<script>
+function setTheme(theme) {
+  if (theme === 'light') {
+    document.body.classList.add('light');
+  } else {
+    document.body.classList.remove('light');
+  }
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase().includes(theme));
+  });
+}
+
+function setSpeed(el) {
+  document.querySelectorAll('.speed-detent').forEach(d => d.classList.remove('detent-active'));
+  el.classList.add('detent-active');
+}
+</script>
+
+</body>
+</html>
