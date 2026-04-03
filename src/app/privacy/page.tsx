@@ -55,57 +55,80 @@ export default function PrivacyPage() {
 
       <div className="privacy-page">
         <h1>Privacy Policy</h1>
-        <p className="updated">Last updated: March 7, 2026</p>
+        <p className="updated">Last updated: April 1, 2026</p>
 
         <p>
-          Skoobi Labs (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) builds mobile applications including
-          HearZ and Connections Buddy. This policy describes how we handle your information.
+          SkoobiLabs (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) builds mobile applications including
+          HearZ, HearVerse, and Connections Buddy. This policy describes how we handle your information
+          across all SkoobiLabs apps.
         </p>
 
         <h2>Information We Collect</h2>
         <p>Our apps are designed to work with minimal data collection:</p>
         <ul>
           <li>
-            <strong>Usage data:</strong> We may collect anonymous usage analytics such as which features
-            are used and general app performance metrics. This data cannot identify you personally.
+            <strong>Account information:</strong> If you choose to create an account (via Apple Sign-In,
+            Google, or email), we store your email address and authentication credentials securely
+            through Supabase. You can use our apps without creating an account.
           </li>
           <li>
-            <strong>Preferences:</strong> Your settings (selected topics, playback speed, voice
-            preference, theme) are stored locally on your device.
+            <strong>Usage analytics:</strong> We collect anonymous usage data such as which features are
+            used, playback events, and general app performance metrics. This helps us improve the
+            experience. This data is processed through PostHog and cannot identify you personally.
           </li>
           <li>
-            <strong>Article data:</strong> Articles you listen to are cached locally on your device for
-            offline access.
+            <strong>Preferences:</strong> Your settings (playback speed, voice preference, reading
+            position, text size) are stored locally on your device.
+          </li>
+          <li>
+            <strong>Subscription status:</strong> If you subscribe to a Pro plan, your subscription
+            is managed by RevenueCat and Apple/Google. We receive your subscription status but not
+            your payment details.
           </li>
         </ul>
 
         <h2>Information We Do Not Collect</h2>
         <ul>
-          <li>We do not collect personal information such as your name, email address, or phone number.</li>
           <li>We do not record audio or access your microphone.</li>
           <li>We do not track your location.</li>
-          <li>We do not sell or share any data with third parties.</li>
+          <li>We do not sell or share personal data with third parties.</li>
+          <li>We do not collect data from children (see below).</li>
         </ul>
 
         <h2>Audio Playback</h2>
         <p>
-          HearZ uses text-to-speech technology to read articles aloud. All audio is generated on your
-          device. No audio is recorded, stored, or transmitted.
+          HearZ and HearVerse use AI text-to-speech technology (OpenAI) to read content aloud. Text is
+          sent to our secure server to generate audio, which is cached for faster playback. No personal
+          data is included in these requests — only the article or Bible chapter text.
+        </p>
+
+        <h2>Advertising</h2>
+        <p>
+          Free-tier users may see ads served by Google AdMob. AdMob may collect device identifiers and
+          usage data as described in{" "}
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+            Google&apos;s Privacy Policy
+          </a>. We configure ads to show only age-appropriate content (G-rated). Pro subscribers do not
+          see any ads.
         </p>
 
         <h2>Third-Party Services</h2>
-        <p>Our apps may use the following third-party services:</p>
+        <p>Our apps use the following third-party services, each with their own privacy policies:</p>
         <ul>
-          <li>
-            <strong>Expo / EAS:</strong> For app updates and build distribution.
-          </li>
+          <li><strong>Supabase:</strong> Authentication and account management</li>
+          <li><strong>RevenueCat:</strong> Subscription management</li>
+          <li><strong>Google AdMob:</strong> Advertising (free tier only)</li>
+          <li><strong>PostHog:</strong> Anonymous usage analytics</li>
+          <li><strong>Sentry:</strong> Crash reporting and error tracking</li>
+          <li><strong>OpenAI:</strong> Text-to-speech audio generation</li>
+          <li><strong>Expo / EAS:</strong> App updates and build distribution</li>
         </ul>
-        <p>These services have their own privacy policies that govern their use of data.</p>
 
         <h2>Data Storage</h2>
         <p>
-          All user preferences and cached content are stored locally on your device. We do not maintain
-          user accounts or store personal data on our servers.
+          User preferences, reading progress, and cached content are stored locally on your device.
+          If you create an account, your email and authentication data are stored securely on Supabase
+          servers. You can delete your account at any time by contacting us.
         </p>
 
         <h2>Children&apos;s Privacy</h2>
