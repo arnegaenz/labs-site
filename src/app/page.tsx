@@ -265,6 +265,13 @@ export default function HomePage() {
           transform: translateY(-4px);
         }
 
+        .app-icon {
+          width: 72px;
+          height: 72px;
+          border-radius: 16px;
+          margin-bottom: 1.2rem;
+        }
+
         .app-badge {
           display: inline-flex;
           align-items: center;
@@ -488,6 +495,7 @@ export default function HomePage() {
         <div className="app-grid">
           {/* HearVerse */}
           <div className="app-card">
+            <img src="/icons/hearverse.png" alt="HearVerse" className="app-icon" />
             <div className="app-badge badge-live"><span className="dot" /> Live on App Store</div>
             <h3><span>HearVerse</span></h3>
             <div className="platform">iPhone + iPad</div>
@@ -498,6 +506,7 @@ export default function HomePage() {
 
           {/* HearZ */}
           <div className="app-card">
+            <img src="/icons/hearz.png" alt="HearZ" className="app-icon" />
             <div className="app-badge badge-dev">In Development</div>
             <h3><span>HearZ</span></h3>
             <div className="platform">iPhone + Android</div>
