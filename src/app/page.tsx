@@ -272,6 +272,135 @@ export default function HomePage() {
           margin-bottom: 1.2rem;
         }
 
+        /* --- HERO APP (HearVerse) --- */
+        .hero-app {
+          background: linear-gradient(135deg, rgba(255,179,0,0.08), rgba(255,179,0,0.02));
+          border: 1px solid rgba(255,179,0,0.15);
+          border-radius: 32px;
+          padding: 3.5rem 3rem;
+          margin-bottom: 2rem;
+          display: flex;
+          gap: 3rem;
+          align-items: center;
+          overflow: hidden;
+          position: relative;
+        }
+        .hero-app::before {
+          content: '';
+          position: absolute;
+          top: -100px;
+          right: -100px;
+          width: 300px;
+          height: 300px;
+          background: rgba(255,179,0,0.06);
+          border-radius: 50%;
+          filter: blur(80px);
+        }
+        .hero-app-info {
+          flex: 1;
+          z-index: 1;
+        }
+        .hero-app-info .app-icon {
+          width: 96px;
+          height: 96px;
+          border-radius: 22px;
+          box-shadow: 0 8px 32px rgba(255,179,0,0.2);
+        }
+        .hero-app-info h3 {
+          font-size: 2.2rem;
+          font-weight: 700;
+          color: #FFB300;
+          margin: 0.8rem 0 0.3rem;
+          letter-spacing: -0.5px;
+        }
+        .hero-app-info .tagline {
+          font-size: 1.15rem;
+          color: rgba(255,255,255,0.5);
+          line-height: 1.6;
+          margin-bottom: 1.5rem;
+          max-width: 400px;
+        }
+        .hero-app-info .app-store-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 24px;
+          background: #FFB300;
+          color: #000;
+          font-weight: 700;
+          font-size: 0.9rem;
+          border-radius: 12px;
+          text-decoration: none;
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .hero-app-info .app-store-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 24px rgba(255,179,0,0.3);
+        }
+        .hero-app-screenshots {
+          display: flex;
+          gap: 1rem;
+          z-index: 1;
+        }
+        .phone-frame {
+          width: 200px;
+          border-radius: 24px;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+          border: 2px solid rgba(255,255,255,0.08);
+        }
+        .phone-frame-secondary {
+          width: 170px;
+          border-radius: 20px;
+          box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+          border: 2px solid rgba(255,255,255,0.05);
+          opacity: 0.7;
+          transform: translateY(20px);
+        }
+
+        .other-apps {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+        }
+
+        .app-card-small {
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.07);
+          border-radius: 24px;
+          padding: 2rem 1.8rem;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          transition: border-color 0.3s, transform 0.2s;
+        }
+        .app-card-small:hover {
+          border-color: rgba(0,212,255,0.2);
+          transform: translateY(-4px);
+        }
+        .app-card-small .app-icon {
+          width: 56px;
+          height: 56px;
+          border-radius: 14px;
+        }
+
+        @media (max-width: 700px) {
+          .hero-app {
+            flex-direction: column;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+          }
+          .hero-app-info .tagline {
+            max-width: 100%;
+          }
+          .hero-app-screenshots {
+            justify-content: center;
+          }
+          .phone-frame { width: 160px; }
+          .phone-frame-secondary { width: 140px; }
+          .other-apps {
+            grid-template-columns: 1fr;
+          }
+        }
+
         .app-badge {
           display: inline-flex;
           align-items: center;
@@ -492,36 +621,45 @@ export default function HomePage() {
         <div className="section-label">Our Apps</div>
         <h2 className="section-heading">What we&apos;re building</h2>
 
-        <div className="app-grid">
-          {/* HearVerse */}
-          <div className="app-card">
+        {/* HearVerse — Hero App */}
+        <div className="hero-app">
+          <div className="hero-app-info">
             <img src="/icons/hearverse.png" alt="HearVerse" className="app-icon" />
-            <div className="app-badge badge-live"><span className="dot" /> Live on App Store</div>
-            <h3><span>HearVerse</span></h3>
-            <div className="platform">iPhone + iPad</div>
-            <p>
-              The Bible, read aloud by AI voices. Pick a book, tap play, and listen — 1,189 chapters across 66 books in KJV and ASV. Designed for elderly listeners who want the Word read to them beautifully.
+            <h3>HearVerse</h3>
+            <div className="app-badge badge-live" style={{ marginBottom: '1rem' }}><span className="dot" /> Live on App Store</div>
+            <p className="tagline">
+              The Bible, read aloud beautifully. 1,189 chapters, 66 books, two AI voices. Pick a book, tap play, and listen. Designed for listeners who want the Word read to them.
             </p>
+            <a href="https://apps.apple.com/app/hearverse/id6761432386" className="app-store-btn" target="_blank" rel="noopener noreferrer">
+              Download on the App Store
+            </a>
           </div>
+          <div className="hero-app-screenshots">
+            <img src="/screenshots/nowplaying.jpg" alt="HearVerse Now Playing" className="phone-frame" />
+            <img src="/screenshots/plan.jpg" alt="HearVerse Reading Plan" className="phone-frame-secondary" />
+          </div>
+        </div>
 
+        {/* Other Apps */}
+        <div className="other-apps">
           {/* HearZ */}
-          <div className="app-card">
+          <div className="app-card-small">
             <img src="/icons/hearz.png" alt="HearZ" className="app-icon" />
-            <div className="app-badge badge-dev">In Development</div>
+            <div className="app-badge badge-dev">Coming Soon</div>
             <h3><span>HearZ</span></h3>
             <div className="platform">iPhone + Android</div>
             <p>
-              Your curated audio feed. HearZ takes the best articles from the web and reads them to you. Open the app, tap play — like a radio station for articles. Accessibility-first, built for everyone.
+              Your curated audio feed. The best articles from the web, read aloud. Tap play — like a radio station for articles.
             </p>
           </div>
 
           {/* Connections Buddy */}
-          <div className="app-card">
-            <div className="app-badge badge-dev">In Development</div>
+          <div className="app-card-small">
+            <div className="app-badge badge-dev">Coming Soon</div>
             <h3><span>Connections Buddy</span></h3>
             <div className="platform">iOS</div>
             <p>
-              Your scratchpad for NYT Connections puzzles. Load a puzzle, color-tag words into groups, and work through the logic. A polished, focused tool for puzzle lovers.
+              Your scratchpad for NYT Connections puzzles. Color-tag words, work through the logic, solve the grid.
             </p>
           </div>
         </div>
