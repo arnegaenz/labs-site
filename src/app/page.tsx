@@ -486,13 +486,13 @@ export default function HomePage() {
         <h2 className="section-heading">What we&apos;re building</h2>
 
         <div className="app-grid">
-          {/* Connections Buddy */}
+          {/* HearVerse */}
           <div className="app-card">
-            <div className="app-badge badge-dev">In Development</div>
-            <h3><span>Connections Buddy</span></h3>
-            <div className="platform">iOS</div>
+            <div className="app-badge badge-live"><span className="dot" /> Live on App Store</div>
+            <h3><span>HearVerse</span></h3>
+            <div className="platform">iPhone + iPad</div>
             <p>
-              Your scratchpad for NYT Connections puzzles. Load a puzzle, color-tag words into groups, and work through the logic. A polished, focused tool for puzzle lovers.
+              The Bible, read aloud by AI voices. Pick a book, tap play, and listen — 1,189 chapters across 66 books in KJV and ASV. Designed for elderly listeners who want the Word read to them beautifully.
             </p>
           </div>
 
@@ -503,6 +503,16 @@ export default function HomePage() {
             <div className="platform">iPhone + Android</div>
             <p>
               Your curated audio feed. HearZ takes the best articles from the web and reads them to you. Open the app, tap play — like a radio station for articles. Accessibility-first, built for everyone.
+            </p>
+          </div>
+
+          {/* Connections Buddy */}
+          <div className="app-card">
+            <div className="app-badge badge-dev">In Development</div>
+            <h3><span>Connections Buddy</span></h3>
+            <div className="platform">iOS</div>
+            <p>
+              Your scratchpad for NYT Connections puzzles. Load a puzzle, color-tag words into groups, and work through the logic. A polished, focused tool for puzzle lovers.
             </p>
           </div>
         </div>
