@@ -96,13 +96,18 @@ export default function HearZPage() {
         .hz-phone-section {
           display: flex;
           justify-content: center;
-          gap: 1.5rem;
           padding: 0 2rem 5rem;
           position: relative;
           z-index: 1;
         }
+        .hz-phones {
+          display: flex;
+          justify-content: center;
+          gap: 2rem;
+          align-items: flex-start;
+        }
         .hz-phone {
-          width: 260px;
+          width: 240px;
           flex-shrink: 0;
         }
         .hz-phone img {
@@ -325,8 +330,8 @@ export default function HearZPage() {
         .hz-footer a:hover { color: rgba(255,255,255,0.5); }
 
         @media (max-width: 700px) {
-          .hz-phone-section { gap: 0.8rem; }
-          .hz-phone { width: 200px; }
+          .hz-phones { gap: 1rem; }
+          .hz-phone { width: 160px; }
           .hz-features-grid { grid-template-columns: 1fr; gap: 1rem; }
           .hz-pricing-cards { grid-template-columns: 1fr; }
           .hz-step { gap: 1rem; }
@@ -350,10 +355,15 @@ export default function HearZPage() {
         </div>
       </section>
 
-      {/* Phone Screenshot */}
+      {/* Phone Screenshots */}
       <section className="hz-phone-section">
-        <div className="hz-phone">
-          <img src="/screenshots/nowplaying.jpg" alt="Now Playing" />
+        <div className="hz-phones">
+          <div className="hz-phone">
+            <img src="/screenshots/hearz-discover.png" alt="HearZ Discover" />
+          </div>
+          <div className="hz-phone">
+            <img src="/screenshots/hearz-library.png" alt="HearZ Library" />
+          </div>
         </div>
       </section>
 
