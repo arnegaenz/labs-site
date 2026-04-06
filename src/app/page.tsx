@@ -400,7 +400,7 @@ export default function HomePage() {
         }
         .other-apps {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(3, 1fr);
           gap: 1.5rem;
         }
         .app-card-small {
@@ -445,6 +445,9 @@ export default function HomePage() {
           line-height: 1.6;
         }
 
+        @media (max-width: 960px) {
+          .other-apps { grid-template-columns: 1fr 1fr; }
+        }
         @media (max-width: 700px) {
           .hero-app h3 { font-size: 2rem; }
           .hero-app-phone { width: 220px; }
@@ -708,8 +711,9 @@ export default function HomePage() {
             <h3><span>HearZ</span></h3>
             <div className="platform">Coming Soon &middot; iPhone + Android</div>
             <p>
-              Your curated audio feed. The best articles from the web, read aloud. Like a radio station for everything you want to read but don&apos;t have time for.
+              Your curated audio feed. 50+ sources, AI voices that sound human, and a recommendation engine that learns what you love. Like a radio station for everything you want to read but don&apos;t have time for.
             </p>
+            <a href="/hearz" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '0.8rem', color: 'rgba(0,212,255,0.6)', textDecoration: 'none' }}>Learn More &rarr;</a>
           </div>
 
           {/* Connections Buddy */}
@@ -719,6 +723,16 @@ export default function HomePage() {
             <p>
               Your scratchpad for NYT Connections puzzles. Color-tag words, work through the logic, solve the grid.
             </p>
+          </div>
+
+          {/* SkoobiDo */}
+          <div className="app-card-small">
+            <h3><span>SkoobiDo</span></h3>
+            <div className="platform">TestFlight &middot; iPhone</div>
+            <p>
+              A GTD task manager that actually gets things done. Capture, process, organize — with dependency tracking, 5 color themes, and insights that show your productivity trends.
+            </p>
+            <a href="/skoobido" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '0.8rem', color: 'rgba(0,212,255,0.6)', textDecoration: 'none' }}>Learn More &rarr;</a>
           </div>
         </div>
       </section>
