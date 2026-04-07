@@ -44,6 +44,15 @@ src/app/
 - Background: #08080F
 - Logo: VW minibus (brand assets in /SkoobiLabs/brand/)
 
+## App Store Links
+- HearVerse hero section on homepage links directly to App Store: https://apps.apple.com/app/id6761432386
+- Added April 2026 for AdMob app-ads.txt verification (needs a public link to the store listing)
+
+## app-ads.txt
+- Served at labs.skoobi.com/app-ads.txt (also at skoobi.com and www.skoobi.com)
+- Content: `google.com, pub-2092614136459898, DIRECT, f08c47fec0942fa0`
+- Required by AdMob for ad serving verification
+
 ## Sibling Projects
 - ConnectionsHelper: /SkoobiLabs/ConnectionsHelper (iOS app)
 - HearZee: /SkoobiLabs/HearZee (cross-platform app)
