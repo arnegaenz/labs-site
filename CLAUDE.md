@@ -45,8 +45,8 @@ src/app/
 - Logo: VW minibus (brand assets in /SkoobiLabs/brand/)
 
 ## App Store Links
-- HearVerse hero section on homepage links directly to App Store: https://apps.apple.com/app/id6761432386
-- Added April 2026 for AdMob app-ads.txt verification (needs a public link to the store listing)
+- HearVerse App Store download button on homepage: https://apps.apple.com/app/id6761432386
+- Added April 2026 for AdMob app-ads.txt verification and user acquisition
 
 ## app-ads.txt
 - Served at labs.skoobi.com/app-ads.txt (also at skoobi.com and www.skoobi.com)
