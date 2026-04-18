@@ -56,4 +56,4 @@ src/app/
 ## Sibling Projects
 - ConnectionsHelper: /SkoobiLabs/ConnectionsHelper (iOS app)
 - HearZee: /SkoobiLabs/HearZee (cross-platform app)
-- Skoobi platform: /development/Skoobi (skoobi.com)
+- Skoobi platform: /development/SkoobiLabs/skoobi (skoobi.com)
