@@ -1,19 +1,5 @@
 {
   "framework": "nextjs",
   "buildCommand": "next build",
-  "installCommand": "npm install",
-  "crons": [
-    {
-      "path": "/api/sync/ad-metrics",
-      "schedule": "0 8 * * *"
-    },
-    {
-      "path": "/api/webhooks/store-reviews",
-      "schedule": "0 12 * * *"
-    },
-    {
-      "path": "/api/sync/weekly-creative-review",
-      "schedule": "0 9 * * 1"
-    }
-  ]
+  "installCommand": "npm install"
 }
