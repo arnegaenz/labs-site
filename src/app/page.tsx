@@ -309,40 +309,6 @@ export default function HomePage() {
           max-width: 520px;
           margin: 0 auto 2.5rem;
         }
-        .hero-app-phone {
-          position: relative;
-          width: 260px;
-          margin: 0 auto 2.5rem;
-        }
-        .hero-app-phone::before {
-          content: '';
-          position: absolute;
-          inset: -2px;
-          border-radius: 38px;
-          border: 2.5px solid rgba(255,255,255,0.12);
-          pointer-events: none;
-          z-index: 2;
-        }
-        .hero-app-phone::after {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 320px;
-          height: 320px;
-          background: radial-gradient(circle, rgba(255,179,0,0.12) 0%, transparent 70%);
-          border-radius: 50%;
-          z-index: 0;
-          filter: blur(40px);
-        }
-        .hero-app-phone img {
-          width: 100%;
-          border-radius: 36px;
-          position: relative;
-          z-index: 1;
-          box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-        }
         .hero-app .features {
           display: flex;
           justify-content: center;
@@ -512,78 +478,50 @@ export default function HomePage() {
           margin-bottom: 3rem;
         }
 
-        /* --- OTHER APPS --- */
-        .other-apps-label {
-          font-size: 0.65rem;
-          font-weight: 600;
-          letter-spacing: 5px;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.2);
+        /* --- MORE PROJECTS LINK --- */
+        .more-projects {
+          position: relative;
+          z-index: 10;
           text-align: center;
-          margin-bottom: 1.5rem;
-          margin-top: 2rem;
+          padding: 1rem 1.5rem 4rem;
         }
-        .other-apps {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 1.5rem;
-          max-width: 700px;
-          margin: 0 auto;
-        }
-        .app-card-small {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.07);
-          border-radius: 20px;
-          padding: 2rem 1.8rem;
-          transition: border-color 0.3s, transform 0.2s;
-        }
-        .app-card-small:hover {
-          border-color: rgba(0,212,255,0.15);
-          transform: translateY(-3px);
-        }
-        .app-card-small .app-icon {
-          width: 52px;
-          height: 52px;
-          border-radius: 12px;
-          margin-bottom: 1rem;
-        }
-        .app-card-small h3 {
-          font-size: 1.2rem;
-          font-weight: 700;
-          margin-bottom: 0.4rem;
-          letter-spacing: -0.3px;
-        }
-        .app-card-small h3 span {
-          background: linear-gradient(135deg, var(--mint), var(--cyan));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-        .app-card-small .platform {
-          font-size: 0.7rem;
-          color: rgba(255,255,255,0.2);
-          letter-spacing: 1px;
+        .more-projects-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          padding: 12px 24px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          letter-spacing: 2px;
           text-transform: uppercase;
-          margin-bottom: 0.8rem;
+          color: rgba(255,255,255,0.45);
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 100px;
+          text-decoration: none;
+          transition: color 0.2s, border-color 0.2s, transform 0.2s;
         }
-        .app-card-small p {
-          font-size: 0.88rem;
-          color: rgba(255,255,255,0.35);
-          line-height: 1.6;
+        .more-projects-link:hover {
+          color: rgba(255,255,255,0.85);
+          border-color: rgba(139,92,246,0.35);
+          transform: translateY(-2px);
+        }
+        .more-projects-link span {
+          transition: transform 0.2s;
+        }
+        .more-projects-link:hover span {
+          transform: translateX(3px);
         }
 
         @media (max-width: 960px) {
-          .other-apps { grid-template-columns: 1fr 1fr; }
           .phone { width: 180px; }
           .hero-app-phones { gap: 0.75rem; }
         }
         @media (max-width: 700px) {
           .hero-app h3 { font-size: 2rem; }
-          .hero-app-phone { width: 220px; }
           .phone { width: 160px; }
           .hero-app-phones { gap: 0.5rem; }
           .hero-app .features { gap: 1rem; }
-          .other-apps { grid-template-columns: 1fr; }
         }
         @media (max-width: 520px) {
           .phone { width: 140px; }
@@ -904,30 +842,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* OTHER APPS (smaller cards) */}
-      <section className="apps-section" style={{ paddingTop: '1rem' }}>
-        <div className="other-apps-label">Also from SkoobiLabs</div>
-        <div className="other-apps">
-          {/* HearZ */}
-          <div className="app-card-small">
-            <img src="/icons/hearz.png" alt="HearZ" className="app-icon" />
-            <h3><span>HearZ</span></h3>
-            <div className="platform">Coming Soon &middot; iPhone + Android</div>
-            <p>
-              Your curated audio feed. 50+ sources, AI voices that sound human, and a recommendation engine that learns what you love. Like a radio station for everything you want to read but don&apos;t have time for.
-            </p>
-            <a href="/hearz" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '0.8rem', color: 'rgba(0,212,255,0.6)', textDecoration: 'none' }}>Learn More &rarr;</a>
-          </div>
-
-          {/* Connections Buddy */}
-          <div className="app-card-small">
-            <h3><span>Connections Buddy</span></h3>
-            <div className="platform">Coming Soon &middot; iOS</div>
-            <p>
-              Your scratchpad for NYT Connections puzzles. Color-tag words, work through the logic, solve the grid.
-            </p>
-          </div>
-        </div>
+      {/* MORE PROJECTS */}
+      <section className="more-projects">
+        <a href="/projects" className="more-projects-link">
+          More projects <span>&rarr;</span>
+        </a>
       </section>
 
       {/* COMING SOON */}
