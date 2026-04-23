@@ -870,29 +870,6 @@ export default function HomePage() {
           <a href="/skoobido" className="learn-more">Learn More &rarr;</a>
         </div>
 
-        {/* Other Apps */}
-        <div className="other-apps-label">Also from SkoobiLabs</div>
-        <div className="other-apps">
-          {/* HearZ */}
-          <div className="app-card-small">
-            <img src="/icons/hearz.png" alt="HearZ" className="app-icon" />
-            <h3><span>HearZ</span></h3>
-            <div className="platform">Coming Soon &middot; iPhone + Android</div>
-            <p>
-              Your curated audio feed. 50+ sources, AI voices that sound human, and a recommendation engine that learns what you love. Like a radio station for everything you want to read but don&apos;t have time for.
-            </p>
-            <a href="/hearz" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '0.8rem', color: 'rgba(0,212,255,0.6)', textDecoration: 'none' }}>Learn More &rarr;</a>
-          </div>
-
-          {/* Connections Buddy */}
-          <div className="app-card-small">
-            <h3><span>Connections Buddy</span></h3>
-            <div className="platform">Coming Soon &middot; iOS</div>
-            <p>
-              Your scratchpad for NYT Connections puzzles. Color-tag words, work through the logic, solve the grid.
-            </p>
-          </div>
-        </div>
       </section>
 
       {/* CLIENT WORK */}
@@ -924,6 +901,32 @@ export default function HomePage() {
           <p className="tagline">
             Custom field ops software designed and built end-to-end for Jake&apos;s Junk Removal. Crews clock in, watch their pay period grow in real-time, and review every shift — all from their phone.
           </p>
+        </div>
+      </section>
+
+      {/* OTHER APPS (smaller cards) */}
+      <section className="apps-section" style={{ paddingTop: '1rem' }}>
+        <div className="other-apps-label">Also from SkoobiLabs</div>
+        <div className="other-apps">
+          {/* HearZ */}
+          <div className="app-card-small">
+            <img src="/icons/hearz.png" alt="HearZ" className="app-icon" />
+            <h3><span>HearZ</span></h3>
+            <div className="platform">Coming Soon &middot; iPhone + Android</div>
+            <p>
+              Your curated audio feed. 50+ sources, AI voices that sound human, and a recommendation engine that learns what you love. Like a radio station for everything you want to read but don&apos;t have time for.
+            </p>
+            <a href="/hearz" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '0.8rem', color: 'rgba(0,212,255,0.6)', textDecoration: 'none' }}>Learn More &rarr;</a>
+          </div>
+
+          {/* Connections Buddy */}
+          <div className="app-card-small">
+            <h3><span>Connections Buddy</span></h3>
+            <div className="platform">Coming Soon &middot; iOS</div>
+            <p>
+              Your scratchpad for NYT Connections puzzles. Color-tag words, work through the logic, solve the grid.
+            </p>
+          </div>
         </div>
       </section>
 
