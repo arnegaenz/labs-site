@@ -387,6 +387,131 @@ export default function HomePage() {
           height: 20px;
         }
 
+        /* --- MULTI-PHONE ROW (shared by all heroes) --- */
+        .hero-app-phones {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          margin: 0 auto 2.5rem;
+          max-width: 100%;
+          flex-wrap: wrap;
+        }
+        .hero-app-phones::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 640px;
+          height: 440px;
+          background: radial-gradient(ellipse, rgba(255,179,0,0.12) 0%, transparent 70%);
+          border-radius: 50%;
+          z-index: 0;
+          filter: blur(50px);
+          pointer-events: none;
+        }
+        .phone {
+          position: relative;
+          width: 200px;
+          z-index: 1;
+        }
+        .phone::before {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          border-radius: 32px;
+          border: 2px solid rgba(255,255,255,0.1);
+          pointer-events: none;
+          z-index: 2;
+        }
+        .phone img {
+          width: 100%;
+          border-radius: 30px;
+          position: relative;
+          z-index: 1;
+          box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+          display: block;
+        }
+
+        /* --- SKOOBIDO HERO OVERRIDES (emerald accent) --- */
+        .hero-app.skoobido-hero .hero-app-icon {
+          box-shadow: 0 12px 48px rgba(16,185,129,0.25), 0 0 0 1px rgba(16,185,129,0.15);
+        }
+        .hero-app.skoobido-hero h3 em { color: #10B981; }
+        .hero-app.skoobido-hero .hero-app-phones::after {
+          background: radial-gradient(ellipse, rgba(16,185,129,0.12) 0%, transparent 70%);
+        }
+        .hero-app.skoobido-hero .feature-dot { background: #10B981; }
+        .hero-app.skoobido-hero .learn-more {
+          display: inline-block;
+          margin-top: 0.5rem;
+          font-size: 0.95rem;
+          color: #10B981;
+          text-decoration: none;
+          font-weight: 600;
+        }
+        .hero-app.skoobido-hero .learn-more:hover { color: #34D399; }
+        .hero-app.skoobido-hero .beta-tag {
+          display: inline-block;
+          padding: 4px 12px;
+          margin-bottom: 1.2rem;
+          border-radius: 100px;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          border: 1px solid rgba(16,185,129,0.35);
+          color: rgba(16,185,129,0.85);
+        }
+
+        /* --- JAKETRACK HERO OVERRIDES (blue accent) --- */
+        .hero-app.jaketrack-hero .hero-app-icon {
+          box-shadow: 0 12px 48px rgba(74,124,255,0.28), 0 0 0 1px rgba(74,124,255,0.18);
+        }
+        .hero-app.jaketrack-hero h3 em { color: #4A7CFF; }
+        .hero-app.jaketrack-hero .hero-app-phones::after {
+          background: radial-gradient(ellipse, rgba(74,124,255,0.14) 0%, transparent 70%);
+        }
+        .hero-app.jaketrack-hero .feature-dot { background: #4A7CFF; }
+        .hero-app.jaketrack-hero .learn-more {
+          display: inline-block;
+          margin-top: 0.5rem;
+          font-size: 0.95rem;
+          color: #4A7CFF;
+          text-decoration: none;
+          font-weight: 600;
+        }
+        .hero-app.jaketrack-hero .learn-more:hover { color: #7AA0FF; }
+        .hero-app.jaketrack-hero .client-tag {
+          display: inline-block;
+          padding: 4px 12px;
+          margin-bottom: 1.2rem;
+          border-radius: 100px;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          border: 1px solid rgba(74,124,255,0.35);
+          color: rgba(74,124,255,0.9);
+        }
+
+        /* --- CLIENT WORK SECTION --- */
+        .client-work {
+          position: relative;
+          z-index: 10;
+          padding: 5rem 1.5rem 2rem;
+          max-width: 900px;
+          margin: 0 auto;
+        }
+        .client-work .section-label {
+          color: rgba(139,92,246,0.55);
+        }
+        .client-work .section-heading {
+          margin-bottom: 3rem;
+        }
+
         /* --- OTHER APPS --- */
         .other-apps-label {
           font-size: 0.65rem;
@@ -400,8 +525,10 @@ export default function HomePage() {
         }
         .other-apps {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 1.5rem;
+          max-width: 700px;
+          margin: 0 auto;
         }
         .app-card-small {
           background: rgba(255,255,255,0.03);
@@ -447,12 +574,19 @@ export default function HomePage() {
 
         @media (max-width: 960px) {
           .other-apps { grid-template-columns: 1fr 1fr; }
+          .phone { width: 180px; }
+          .hero-app-phones { gap: 0.75rem; }
         }
         @media (max-width: 700px) {
           .hero-app h3 { font-size: 2rem; }
           .hero-app-phone { width: 220px; }
+          .phone { width: 160px; }
+          .hero-app-phones { gap: 0.5rem; }
           .hero-app .features { gap: 1rem; }
           .other-apps { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 520px) {
+          .phone { width: 140px; }
         }
 
         .app-badge {
@@ -681,8 +815,10 @@ export default function HomePage() {
           <h3>Hear<em>Verse</em></h3>
           <p className="subtitle">The Bible, read aloud beautifully.</p>
 
-          <div className="hero-app-phone">
-            <img src="/screenshots/nowplaying.jpg" alt="HearVerse Now Playing" />
+          <div className="hero-app-phones">
+            <div className="phone"><img src="/screenshots/library.jpg" alt="HearVerse Library" /></div>
+            <div className="phone"><img src="/screenshots/nowplaying.jpg" alt="HearVerse Now Playing" /></div>
+            <div className="phone"><img src="/screenshots/plan.jpg" alt="HearVerse Reading Plan" /></div>
           </div>
 
           <div className="features">
@@ -704,6 +840,34 @@ export default function HomePage() {
           <a href="/hearverse" style={{ display: 'block', marginTop: '1.5rem', fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', textDecoration: 'none' }}>
             Learn More &rarr;
           </a>
+        </div>
+
+        {/* SkoobiDo — Hero App */}
+        <div className="hero-app skoobido-hero">
+          <img src="/icons/skoobido.png" alt="SkoobiDo" className="hero-app-icon" />
+          <span className="beta-tag">Private Beta</span>
+          <h3>Skoobi<em>Do</em></h3>
+          <p className="subtitle">Get things done. For real.</p>
+
+          <div className="hero-app-phones">
+            <div className="phone"><img src="/screenshots/skoobido-splash.png" alt="SkoobiDo Splash" /></div>
+            <div className="phone"><img src="/screenshots/skoobido-inbox.png" alt="SkoobiDo Inbox" /></div>
+            <div className="phone"><img src="/screenshots/skoobido-task.png" alt="SkoobiDo Task" /></div>
+          </div>
+
+          <div className="features">
+            <div className="feature"><span className="feature-dot" />GTD workflow</div>
+            <div className="feature"><span className="feature-dot" />Smart Today view</div>
+            <div className="feature"><span className="feature-dot" />Dependencies</div>
+            <div className="feature"><span className="feature-dot" />5 color themes</div>
+            <div className="feature"><span className="feature-dot" />Streaks &amp; insights</div>
+          </div>
+
+          <p className="tagline">
+            A task manager built on the GTD methodology — capture every loose thread into your inbox, process into actionable next steps, and watch your streak grow as you finish what matters.
+          </p>
+
+          <a href="/skoobido" className="learn-more">Learn More &rarr;</a>
         </div>
 
         {/* Other Apps */}
@@ -728,16 +892,38 @@ export default function HomePage() {
               Your scratchpad for NYT Connections puzzles. Color-tag words, work through the logic, solve the grid.
             </p>
           </div>
+        </div>
+      </section>
 
-          {/* SkoobiDo */}
-          <div className="app-card-small">
-            <h3><span>SkoobiDo</span></h3>
-            <div className="platform">TestFlight &middot; iPhone</div>
-            <p>
-              A GTD task manager that actually gets things done. Capture, process, organize — with dependency tracking, 5 color themes, and insights that show your productivity trends.
-            </p>
-            <a href="/skoobido" style={{ display: 'inline-block', marginTop: '1rem', fontSize: '0.8rem', color: 'rgba(0,212,255,0.6)', textDecoration: 'none' }}>Learn More &rarr;</a>
+      {/* CLIENT WORK */}
+      <section className="client-work">
+        <div className="section-label">Client Work</div>
+        <h2 className="section-heading">We build for our clients too</h2>
+
+        {/* JakeTrack — Client Hero */}
+        <div className="hero-app jaketrack-hero">
+          <img src="/icons/jaketrack.png" alt="JakeTrack" className="hero-app-icon" />
+          <span className="client-tag">In Development</span>
+          <h3>Jake<em>Track</em></h3>
+          <p className="subtitle">Built for Jake&apos;s Junk Removal.</p>
+
+          <div className="hero-app-phones">
+            <div className="phone"><img src="/screenshots/jaketrack-splash.png" alt="JakeTrack Splash" /></div>
+            <div className="phone"><img src="/screenshots/jaketrack-home.png" alt="JakeTrack Clock In" /></div>
+            <div className="phone"><img src="/screenshots/jaketrack-history.png" alt="JakeTrack History" /></div>
           </div>
+
+          <div className="features">
+            <div className="feature"><span className="feature-dot" />Clock in / out</div>
+            <div className="feature"><span className="feature-dot" />Live pay tracking</div>
+            <div className="feature"><span className="feature-dot" />Shift history</div>
+            <div className="feature"><span className="feature-dot" />Crew sign-in</div>
+            <div className="feature"><span className="feature-dot" />Custom-branded</div>
+          </div>
+
+          <p className="tagline">
+            Custom field ops software designed and built end-to-end for Jake&apos;s Junk Removal. Crews clock in, watch their pay period grow in real-time, and review every shift — all from their phone.
+          </p>
         </div>
       </section>
 

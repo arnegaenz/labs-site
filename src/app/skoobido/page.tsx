@@ -292,9 +292,6 @@ export default function SkoobiDoPage() {
       {/* Nav */}
       <nav className="nav">
         <a href="/" className="nav-logo">SkoobiLabs</a>
-        <a href="#cta" className="nav-download">
-          TestFlight
-        </a>
       </nav>
 
       {/* Hero */}
@@ -373,26 +370,10 @@ export default function SkoobiDoPage() {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="sd-pricing">
-        <h2>Free on TestFlight</h2>
-        <p className="pricing-sub">
-          No subscription yet. Just download and start getting things done.
-        </p>
-        <div className="sd-price-card">
-          <div className="sd-price-label">Early Access</div>
-          <div className="sd-price-amount">Free</div>
-          <div className="sd-price-period">while in beta</div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
+      {/* Private beta notice */}
       <section className="sd-cta" id="cta">
-        <h2>Now on TestFlight</h2>
-        <p>SkoobiDo is in early testing. More features coming soon.</p>
-        <a href="#" className="cta-btn">
-          Join TestFlight
-        </a>
+        <h2>Currently in private beta</h2>
+        <p>SkoobiDo is being tested with a small group. Public release coming soon.</p>
       </section>
 
       {/* Footer */}
