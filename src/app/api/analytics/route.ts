@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const HEARZ_API = "https://hearzee-api.arneg-fb8.workers.dev";
+// Switched from hearzee-api (legacy, retired 2026-04-26) to hear-api;
+// /api/analytics/summary endpoint shape is identical post-monorepo migration.
+const HEARZ_API = "https://hear-api.arneg-fb8.workers.dev";
 
 export async function GET(request: NextRequest) {
   try {
