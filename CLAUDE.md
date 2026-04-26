@@ -55,5 +55,9 @@ src/app/
 
 ## Sibling Projects
 - ConnectionsHelper: /SkoobiLabs/ConnectionsHelper (iOS app)
-- HearZee: /SkoobiLabs/HearZee (cross-platform app)
+- HearZee: /SkoobiLabs/HearZee — **legacy, retired 2026-04-26**; active HearZ is in Hear monorepo
 - Skoobi platform: /development/SkoobiLabs/skoobi (skoobi.com)
+- Hear monorepo: /SkoobiLabs/Hear (HearVerse + HearZ)
+
+## Backend dependency
+- `/api/analytics` proxies to `https://hear-api.arneg-fb8.workers.dev/api/analytics/summary`. Switched 2026-04-26 from the legacy `hearzee-api` worker (deleted) to the active `hear-api` post-monorepo migration. Endpoint shape is identical.
