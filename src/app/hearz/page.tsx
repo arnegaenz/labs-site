@@ -347,7 +347,7 @@ export default function HearZPage() {
       {/* Hero */}
       <section className="hz-hero">
         <div className="hz-hero-content">
-          <img src="/icons/hearz.png" alt="HearZ" className="hz-hero-icon" />
+          <img src="/icons/hearnews.png" alt="HearNewZ" className="hz-hero-icon" />
           <h1>Hear<em>Z</em></h1>
           <p className="lead">
             Your feed, out loud.
@@ -359,10 +359,10 @@ export default function HearZPage() {
       <section className="hz-phone-section">
         <div className="hz-phones">
           <div className="hz-phone">
-            <img src="/screenshots/hearz-discover.png" alt="HearZ Discover" />
+            <img src="/screenshots/hearnews-discover.png" alt="HearNewZ Discover" />
           </div>
           <div className="hz-phone">
-            <img src="/screenshots/hearz-library.png" alt="HearZ Library" />
+            <img src="/screenshots/hearnews-library.png" alt="HearNewZ Library" />
           </div>
         </div>
       </section>

@@ -152,15 +152,15 @@ export default function HomePage() {
 
         {/* SkoobiDo — Hero App */}
         <div className="hero-app skoobido-hero">
-          <img src="/icons/skoobido.png" alt="SkoobiDo" className="hero-app-icon" />
+          <img src="/icons/skoobislate.png" alt="SkoobiSlate" className="hero-app-icon" />
           <span className="beta-tag">Private Beta</span>
           <h3>Skoobi<em>Do</em></h3>
           <p className="subtitle">Get things done. For real.</p>
 
           <div className="hero-app-phones">
-            <div className="phone"><img src="/screenshots/skoobido-splash.png" alt="SkoobiDo Splash" /></div>
-            <div className="phone"><img src="/screenshots/skoobido-inbox.png" alt="SkoobiDo Inbox" /></div>
-            <div className="phone"><img src="/screenshots/skoobido-task.png" alt="SkoobiDo Task" /></div>
+            <div className="phone"><img src="/screenshots/skoobislate-splash.png" alt="SkoobiSlate Splash" /></div>
+            <div className="phone"><img src="/screenshots/skoobislate-inbox.png" alt="SkoobiSlate Inbox" /></div>
+            <div className="phone"><img src="/screenshots/skoobislate-task.png" alt="SkoobiSlate Task" /></div>
           </div>
 
           <div className="features">

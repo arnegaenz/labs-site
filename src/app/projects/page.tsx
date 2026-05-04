@@ -170,7 +170,7 @@ export default function ProjectsPage() {
 
       <div className="projects-grid">
         <div className="project-card">
-          <img src="/icons/hearz.png" alt="HearZ" className="app-icon" />
+          <img src="/icons/hearnews.png" alt="HearNewZ" className="app-icon" />
           <h3><span>HearZ</span></h3>
           <div className="status">Coming Soon &middot; iPhone + Android</div>
           <p>

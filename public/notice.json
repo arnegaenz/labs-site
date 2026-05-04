@@ -1,0 +1,608 @@
+{
+  "generated_at": "2026-05-04T16:17:20.499Z",
+  "count": 75,
+  "generator": "platform/scripts/generate-notice.mjs",
+  "notice": "Third-party software included with this product. SkoobiLabs honors the attribution requirements of every license listed below. See https://labs.skoobi.com/credits or _ops/standards/legal.md § 6.",
+  "packages": [
+    {
+      "name": "@anthropic-ai/sdk",
+      "version": "0.82.0",
+      "license": "MIT",
+      "publisher": "Anthropic <support@anthropic.com>",
+      "repository": "github:anthropics/anthropic-sdk-typescript",
+      "homepage": null
+    },
+    {
+      "name": "@babel/runtime",
+      "version": "7.29.2",
+      "license": "MIT",
+      "publisher": "The Babel Team (https://babel.dev/team)",
+      "repository": "https://github.com/babel/babel",
+      "homepage": "https://babel.dev/docs/en/next/babel-runtime"
+    },
+    {
+      "name": "@img/colour",
+      "version": "1.1.0",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/lovell/colour",
+      "homepage": null
+    },
+    {
+      "name": "@img/sharp-darwin-arm64",
+      "version": "0.34.5",
+      "license": "Apache-2.0",
+      "publisher": "Lovell Fuller <npm@lovell.info>",
+      "repository": "https://github.com/lovell/sharp",
+      "homepage": "https://sharp.pixelplumbing.com"
+    },
+    {
+      "name": "@img/sharp-libvips-darwin-arm64",
+      "version": "1.2.4",
+      "license": "LGPL-3.0-or-later",
+      "publisher": "Lovell Fuller <npm@lovell.info>",
+      "repository": "https://github.com/lovell/sharp-libvips",
+      "homepage": "https://sharp.pixelplumbing.com"
+    },
+    {
+      "name": "@next/env",
+      "version": "15.5.12",
+      "license": "MIT",
+      "publisher": "Next.js Team <support@vercel.com>",
+      "repository": "https://github.com/vercel/next.js",
+      "homepage": null
+    },
+    {
+      "name": "@next/swc-darwin-arm64",
+      "version": "15.5.12",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/vercel/next.js",
+      "homepage": null
+    },
+    {
+      "name": "@opentelemetry/api",
+      "version": "1.9.1",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/api"
+    },
+    {
+      "name": "@opentelemetry/api-logs",
+      "version": "0.208.0",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/api-logs"
+    },
+    {
+      "name": "@opentelemetry/core",
+      "version": "2.2.0",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-core"
+    },
+    {
+      "name": "@opentelemetry/core",
+      "version": "2.7.1",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-core"
+    },
+    {
+      "name": "@opentelemetry/exporter-logs-otlp-http",
+      "version": "0.208.0",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "https://github.com/open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/exporter-logs-otlp-http"
+    },
+    {
+      "name": "@opentelemetry/otlp-exporter-base",
+      "version": "0.208.0",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/otlp-exporter-base"
+    },
+    {
+      "name": "@opentelemetry/otlp-transformer",
+      "version": "0.208.0",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/otlp-transformer"
+    },
+    {
+      "name": "@opentelemetry/resources",
+      "version": "2.2.0",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-resources"
+    },
+    {
+      "name": "@opentelemetry/resources",
+      "version": "2.7.1",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-resources"
+    },
+    {
+      "name": "@opentelemetry/sdk-logs",
+      "version": "0.208.0",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "https://github.com/open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/sdk-logs"
+    },
+    {
+      "name": "@opentelemetry/sdk-metrics",
+      "version": "2.2.0",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/sdk-metrics"
+    },
+    {
+      "name": "@opentelemetry/sdk-trace-base",
+      "version": "2.2.0",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-sdk-trace-base"
+    },
+    {
+      "name": "@opentelemetry/semantic-conventions",
+      "version": "1.40.0",
+      "license": "Apache-2.0",
+      "publisher": "OpenTelemetry Authors",
+      "repository": "open-telemetry/opentelemetry-js",
+      "homepage": "https://github.com/open-telemetry/opentelemetry-js/tree/main/semantic-conventions"
+    },
+    {
+      "name": "@posthog/core",
+      "version": "1.28.2",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/PostHog/posthog-js",
+      "homepage": null
+    },
+    {
+      "name": "@posthog/types",
+      "version": "1.372.8",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/PostHog/posthog-js",
+      "homepage": null
+    },
+    {
+      "name": "@protobufjs/aspromise",
+      "version": "1.1.2",
+      "license": "BSD-3-Clause",
+      "publisher": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+      "repository": "https://github.com/dcodeIO/protobuf.js",
+      "homepage": null
+    },
+    {
+      "name": "@protobufjs/base64",
+      "version": "1.1.2",
+      "license": "BSD-3-Clause",
+      "publisher": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+      "repository": "https://github.com/dcodeIO/protobuf.js",
+      "homepage": null
+    },
+    {
+      "name": "@protobufjs/codegen",
+      "version": "2.0.5",
+      "license": "BSD-3-Clause",
+      "publisher": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+      "repository": "https://github.com/dcodeIO/protobuf.js",
+      "homepage": null
+    },
+    {
+      "name": "@protobufjs/eventemitter",
+      "version": "1.1.0",
+      "license": "BSD-3-Clause",
+      "publisher": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+      "repository": "https://github.com/dcodeIO/protobuf.js",
+      "homepage": null
+    },
+    {
+      "name": "@protobufjs/fetch",
+      "version": "1.1.0",
+      "license": "BSD-3-Clause",
+      "publisher": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+      "repository": "https://github.com/dcodeIO/protobuf.js",
+      "homepage": null
+    },
+    {
+      "name": "@protobufjs/float",
+      "version": "1.0.2",
+      "license": "BSD-3-Clause",
+      "publisher": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+      "repository": "https://github.com/dcodeIO/protobuf.js",
+      "homepage": null
+    },
+    {
+      "name": "@protobufjs/inquire",
+      "version": "1.1.1",
+      "license": "BSD-3-Clause",
+      "publisher": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+      "repository": "https://github.com/dcodeIO/protobuf.js",
+      "homepage": null
+    },
+    {
+      "name": "@protobufjs/path",
+      "version": "1.1.2",
+      "license": "BSD-3-Clause",
+      "publisher": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+      "repository": "https://github.com/dcodeIO/protobuf.js",
+      "homepage": null
+    },
+    {
+      "name": "@protobufjs/pool",
+      "version": "1.1.0",
+      "license": "BSD-3-Clause",
+      "publisher": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+      "repository": "https://github.com/dcodeIO/protobuf.js",
+      "homepage": null
+    },
+    {
+      "name": "@protobufjs/utf8",
+      "version": "1.1.1",
+      "license": "BSD-3-Clause",
+      "publisher": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+      "repository": "https://github.com/dcodeIO/protobuf.js",
+      "homepage": null
+    },
+    {
+      "name": "@supabase/auth-js",
+      "version": "2.99.1",
+      "license": "MIT",
+      "publisher": "Supabase",
+      "repository": "https://github.com/supabase/supabase-js",
+      "homepage": "https://github.com/supabase/supabase-js/tree/master/packages/core/auth-js"
+    },
+    {
+      "name": "@supabase/functions-js",
+      "version": "2.99.1",
+      "license": "MIT",
+      "publisher": "Supabase",
+      "repository": "https://github.com/supabase/supabase-js",
+      "homepage": "https://github.com/supabase/supabase-js/tree/master/packages/core/functions-js"
+    },
+    {
+      "name": "@supabase/postgrest-js",
+      "version": "2.99.1",
+      "license": "MIT",
+      "publisher": "Supabase",
+      "repository": "https://github.com/supabase/supabase-js",
+      "homepage": "https://github.com/supabase/supabase-js/tree/master/packages/core/postgrest-js"
+    },
+    {
+      "name": "@supabase/realtime-js",
+      "version": "2.99.1",
+      "license": "MIT",
+      "publisher": "Supabase",
+      "repository": "https://github.com/supabase/supabase-js",
+      "homepage": "https://github.com/supabase/supabase-js/tree/master/packages/core/realtime-js"
+    },
+    {
+      "name": "@supabase/storage-js",
+      "version": "2.99.1",
+      "license": "MIT",
+      "publisher": "Supabase",
+      "repository": "https://github.com/supabase/supabase-js",
+      "homepage": "https://github.com/supabase/supabase-js/tree/master/packages/core/storage-js"
+    },
+    {
+      "name": "@supabase/supabase-js",
+      "version": "2.99.1",
+      "license": "MIT",
+      "publisher": "Supabase",
+      "repository": "https://github.com/supabase/supabase-js",
+      "homepage": "https://github.com/supabase/supabase-js/tree/master/packages/core/supabase-js"
+    },
+    {
+      "name": "@swc/helpers",
+      "version": "0.5.15",
+      "license": "Apache-2.0",
+      "publisher": "강동윤 <kdy1997.dev@gmail.com>",
+      "repository": "https://github.com/swc-project/swc",
+      "homepage": "https://swc.rs"
+    },
+    {
+      "name": "@types/node",
+      "version": "22.19.15",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node"
+    },
+    {
+      "name": "@types/phoenix",
+      "version": "1.6.7",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/phoenix"
+    },
+    {
+      "name": "@types/react",
+      "version": "19.2.14",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react"
+    },
+    {
+      "name": "@types/trusted-types",
+      "version": "2.0.7",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/trusted-types"
+    },
+    {
+      "name": "@types/ws",
+      "version": "8.18.1",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/ws"
+    },
+    {
+      "name": "caniuse-lite",
+      "version": "1.0.30001779",
+      "license": "CC-BY-4.0",
+      "publisher": "Ben Briggs",
+      "repository": "browserslist/caniuse-lite",
+      "homepage": null
+    },
+    {
+      "name": "client-only",
+      "version": "0.0.1",
+      "license": "MIT",
+      "publisher": null,
+      "repository": null,
+      "homepage": "https://reactjs.org/"
+    },
+    {
+      "name": "core-js",
+      "version": "3.49.0",
+      "license": "MIT",
+      "publisher": "Denis Pushkarev",
+      "repository": "https://github.com/zloirock/core-js",
+      "homepage": "https://core-js.io"
+    },
+    {
+      "name": "csstype",
+      "version": "3.2.3",
+      "license": "MIT",
+      "publisher": "Fredrik Nicol <fredrik.nicol@gmail.com>",
+      "repository": "https://github.com/frenic/csstype",
+      "homepage": null
+    },
+    {
+      "name": "detect-libc",
+      "version": "2.1.2",
+      "license": "Apache-2.0",
+      "publisher": "Lovell Fuller <npm@lovell.info>",
+      "repository": "git://github.com/lovell/detect-libc",
+      "homepage": null
+    },
+    {
+      "name": "dompurify",
+      "version": "3.4.2",
+      "license": "(MPL-2.0 OR Apache-2.0)",
+      "publisher": "Dr.-Ing. Mario Heiderich, Cure53 <mario@cure53.de> (https://cure53.de/)",
+      "repository": "git://github.com/cure53/DOMPurify",
+      "homepage": "https://github.com/cure53/DOMPurify"
+    },
+    {
+      "name": "fflate",
+      "version": "0.4.8",
+      "license": "MIT",
+      "publisher": "Arjun Barrett",
+      "repository": "https://github.com/101arrowz/fflate",
+      "homepage": "https://101arrowz.github.io/fflate"
+    },
+    {
+      "name": "iceberg-js",
+      "version": "0.8.1",
+      "license": "MIT",
+      "publisher": "mandarini",
+      "repository": "https://github.com/supabase/iceberg-js",
+      "homepage": "https://github.com/supabase/iceberg-js#readme"
+    },
+    {
+      "name": "json-schema-to-ts",
+      "version": "3.1.1",
+      "license": "MIT",
+      "publisher": "Thomas Aribart",
+      "repository": "https://github.com/ThomasAribart/json-schema-to-ts",
+      "homepage": "https://github.com/ThomasAribart/json-schema-to-ts#readme"
+    },
+    {
+      "name": "long",
+      "version": "5.3.2",
+      "license": "Apache-2.0",
+      "publisher": "Daniel Wirtz <dcode@dcode.io>",
+      "repository": "https://github.com/dcodeIO/long.js",
+      "homepage": null
+    },
+    {
+      "name": "nanoid",
+      "version": "3.3.11",
+      "license": "MIT",
+      "publisher": "Andrey Sitnik <andrey@sitnik.ru>",
+      "repository": "ai/nanoid",
+      "homepage": null
+    },
+    {
+      "name": "next",
+      "version": "15.5.12",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "vercel/next.js",
+      "homepage": "https://nextjs.org"
+    },
+    {
+      "name": "picocolors",
+      "version": "1.1.1",
+      "license": "ISC",
+      "publisher": "Alexey Raspopov",
+      "repository": "alexeyraspopov/picocolors",
+      "homepage": null
+    },
+    {
+      "name": "postcss",
+      "version": "8.4.31",
+      "license": "MIT",
+      "publisher": "Andrey Sitnik <andrey@sitnik.ru>",
+      "repository": "postcss/postcss",
+      "homepage": "https://postcss.org/"
+    },
+    {
+      "name": "posthog-js",
+      "version": "1.372.8",
+      "license": "SEE LICENSE IN LICENSE",
+      "publisher": "engineering@posthog.com",
+      "repository": "https://github.com/PostHog/posthog-js",
+      "homepage": "https://posthog.com/docs/libraries/js"
+    },
+    {
+      "name": "preact",
+      "version": "10.29.1",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "preactjs/preact",
+      "homepage": "https://preactjs.com"
+    },
+    {
+      "name": "protobufjs",
+      "version": "7.5.6",
+      "license": "BSD-3-Clause",
+      "publisher": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+      "repository": "protobufjs/protobuf.js",
+      "homepage": "https://protobufjs.github.io/protobuf.js/"
+    },
+    {
+      "name": "query-selector-shadow-dom",
+      "version": "1.0.1",
+      "license": "MIT",
+      "publisher": "George Griffiths <GeorgeGriff>",
+      "repository": "https://github.com/webdriverio/query-selector-shadow-dom",
+      "homepage": null
+    },
+    {
+      "name": "react",
+      "version": "19.2.4",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/facebook/react",
+      "homepage": "https://react.dev/"
+    },
+    {
+      "name": "react-dom",
+      "version": "19.2.4",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/facebook/react",
+      "homepage": "https://react.dev/"
+    },
+    {
+      "name": "scheduler",
+      "version": "0.27.0",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/facebook/react",
+      "homepage": "https://react.dev/"
+    },
+    {
+      "name": "semver",
+      "version": "7.7.4",
+      "license": "ISC",
+      "publisher": "GitHub Inc.",
+      "repository": "https://github.com/npm/node-semver",
+      "homepage": null
+    },
+    {
+      "name": "sharp",
+      "version": "0.34.5",
+      "license": "Apache-2.0",
+      "publisher": "Lovell Fuller <npm@lovell.info>",
+      "repository": "git://github.com/lovell/sharp",
+      "homepage": "https://sharp.pixelplumbing.com"
+    },
+    {
+      "name": "source-map-js",
+      "version": "1.2.1",
+      "license": "BSD-3-Clause",
+      "publisher": "Valentin 7rulnik Semirulnik <v7rulnik@gmail.com>",
+      "repository": "7rulnik/source-map-js",
+      "homepage": "https://github.com/7rulnik/source-map-js"
+    },
+    {
+      "name": "styled-jsx",
+      "version": "5.1.6",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "vercel/styled-jsx",
+      "homepage": null
+    },
+    {
+      "name": "ts-algebra",
+      "version": "2.0.0",
+      "license": "MIT",
+      "publisher": "Thomas Aribart",
+      "repository": "https://github.com/ThomasAribart/ts-algebra",
+      "homepage": "https://github.com/ThomasAribart/ts-algebra#readme"
+    },
+    {
+      "name": "tslib",
+      "version": "2.8.1",
+      "license": "0BSD",
+      "publisher": "Microsoft Corp.",
+      "repository": "https://github.com/Microsoft/tslib",
+      "homepage": "https://www.typescriptlang.org/"
+    },
+    {
+      "name": "typescript",
+      "version": "5.9.3",
+      "license": "Apache-2.0",
+      "publisher": "Microsoft Corp.",
+      "repository": "https://github.com/microsoft/TypeScript",
+      "homepage": "https://www.typescriptlang.org/"
+    },
+    {
+      "name": "undici-types",
+      "version": "6.21.0",
+      "license": "MIT",
+      "publisher": null,
+      "repository": "https://github.com/nodejs/undici",
+      "homepage": "https://undici.nodejs.org"
+    },
+    {
+      "name": "web-vitals",
+      "version": "5.2.0",
+      "license": "Apache-2.0",
+      "publisher": "Philip Walton",
+      "repository": "https://github.com/GoogleChrome/web-vitals",
+      "homepage": null
+    },
+    {
+      "name": "ws",
+      "version": "8.19.0",
+      "license": "MIT",
+      "publisher": "Einar Otto Stangvik <einaros@gmail.com> (http://2x.io)",
+      "repository": "https://github.com/websockets/ws",
+      "homepage": "https://github.com/websockets/ws"
+    }
+  ]
+}

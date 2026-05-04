@@ -2,6 +2,13 @@
 
 The web presence for Skoobi Labs at labs.skoobi.com.
 
+## Design language
+
+This product follows the SkoobiLabs Workbench direction. Brand POV and studio token spec auto-load below — authoritative for any visual or voice change:
+
+@../BRAND.md
+@../platform/DESIGN.md
+
 ## Tech Stack
 - Next.js 15 (App Router) with TypeScript
 - React 19
