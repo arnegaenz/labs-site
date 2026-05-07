@@ -106,7 +106,7 @@ export default function HomePage() {
 
         <div className="hero-tagline">
           <h1>We build apps you&apos;re<br />going to <em>love</em></h1>
-          <p>Thoughtful mobile apps for iPhone and Android, designed to delight and built to last.</p>
+          <p>Thoughtful software &mdash; mobile, web, and beyond &mdash; designed to delight and built to last.</p>
         </div>
 
         <div className="scroll-hint"><span /></div>
@@ -116,6 +116,34 @@ export default function HomePage() {
       <section className="apps-section">
         <div className="section-label">Our Apps</div>
         <h2 className="section-heading">What we&apos;re building</h2>
+
+        {/* SkoobiSlate — Hero App */}
+        <div className="hero-app skoobislate-hero">
+          <img src="/icons/skoobislate.png" alt="SkoobiSlate" className="hero-app-icon" />
+          <span className="beta-tag">Private Beta</span>
+          <h3>Skoobi<em>Slate</em></h3>
+          <p className="subtitle">Get things done. For real.</p>
+
+          <div className="hero-app-phones">
+            <div className="phone"><img src="/screenshots/skoobislate-splash.png" alt="SkoobiSlate Splash" /></div>
+            <div className="phone"><img src="/screenshots/skoobislate-inbox.png" alt="SkoobiSlate Inbox" /></div>
+            <div className="phone"><img src="/screenshots/skoobislate-task.png" alt="SkoobiSlate Task" /></div>
+          </div>
+
+          <div className="features">
+            <div className="feature"><span className="feature-dot" />GTD workflow</div>
+            <div className="feature"><span className="feature-dot" />Smart Today view</div>
+            <div className="feature"><span className="feature-dot" />Dependencies</div>
+            <div className="feature"><span className="feature-dot" />5 color themes</div>
+            <div className="feature"><span className="feature-dot" />Streaks &amp; insights</div>
+          </div>
+
+          <p className="tagline">
+            A task manager built on the GTD methodology — capture every loose thread into your inbox, process into actionable next steps, and watch your streak grow as you finish what matters.
+          </p>
+
+          <a href="/skoobislate" className="learn-more">Learn More &rarr;</a>
+        </div>
 
         {/* HearVerse — Hero App */}
         <div className="hero-app">
@@ -148,34 +176,6 @@ export default function HomePage() {
           <a href="/hearverse" style={{ display: 'block', marginTop: '1.5rem', fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', textDecoration: 'none' }}>
             Learn More &rarr;
           </a>
-        </div>
-
-        {/* SkoobiDo — Hero App */}
-        <div className="hero-app skoobido-hero">
-          <img src="/icons/skoobislate.png" alt="SkoobiSlate" className="hero-app-icon" />
-          <span className="beta-tag">Private Beta</span>
-          <h3>Skoobi<em>Do</em></h3>
-          <p className="subtitle">Get things done. For real.</p>
-
-          <div className="hero-app-phones">
-            <div className="phone"><img src="/screenshots/skoobislate-splash.png" alt="SkoobiSlate Splash" /></div>
-            <div className="phone"><img src="/screenshots/skoobislate-inbox.png" alt="SkoobiSlate Inbox" /></div>
-            <div className="phone"><img src="/screenshots/skoobislate-task.png" alt="SkoobiSlate Task" /></div>
-          </div>
-
-          <div className="features">
-            <div className="feature"><span className="feature-dot" />GTD workflow</div>
-            <div className="feature"><span className="feature-dot" />Smart Today view</div>
-            <div className="feature"><span className="feature-dot" />Dependencies</div>
-            <div className="feature"><span className="feature-dot" />5 color themes</div>
-            <div className="feature"><span className="feature-dot" />Streaks &amp; insights</div>
-          </div>
-
-          <p className="tagline">
-            A task manager built on the GTD methodology — capture every loose thread into your inbox, process into actionable next steps, and watch your streak grow as you finish what matters.
-          </p>
-
-          <a href="/skoobido" className="learn-more">Learn More &rarr;</a>
         </div>
 
       </section>

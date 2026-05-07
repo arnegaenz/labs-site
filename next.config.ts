@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
 
-const nextConfig: NextConfig = {};
+const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      { source: "/skoobido", destination: "/skoobislate", permanent: true },
+    ];
+  },
+};
 
 export default withSentryConfig(nextConfig, {
   org: "skoobi-labs",

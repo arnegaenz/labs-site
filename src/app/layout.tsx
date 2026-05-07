@@ -6,7 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Skoobi Labs",
   description:
-    "Skoobi Labs builds mobile apps for iPhone and Android. Thoughtful, polished, and built to delight.",
+    "Skoobi Labs builds thoughtful software — mobile, web, and beyond. Designed to delight, built to last.",
 };
 
 export default function RootLayout({

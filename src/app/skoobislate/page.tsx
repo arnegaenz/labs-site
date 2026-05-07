@@ -1,6 +1,6 @@
 'use client';
 
-export default function SkoobiDoPage() {
+export default function SkoobiSlatePage() {
   return (
     <>
       <style jsx global>{`
@@ -298,7 +298,7 @@ export default function SkoobiDoPage() {
       <section className="sd-hero">
         <div className="sd-hero-content">
           <span className="sd-hero-check" role="img" aria-label="checkmark">&#x2713;</span>
-          <h1>Skoobi<em>Do</em></h1>
+          <h1>Skoobi<em>Slate</em></h1>
           <p className="lead">
             Get things done. For real.
           </p>
@@ -373,7 +373,7 @@ export default function SkoobiDoPage() {
       {/* Private beta notice */}
       <section className="sd-cta" id="cta">
         <h2>Currently in private beta</h2>
-        <p>SkoobiDo is being tested with a small group. Public release coming soon.</p>
+        <p>SkoobiSlate is being tested with a small group. Public release coming soon.</p>
       </section>
 
       {/* Footer */}

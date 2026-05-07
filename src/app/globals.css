@@ -400,16 +400,16 @@ body {
   display: block;
 }
 
-/* --- SKOOBIDO HERO OVERRIDES (emerald accent) --- */
-.hero-app.skoobido-hero .hero-app-icon {
+/* --- SKOOBISLATE HERO OVERRIDES (emerald accent) --- */
+.hero-app.skoobislate-hero .hero-app-icon {
   box-shadow: 0 12px 48px rgba(16,185,129,0.25), 0 0 0 1px rgba(16,185,129,0.15);
 }
-.hero-app.skoobido-hero h3 em { color: #10B981; }
-.hero-app.skoobido-hero .hero-app-phones::after {
+.hero-app.skoobislate-hero h3 em { color: #10B981; }
+.hero-app.skoobislate-hero .hero-app-phones::after {
   background: radial-gradient(ellipse, rgba(16,185,129,0.12) 0%, transparent 70%);
 }
-.hero-app.skoobido-hero .feature-dot { background: #10B981; }
-.hero-app.skoobido-hero .learn-more {
+.hero-app.skoobislate-hero .feature-dot { background: #10B981; }
+.hero-app.skoobislate-hero .learn-more {
   display: inline-block;
   margin-top: 0.5rem;
   font-size: 0.95rem;
@@ -417,8 +417,8 @@ body {
   text-decoration: none;
   font-weight: 600;
 }
-.hero-app.skoobido-hero .learn-more:hover { color: #34D399; }
-.hero-app.skoobido-hero .beta-tag {
+.hero-app.skoobislate-hero .learn-more:hover { color: #34D399; }
+.hero-app.skoobislate-hero .beta-tag {
   display: inline-block;
   padding: 4px 12px;
   margin-bottom: 1.2rem;
