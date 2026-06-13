@@ -105,8 +105,9 @@ export default function HomePage() {
         </div>
 
         <div className="hero-tagline">
-          <h1>We build apps you&apos;re<br />going to <em>love</em></h1>
-          <p>Thoughtful software &mdash; mobile, web, and beyond &mdash; designed to delight and built to last.</p>
+          <h1>Want to build something <em>cool</em> together?</h1>
+          <p>A freelance studio with a lot going on &mdash; and a lot of love for what we do. Got an ambitious idea? We&apos;re probably your people.</p>
+          <p className="hero-fine-print"><em>Got something boring? We probably aren&apos;t your best connection.</em></p>
         </div>
 
         <div className="scroll-hint"><span /></div>
@@ -114,8 +115,8 @@ export default function HomePage() {
 
       {/* APPS */}
       <section className="apps-section">
-        <div className="section-label">Our Apps</div>
-        <h2 className="section-heading">What we&apos;re building</h2>
+        <div className="section-label">Our flagship</div>
+        <h2 className="section-heading">The task manager we built for ourselves</h2>
 
         {/* SkoobiSlate — Hero App */}
         <div className="hero-app skoobislate-hero">
@@ -145,70 +146,266 @@ export default function HomePage() {
           <a href="/skoobislate" className="learn-more">Learn More &rarr;</a>
         </div>
 
-        {/* HearVerse — Hero App */}
-        <div className="hero-app">
-          <img src="/icons/hearverse.png" alt="HearVerse" className="hero-app-icon" />
-          <h3>Hear<em>Verse</em></h3>
-          <p className="subtitle">The Bible, read aloud beautifully.</p>
-
-          <div className="hero-app-phones">
-            <div className="phone"><img src="/screenshots/library.jpg" alt="HearVerse Library" /></div>
-            <div className="phone"><img src="/screenshots/nowplaying.jpg" alt="HearVerse Now Playing" /></div>
-            <div className="phone"><img src="/screenshots/plan.jpg" alt="HearVerse Reading Plan" /></div>
-          </div>
-
-          <div className="features">
-            <div className="feature"><span className="feature-dot" />1,189 chapters</div>
-            <div className="feature"><span className="feature-dot" />66 books</div>
-            <div className="feature"><span className="feature-dot" />KJV &amp; ASV</div>
-            <div className="feature"><span className="feature-dot" />Two AI voices</div>
-            <div className="feature"><span className="feature-dot" />Daily reading plans</div>
-          </div>
-
-          <p className="tagline">
-            Open the app, pick a book, and listen. Two warm AI voices read Scripture aloud — chapter by chapter, verse by verse. Built for people who want the Word read to them.
-          </p>
-
-          <a href="https://apps.apple.com/app/id6761432386" className="app-store-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            Download on the App Store
-          </a>
-          <a href="/hearverse" style={{ display: 'block', marginTop: '1.5rem', fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', textDecoration: 'none' }}>
-            Learn More &rarr;
-          </a>
-        </div>
-
       </section>
 
-      {/* CLIENT WORK */}
+      {/* SKOOBIBUILD — built it ourselves first */}
       <section className="client-work">
-        <div className="section-label">Client Work</div>
-        <h2 className="section-heading">We build for our clients too</h2>
+        <div className="section-label">Built it ourselves first</div>
+        <h2 className="section-heading">How <em>SkoobiBuild</em> grew up</h2>
+        <p className="section-lede">
+          We needed a job-tracking tool for our own construction company &mdash; Kelli
+          Homes &mdash; so we built one. Real jobs, real schedules, real walkthroughs.
+          Then we saw the shape underneath, and turned it into a platform any small
+          construction company can run on.
+        </p>
 
-        {/* JakeTrack — Client Hero */}
-        <div className="hero-app jaketrack-hero">
-          <img src="/icons/jaketrack.png" alt="JakeTrack" className="hero-app-icon" />
-          <span className="client-tag">In Development</span>
-          <h3>Jake<em>Track</em></h3>
-          <p className="subtitle">Built for Jake&apos;s Junk Removal.</p>
+        {/* The origin — Kelli Homes dashboard rendered in HTML/CSS */}
+        <div className="mac-window kelli-window">
+          <div className="mac-titlebar">
+            <span className="mac-dot mac-dot-red" />
+            <span className="mac-dot mac-dot-yellow" />
+            <span className="mac-dot mac-dot-green" />
+            <span className="mac-url">jobs.kellihomes.com</span>
+          </div>
+          <div className="kelli-dashboard">
+            <div className="kelli-topbar">
+              <div className="kelli-crest">
+                <span className="kelli-crest-letters">KH</span>
+                <span className="kelli-crest-est">EST. 1999</span>
+              </div>
+              <nav className="kelli-nav">
+                <span className="kelli-nav-active">Dashboard</span>
+                <span>Tasks</span>
+                <span>Documents</span>
+                <span>Wasteland</span>
+              </nav>
+              <div className="kelli-user">Signed in as kelli</div>
+            </div>
+            <div className="kelli-jobs-header">
+              <div>
+                <h4>Job Management</h4>
+                <p>A clear view of every project in motion, from first estimate to final walkthrough.</p>
+              </div>
+              <button className="kelli-cta">Create New Job</button>
+            </div>
+            <div className="kelli-stats">
+              <div className="kelli-stat">
+                <div className="kelli-stat-label">Active Jobs</div>
+                <div className="kelli-stat-num">4</div>
+                <div className="kelli-stat-note">Currently in build or punch.</div>
+              </div>
+              <div className="kelli-stat">
+                <div className="kelli-stat-label">In Design / Estimating</div>
+                <div className="kelli-stat-num">2</div>
+                <div className="kelli-stat-note">Preconstruction work in motion.</div>
+              </div>
+              <div className="kelli-stat">
+                <div className="kelli-stat-label">Closed</div>
+                <div className="kelli-stat-num">11</div>
+                <div className="kelli-stat-note">Completed and handed off.</div>
+              </div>
+            </div>
+            <div className="kelli-table">
+              <div className="kelli-table-head">
+                <span>Job</span>
+                <span>Client</span>
+                <span>Stage</span>
+                <span>Type</span>
+                <span>Start</span>
+                <span>Target</span>
+              </div>
+              <div className="kelli-table-row">
+                <span><strong>Lakeside Garage Conversion</strong><br /><em className="kelli-loc">Bellevue, WA</em></span>
+                <span>J. Thompson</span>
+                <span className="kelli-stage">In Construction</span>
+                <span>Remodel</span>
+                <span>Apr 12</span>
+                <span>Aug 30</span>
+              </div>
+              <div className="kelli-table-row">
+                <span><strong>Crestline Custom Home</strong><br /><em className="kelli-loc">Snohomish, WA</em></span>
+                <span>M. Sandoval</span>
+                <span className="kelli-stage">Permitting</span>
+                <span>Custom Build</span>
+                <span>May 28</span>
+                <span>Mar 2027</span>
+              </div>
+              <div className="kelli-table-row">
+                <span><strong>Sound View ADU</strong><br /><em className="kelli-loc">Edmonds, WA</em></span>
+                <span>R. Wells</span>
+                <span className="kelli-stage kelli-stage-warranty">Warranty</span>
+                <span>Custom Build</span>
+                <span>Jul 31</span>
+                <span>Feb 16</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <div className="hero-app-phones">
-            <div className="phone"><img src="/screenshots/jaketrack-splash.png" alt="JakeTrack Splash" /></div>
-            <div className="phone"><img src="/screenshots/jaketrack-home.png" alt="JakeTrack Clock In" /></div>
-            <div className="phone"><img src="/screenshots/jaketrack-history.png" alt="JakeTrack History" /></div>
+        <p className="morph-line"><em>Then we saw the shape underneath.</em></p>
+
+        {/* The white-label proof — three branded tiles */}
+        <div className="white-label-grid">
+          <div className="brand-tile brand-kelli">
+            <div className="brand-tile-crest">KH</div>
+            <h4>Kelli Homes</h4>
+            <p>The original. Custom homes — Edmonds, WA.</p>
+            <span className="brand-tile-badge">live</span>
+          </div>
+          <div className="brand-tile brand-cascade">
+            <div className="brand-tile-crest">CB</div>
+            <h4>Cascade Builders</h4>
+            <p>Light-commercial. <em>Could be your company.</em></p>
+          </div>
+          <div className="brand-tile brand-driftwood">
+            <div className="brand-tile-crest">DC</div>
+            <h4>Driftwood Carpentry</h4>
+            <p>Boutique remodels. <em>Could be your company.</em></p>
+          </div>
+        </div>
+
+        <p className="white-label-tagline">
+          Your company. Your colors. Your name. <em>Our engine underneath.</em>
+        </p>
+      </section>
+
+      {/* HEAR LINE — the passion project */}
+      <section className="hear-line">
+        <div className="section-label">Our passion project</div>
+        <h2 className="section-heading">A quiet little family we keep coming back to</h2>
+        <p className="hear-lede">
+          For people who&apos;d rather hear than read. Or who can&apos;t, anymore.
+          We&apos;re building a small family of audio apps to bring the world to them &mdash;
+          book by book, headline by headline, verse by verse.
+        </p>
+
+        <div className="hear-grid">
+          {/* HearBooks */}
+          <div className="hear-card hear-card-books">
+            <img src="/icons/hearbooks.png" alt="HearBooks" className="hear-card-icon" />
+            <h3>Hear<em>Books</em></h3>
+            <p className="hear-card-tag">Public-domain audiobooks. Discovered by <em>mood.</em></p>
+            <p className="hear-card-body">
+              Twain, Austen, the whole canon &mdash; free, read aloud, tagged with poetic moods
+              like &ldquo;a long brown river&rdquo; or &ldquo;a quiet kind of brave.&rdquo;
+              Find one that fits the day.
+            </p>
+            <div className="hear-card-shot">
+              <img src="/screenshots/hearbooks-discover.jpeg" alt="HearBooks Discover" />
+            </div>
+            <span className="hear-card-status">TestFlight</span>
           </div>
 
-          <div className="features">
-            <div className="feature"><span className="feature-dot" />Clock in / out</div>
-            <div className="feature"><span className="feature-dot" />Live pay tracking</div>
-            <div className="feature"><span className="feature-dot" />Shift history</div>
-            <div className="feature"><span className="feature-dot" />Crew sign-in</div>
-            <div className="feature"><span className="feature-dot" />Custom-branded</div>
+          {/* HearNews */}
+          <div className="hear-card hear-card-news">
+            <img src="/icons/hearnews.png" alt="HearNews" className="hear-card-icon" />
+            <h3>Hear<em>News</em></h3>
+            <p className="hear-card-tag">The day&apos;s news, read to you. Learns what you like.</p>
+            <p className="hear-card-body">
+              Pick sources, pick topics, then let the app build your news rhythm.
+              The more you listen, the better it gets at picking what you want next.
+            </p>
+            <div className="hear-card-shot">
+              <img src="/screenshots/hearnews-discover.png" alt="HearNews Discover" />
+            </div>
+            <span className="hear-card-status">TestFlight</span>
           </div>
 
-          <p className="tagline">
-            Custom field ops software designed and built end-to-end for Jake&apos;s Junk Removal. Crews clock in, watch their pay period grow in real-time, and review every shift — all from their phone.
-          </p>
+          {/* HearVerse */}
+          <div className="hear-card hear-card-verse">
+            <img src="/icons/hearverse.png" alt="HearVerse" className="hear-card-icon" />
+            <h3>Hear<em>Verse</em></h3>
+            <p className="hear-card-tag">The Bible, read aloud beautifully.</p>
+            <p className="hear-card-body">
+              All 1,189 chapters. Two warm AI voices. Daily reading plans
+              that meet you where you are.
+            </p>
+            <div className="hear-card-shot">
+              <img src="/screenshots/nowplaying.jpg" alt="HearVerse Now Playing" />
+            </div>
+            <a href="https://apps.apple.com/app/id6761432386" className="hear-card-cta">
+              Download on the App Store &rarr;
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* HOW WE WORK + PRICING */}
+      <section className="how-we-work">
+        <div className="section-label">How we work</div>
+        <h2 className="section-heading">We build it. We host it. We watch over it.</h2>
+        <p className="how-lede">
+          Every project we ship goes onto <em>our</em> infrastructure. We host it. We
+          monitor it. If something breaks at 2am, we&apos;re the ones who get the call.
+          Every month, you get a report on uptime, traffic, and how the thing&apos;s
+          actually being used. You stay focused on your business.
+        </p>
+
+        <p className="how-pricing-lede">
+          One build cost up front, plus a small monthly retainer.
+          <em>The numbers below are starting points, not ceilings — they scale with how intense the code gets.</em>
+        </p>
+
+        <div className="pricing-grid">
+          <div className="pricing-card pricing-card-essential">
+            <h3>Essential</h3>
+            <div className="pricing-amount">
+              <span className="pricing-from">From</span>
+              <span className="pricing-num">$2,500</span>
+              <span className="pricing-mo">+ $100<span>/mo</span></span>
+            </div>
+            <p className="pricing-shape">A focused, one-purpose tool.</p>
+            <ul className="pricing-features">
+              <li>Custom configurator, calculator, or branded form</li>
+              <li>Hosted on a subdomain you point at us</li>
+              <li>Monthly uptime &amp; traffic report</li>
+              <li>We maintain it. We&apos;re on call.</li>
+            </ul>
+          </div>
+
+          <div className="pricing-card pricing-card-professional">
+            <h3>Professional</h3>
+            <div className="pricing-amount">
+              <span className="pricing-from">From</span>
+              <span className="pricing-num">$5,000</span>
+              <span className="pricing-mo">+ $150<span>/mo</span></span>
+            </div>
+            <p className="pricing-shape">Interactive. Data-backed. Integrated.</p>
+            <ul className="pricing-features">
+              <li>Database-backed, custom workflows</li>
+              <li>Third-party integrations (Stripe, email, calendars)</li>
+              <li>Custom domain or embeddable widget</li>
+              <li>Same monthly report &amp; on-call coverage</li>
+            </ul>
+          </div>
+
+          <div className="pricing-card pricing-card-advanced">
+            <h3>Advanced</h3>
+            <div className="pricing-amount">
+              <span className="pricing-from">From</span>
+              <span className="pricing-num">$10,000</span>
+              <span className="pricing-mo">+ $250<span>/mo</span></span>
+            </div>
+            <p className="pricing-shape">Full app. Auth, multi-user, dashboards.</p>
+            <ul className="pricing-features">
+              <li>User accounts, roles, permissions</li>
+              <li>Internal dashboards &amp; admin tools</li>
+              <li>Multi-tenant when you need it</li>
+              <li>Same monthly report &amp; on-call coverage</li>
+            </ul>
+          </div>
+        </div>
+
+        <p className="pricing-addon">
+          Want a live analytics dashboard on top? Add it to any tier &mdash; <em>$50&ndash;75/mo</em>.
+        </p>
+
+        <div className="cta-block">
+          <h3>Got something in mind?</h3>
+          <p>Tell us about it. We&apos;ll tell you straight whether we&apos;re a fit.</p>
+          <a href="mailto:ask@skoobilabs.com?subject=Project idea" className="cta-btn">
+            ask@skoobilabs.com &rarr;
+          </a>
         </div>
       </section>
 

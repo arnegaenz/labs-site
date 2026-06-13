@@ -173,9 +173,16 @@ body {
 }
 .hero-tagline p {
   font-size: 1.05rem;
-  color: rgba(255,255,255,0.35);
-  max-width: 500px;
+  color: rgba(255,255,255,0.55);
+  max-width: 540px;
   line-height: 1.6;
+  margin: 0 auto;
+}
+.hero-tagline .hero-fine-print {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.3);
+  margin-top: 0.6rem;
+  letter-spacing: 0.2px;
 }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
@@ -627,4 +634,694 @@ body {
   .bus-scene { height: 260px; }
   .bus-group svg { width: 300px; }
   .app-grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   CLIENT WORK — The SkoobiBuild story
+   ========================================================================== */
+
+.section-lede {
+  position: relative;
+  z-index: 10;
+  max-width: 640px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.55);
+  padding: 0 1.5rem;
+}
+
+/* Mac window chrome — used to frame any "browser-like" mockup */
+.mac-window {
+  position: relative;
+  z-index: 10;
+  margin: 0 auto 2.5rem;
+  max-width: 980px;
+  width: calc(100% - 3rem);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+.mac-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1rem;
+  background: linear-gradient(180deg, #2a2a30 0%, #1f1f25 100%);
+  border-bottom: 1px solid rgba(0,0,0,0.4);
+}
+.mac-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.mac-dot-red { background: #FF5F57; }
+.mac-dot-yellow { background: #FEBC2E; }
+.mac-dot-green { background: #28C840; }
+.mac-url {
+  margin-left: 1rem;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  font-family: -apple-system, 'SF Pro Text', system-ui;
+}
+
+/* The Kelli Homes dashboard mock */
+.kelli-window .kelli-dashboard {
+  background: #F4ECDB;
+  color: #2F1F12;
+  padding: 1.8rem 2rem;
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+}
+.kelli-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(47,31,18,0.08);
+  margin-bottom: 1.6rem;
+}
+.kelli-crest {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: #9C3325;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: #F4ECDB;
+  flex-shrink: 0;
+}
+.kelli-crest-letters {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.kelli-crest-est {
+  font-size: 0.42rem;
+  letter-spacing: 1.2px;
+  margin-top: 2px;
+  opacity: 0.85;
+}
+.kelli-nav {
+  display: flex;
+  gap: 1.6rem;
+  font-size: 0.92rem;
+  color: rgba(47,31,18,0.65);
+}
+.kelli-nav span { cursor: default; }
+.kelli-nav-active {
+  color: #2F1F12 !important;
+  font-weight: 600;
+  position: relative;
+}
+.kelli-nav-active::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -10px;
+  height: 1.5px;
+  background: #2F1F12;
+}
+.kelli-user {
+  font-size: 0.78rem;
+  color: rgba(47,31,18,0.55);
+}
+.kelli-jobs-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.4rem 1.5rem;
+  background: rgba(255,255,255,0.55);
+  border-radius: 10px;
+  margin-bottom: 1.2rem;
+}
+.kelli-jobs-header h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2F1F12;
+  margin-bottom: 0.35rem;
+}
+.kelli-jobs-header p {
+  font-size: 0.88rem;
+  color: rgba(47,31,18,0.7);
+  max-width: 420px;
+  line-height: 1.5;
+}
+.kelli-cta {
+  background: #C68A55;
+  color: #FCF7EE;
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.4rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: default;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.kelli-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+  margin-bottom: 1.4rem;
+}
+.kelli-stat {
+  background: rgba(255,255,255,0.55);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+}
+.kelli-stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(47,31,18,0.55);
+  margin-bottom: 0.5rem;
+}
+.kelli-stat-num {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.45rem;
+}
+.kelli-stat-note {
+  font-size: 0.78rem;
+  color: rgba(47,31,18,0.6);
+}
+.kelli-table {
+  background: rgba(255,255,255,0.55);
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem;
+}
+.kelli-table-head, .kelli-table-row {
+  display: grid;
+  grid-template-columns: 2fr 1.1fr 1fr 1fr 0.7fr 0.7fr;
+  gap: 0.6rem;
+  align-items: start;
+  padding: 0.65rem 0;
+}
+.kelli-table-head {
+  font-size: 0.72rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: rgba(47,31,18,0.5);
+  border-bottom: 1px solid rgba(47,31,18,0.1);
+  margin-bottom: 0.3rem;
+}
+.kelli-table-row {
+  font-size: 0.84rem;
+  color: #2F1F12;
+}
+.kelli-table-row + .kelli-table-row {
+  border-top: 1px solid rgba(47,31,18,0.06);
+}
+.kelli-loc {
+  font-style: normal;
+  font-size: 0.74rem;
+  color: rgba(47,31,18,0.55);
+}
+.kelli-stage { color: #C68A55; font-weight: 600; }
+.kelli-stage-warranty { color: #9C3325; }
+
+.morph-line {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.5);
+  margin: 1.5rem auto 2.5rem;
+  letter-spacing: 0.2px;
+}
+.morph-line em { font-style: italic; }
+
+/* White-label proof grid */
+.white-label-grid {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  max-width: 980px;
+  width: calc(100% - 3rem);
+  margin: 0 auto 2rem;
+}
+.brand-tile {
+  position: relative;
+  border-radius: 14px;
+  padding: 1.6rem 1.4rem 1.4rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.3s ease;
+}
+.brand-tile:hover { transform: translateY(-3px); }
+.brand-tile-crest {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+.brand-tile h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.brand-tile p {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  opacity: 0.75;
+}
+.brand-tile p em {
+  font-style: italic;
+  opacity: 0.7;
+}
+.brand-tile-badge {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.18);
+}
+
+.brand-kelli {
+  background: #F4ECDB;
+  color: #2F1F12;
+}
+.brand-kelli .brand-tile-crest {
+  background: #9C3325;
+  color: #F4ECDB;
+}
+.brand-kelli .brand-tile-badge {
+  background: rgba(47,31,18,0.18);
+  color: #2F1F12;
+}
+
+.brand-cascade {
+  background: #1F3A2E;
+  color: #E8DDB8;
+}
+.brand-cascade .brand-tile-crest {
+  background: #C9A876;
+  color: #1F3A2E;
+}
+
+.brand-driftwood {
+  background: #3F5562;
+  color: #E8D9C4;
+}
+.brand-driftwood .brand-tile-crest {
+  background: #E8D9C4;
+  color: #3F5562;
+}
+
+.white-label-tagline {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.7);
+  margin: 0 auto 3rem;
+  letter-spacing: 0.2px;
+  max-width: 640px;
+  padding: 0 1.5rem;
+}
+.white-label-tagline em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--mint), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ==========================================================================
+   HEAR LINE — passion project section
+   ========================================================================== */
+
+.hear-line {
+  position: relative;
+  z-index: 10;
+  padding: 5rem 1.5rem 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hear-lede {
+  max-width: 620px;
+  margin: 0 auto 3rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.6);
+}
+
+.hear-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  text-align: left;
+}
+
+.hear-card {
+  position: relative;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 18px;
+  padding: 1.8rem 1.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.hear-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,0.12);
+}
+
+.hear-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
+
+.hear-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  color: rgba(255,255,255,0.95);
+}
+.hear-card h3 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--mint), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hear-card-tag {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.hear-card-body {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+  margin-bottom: 1.4rem;
+}
+
+.hear-card-shot {
+  position: relative;
+  margin: 0.4rem -1.5rem 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+  height: 240px;
+}
+.hear-card-shot img {
+  width: 60%;
+  max-width: 200px;
+  border-radius: 14px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.5);
+  display: block;
+}
+
+.hear-card-status {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.5);
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.hear-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--mint);
+  text-decoration: none;
+  margin-top: auto;
+  transition: color 0.2s ease;
+}
+.hear-card-cta:hover { color: var(--cyan); }
+
+/* HearBooks + HearNews — both on TestFlight, get the cyan accent */
+.hear-card-books .hear-card-status,
+.hear-card-news .hear-card-status {
+  background: rgba(0,212,255,0.15);
+  color: var(--cyan);
+}
+.hear-card-books .hear-card-tag em {
+  font-style: italic;
+  color: rgba(255,179,0,0.85);
+}
+
+/* HearVerse — published, gets the App Store CTA */
+.hear-card-verse {
+  background: linear-gradient(180deg, rgba(255,179,0,0.05) 0%, rgba(255,255,255,0.03) 100%);
+}
+
+/* ==========================================================================
+   HOW WE WORK + PRICING
+   ========================================================================== */
+
+.how-we-work {
+  position: relative;
+  z-index: 10;
+  padding: 5rem 1.5rem 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.how-lede {
+  max-width: 640px;
+  margin: 0 auto 2.4rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.6);
+}
+.how-lede em {
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+}
+
+.how-pricing-lede {
+  max-width: 620px;
+  margin: 0 auto 3rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.55);
+}
+.how-pricing-lede em {
+  display: block;
+  font-style: italic;
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.5rem;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.pricing-card {
+  position: relative;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 18px;
+  padding: 1.9rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.pricing-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,0.12);
+}
+
+.pricing-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+  letter-spacing: 0.3px;
+  color: rgba(255,255,255,0.92);
+}
+
+.pricing-amount {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.pricing-from {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: rgba(255,255,255,0.4);
+}
+.pricing-num {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--mint), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.pricing-mo {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.6);
+}
+.pricing-mo span {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.pricing-shape {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 1.1rem;
+  font-weight: 500;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.pricing-features li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.55);
+}
+.pricing-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--mint), var(--cyan));
+  opacity: 0.65;
+}
+
+.pricing-card-professional {
+  background: linear-gradient(180deg, rgba(0,229,160,0.04) 0%, rgba(255,255,255,0.025) 100%);
+  border-color: rgba(0,229,160,0.18);
+}
+
+.pricing-addon {
+  text-align: center;
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.5);
+  margin: 0 auto 3.5rem;
+  max-width: 520px;
+}
+.pricing-addon em {
+  font-style: italic;
+  color: rgba(0,229,160,0.85);
+}
+
+.cta-block {
+  position: relative;
+  margin: 0 auto;
+  max-width: 560px;
+  padding: 2.2rem 1.8rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  text-align: center;
+}
+.cta-block h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: rgba(255,255,255,0.92);
+}
+.cta-block p {
+  font-size: 0.98rem;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 1.4rem;
+  line-height: 1.5;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.85rem 1.6rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--bg);
+  background: linear-gradient(135deg, var(--mint), var(--cyan));
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 229, 160, 0.25);
+}
+
+@media (max-width: 800px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  .kelli-table-head, .kelli-table-row {
+    grid-template-columns: 1.5fr 1fr 0.8fr;
+    font-size: 0.78rem;
+  }
+  .kelli-table-head span:nth-child(4),
+  .kelli-table-head span:nth-child(5),
+  .kelli-table-head span:nth-child(6),
+  .kelli-table-row span:nth-child(4),
+  .kelli-table-row span:nth-child(5),
+  .kelli-table-row span:nth-child(6) {
+    display: none;
+  }
+  .white-label-grid {
+    grid-template-columns: 1fr;
+  }
+  .kelli-stats {
+    grid-template-columns: 1fr;
+  }
+  .kelli-jobs-header {
+    flex-direction: column;
+  }
+  .kelli-window .kelli-dashboard {
+    padding: 1.2rem 1rem;
+  }
+  .hear-grid {
+    grid-template-columns: 1fr;
+  }
 }
