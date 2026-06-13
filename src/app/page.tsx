@@ -330,6 +330,10 @@ export default function HomePage() {
             </a>
           </div>
         </div>
+
+        <a href="/hear" className="hear-learn-more">
+          See more about the Hear line <span>&rarr;</span>
+        </a>
       </section>
 
       {/* HOW WE WORK + PRICING */}
