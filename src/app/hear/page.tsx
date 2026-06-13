@@ -108,6 +108,18 @@ export default function HearPage() {
         </div>
       </section>
 
+      {/* HEAR ASSIST — the sneaky teaser */}
+      <section className="hear-page-tease">
+        <div className="hear-tease-card">
+          <span className="hear-tease-label">Still in the workshop</span>
+          <h2>
+            Hear<em>Assist.</em>
+          </h2>
+          <p>Stay close to the people you love &mdash; even when you can&apos;t be there.</p>
+          <p className="hear-tease-aside">We&apos;ll tell you more when it&apos;s ready.</p>
+        </div>
+      </section>
+
       {/* THE PROMISE */}
       <section className="hear-page-promise">
         <div className="hear-promise-card">
