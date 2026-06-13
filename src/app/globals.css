@@ -1042,17 +1042,19 @@ body {
 
 .hear-card-shot {
   position: relative;
-  margin: 0.4rem -1.5rem 1.2rem;
+  margin: 0.6rem -1.5rem 1.2rem;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   overflow: hidden;
-  height: 240px;
+  height: 260px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 100%);
 }
 .hear-card-shot img {
-  width: 60%;
+  width: 62%;
   max-width: 200px;
-  border-radius: 14px;
+  border-radius: 18px 18px 6px 6px;
   box-shadow: 0 14px 30px rgba(0,0,0,0.5);
   display: block;
 }
