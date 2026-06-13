@@ -315,10 +315,12 @@ export default function HomePage() {
           <div className="hear-card hear-card-verse">
             <img src="/icons/hearverse.png" alt="HearVerse" className="hear-card-icon" />
             <h3>Hear<em>Verse</em></h3>
-            <p className="hear-card-tag">The Bible, read aloud beautifully.</p>
+            <p className="hear-card-tag">The Bible, read aloud beautifully. Built for people who&apos;d rather hear it.</p>
             <p className="hear-card-body">
-              All 1,189 chapters. Two warm AI voices. Daily reading plans
-              that meet you where you are.
+              All 1,189 chapters across 66 books &mdash; KJV and ASV.
+              Two warm AI voices that read patiently, verse by verse.
+              Reading plans that meet you where you are: five minutes
+              a morning, or a whole book on a Sunday drive.
             </p>
             <div className="hear-card-shot">
               <img src="/screenshots/nowplaying.jpg" alt="HearVerse Now Playing" />
