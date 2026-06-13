@@ -1240,6 +1240,25 @@ body {
   border-color: rgba(0,229,160,0.18);
 }
 
+.pricing-asterisk {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  margin-left: 0.15rem;
+  vertical-align: super;
+}
+
+.pricing-footnote {
+  text-align: center;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.42);
+  margin: 0 auto 1.2rem;
+  max-width: 520px;
+}
+.pricing-footnote sup {
+  font-size: 0.72rem;
+  margin-right: 0.2rem;
+}
+
 .pricing-addon {
   text-align: center;
   font-size: 0.92rem;

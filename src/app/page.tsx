@@ -352,7 +352,7 @@ export default function HomePage() {
             <div className="pricing-amount">
               <span className="pricing-from">From</span>
               <span className="pricing-num">$2,500</span>
-              <span className="pricing-mo">+ $100<span>/mo</span></span>
+              <span className="pricing-mo">+ $100<span>/mo</span><sup className="pricing-asterisk">*</sup></span>
             </div>
             <p className="pricing-shape">A focused, one-purpose tool.</p>
             <ul className="pricing-features">
@@ -368,7 +368,7 @@ export default function HomePage() {
             <div className="pricing-amount">
               <span className="pricing-from">From</span>
               <span className="pricing-num">$5,000</span>
-              <span className="pricing-mo">+ $150<span>/mo</span></span>
+              <span className="pricing-mo">+ $150<span>/mo</span><sup className="pricing-asterisk">*</sup></span>
             </div>
             <p className="pricing-shape">Interactive. Data-backed. Integrated.</p>
             <ul className="pricing-features">
@@ -384,7 +384,7 @@ export default function HomePage() {
             <div className="pricing-amount">
               <span className="pricing-from">From</span>
               <span className="pricing-num">$10,000</span>
-              <span className="pricing-mo">+ $250<span>/mo</span></span>
+              <span className="pricing-mo">+ $250<span>/mo</span><sup className="pricing-asterisk">*</sup></span>
             </div>
             <p className="pricing-shape">Full app. Auth, multi-user, dashboards.</p>
             <ul className="pricing-features">
@@ -395,6 +395,10 @@ export default function HomePage() {
             </ul>
           </div>
         </div>
+
+        <p className="pricing-footnote">
+          <sup>*</sup> All retainers are a 12-month minimum engagement.
+        </p>
 
         <p className="pricing-addon">
           Want a live analytics dashboard on top? Add it to any tier &mdash; <em>$50&ndash;75/mo</em>.
