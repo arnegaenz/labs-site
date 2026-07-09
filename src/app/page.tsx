@@ -105,48 +105,150 @@ export default function HomePage() {
         </div>
 
         <div className="hero-tagline">
-          <h1>Want to build something <em>cool</em> together?</h1>
-          <p>A freelance studio with a lot going on &mdash; and a lot of love for what we do. Got an ambitious idea? We&apos;re probably your people.</p>
-          <p className="hero-fine-print"><em>Got something boring? We probably aren&apos;t your best connection.</em></p>
+          <h1>Big-company software. <em>Small-company price.</em></h1>
+          <p>SkoobiLabs designs, builds, hosts, and runs custom software for businesses that can&apos;t justify an enterprise vendor &mdash; and shouldn&apos;t have to.</p>
+          <p className="hero-fine-print"><em>If you love six-month procurement cycles and a login for your login, the big vendors will take great care of you.</em></p>
         </div>
 
         <div className="scroll-hint"><span /></div>
       </section>
 
-      {/* APPS */}
-      <section className="apps-section">
-        <div className="section-label">Our flagship</div>
-        <h2 className="section-heading">The task manager we built for ourselves</h2>
+      {/* BIG-LEAGUE INFRASTRUCTURE — the features you usually pay enterprise prices for */}
+      <section className="trust-section">
+        <div className="section-label">The part you usually pay enterprise prices for</div>
+        <h2 className="section-heading">Small team. Big-league infrastructure.</h2>
+        <div className="trust-grid">
+          <div className="trust-card">
+            <h3>Your own private infrastructure</h3>
+            <p>Every client runs single-tenant &mdash; your data never shares a database with anyone else&apos;s. Not partitioned. Separate.</p>
+          </div>
+          <div className="trust-card">
+            <h3>Locked down by default</h3>
+            <p>Encrypted in transit and at rest. Access is granted person by person &mdash; you decide exactly who gets in, and nobody else does.</p>
+          </div>
+          <div className="trust-card">
+            <h3>Watched around the clock</h3>
+            <p>Crash reporting, analytics, and session-level diagnostics on every deployment. When something breaks, we usually know before you do.</p>
+          </div>
+          <div className="trust-card">
+            <h3>Rehearsed before it&apos;s live</h3>
+            <p>Changes land on a staging environment first and get walked through before they touch the site your customers see.</p>
+          </div>
+          <div className="trust-card">
+            <h3>A real monthly report</h3>
+            <p>Uptime, traffic, and how the tool is actually being used &mdash; numbers with your invoice, not vibes.</p>
+          </div>
+          <div className="trust-card">
+            <h3>A human on call</h3>
+            <p>No ticket queue, no tier-one script. You have the builder&apos;s email, and the builder answers.</p>
+          </div>
+        </div>
+      </section>
 
-        {/* SkoobiSlate — Hero App */}
-        <div className="hero-app skoobislate-hero">
-          <img src="/icons/skoobislate.png" alt="SkoobiSlate" className="hero-app-icon" />
-          <span className="beta-tag">Private Beta</span>
-          <h3>Skoobi<em>Slate</em></h3>
-          <p className="subtitle">Get things done. For real.</p>
+      {/* HOW WE WORK + PRICING */}
+      <section className="how-we-work">
+        <div className="section-label">How we work</div>
+        <h2 className="section-heading">We build it. We host it. We watch over it.</h2>
+        <p className="how-lede">
+          Every project we ship goes onto <em>our</em> infrastructure. We host it. We
+          monitor it. If something breaks at 2am, we&apos;re the ones who get the call.
+          Every month, you get a report on uptime, traffic, and how the thing&apos;s
+          actually being used. You stay focused on your business.
+        </p>
 
-          <div className="hero-app-phones">
-            <div className="phone"><img src="/screenshots/skoobislate-splash.png" alt="SkoobiSlate Splash" /></div>
-            <div className="phone"><img src="/screenshots/skoobislate-inbox.png" alt="SkoobiSlate Inbox" /></div>
-            <div className="phone"><img src="/screenshots/skoobislate-task.png" alt="SkoobiSlate Task" /></div>
+        <p className="how-pricing-lede">
+          One build cost up front, plus a small monthly retainer.
+          <em>The numbers below are starting points, not ceilings — they scale with how intense the code gets.</em>
+        </p>
+
+        <div className="pricing-grid">
+          <div className="pricing-card pricing-card-essential">
+            <h3>Essential</h3>
+            <div className="pricing-amount">
+              <span className="pricing-from">From</span>
+              <span className="pricing-num">$2,500</span>
+              <span className="pricing-mo">+ $100<span>/mo</span><sup className="pricing-asterisk">*</sup></span>
+            </div>
+            <p className="pricing-shape">A focused, one-purpose tool.</p>
+            <ul className="pricing-features">
+              <li>Custom configurator, calculator, or branded form</li>
+              <li>Hosted on a subdomain you point at us</li>
+              <li>Monthly uptime &amp; traffic report</li>
+              <li>We maintain it. We&apos;re on call.</li>
+            </ul>
           </div>
 
-          <div className="features">
-            <div className="feature"><span className="feature-dot" />GTD workflow</div>
-            <div className="feature"><span className="feature-dot" />Smart Today view</div>
-            <div className="feature"><span className="feature-dot" />Dependencies</div>
-            <div className="feature"><span className="feature-dot" />5 color themes</div>
-            <div className="feature"><span className="feature-dot" />Streaks &amp; insights</div>
+          <div className="pricing-card pricing-card-professional">
+            <h3>Professional</h3>
+            <div className="pricing-amount">
+              <span className="pricing-from">From</span>
+              <span className="pricing-num">$5,000</span>
+              <span className="pricing-mo">+ $150<span>/mo</span><sup className="pricing-asterisk">*</sup></span>
+            </div>
+            <p className="pricing-shape">Interactive. Data-backed. Integrated.</p>
+            <ul className="pricing-features">
+              <li>Database-backed, custom workflows</li>
+              <li>Third-party integrations (Stripe, email, calendars)</li>
+              <li>Custom domain or embeddable widget</li>
+              <li>Same monthly report &amp; on-call coverage</li>
+            </ul>
           </div>
 
-          <p className="tagline">
-            A task manager built on the GTD methodology — capture every loose thread into your inbox, process into actionable next steps, and watch your streak grow as you finish what matters.
-          </p>
-
-          <a href="/skoobislate" className="learn-more">Learn More &rarr;</a>
+          <div className="pricing-card pricing-card-advanced">
+            <h3>Advanced</h3>
+            <div className="pricing-amount">
+              <span className="pricing-from">From</span>
+              <span className="pricing-num">$10,000</span>
+              <span className="pricing-mo">+ $250<span>/mo</span><sup className="pricing-asterisk">*</sup></span>
+            </div>
+            <p className="pricing-shape">Full app. Auth, multi-user, dashboards.</p>
+            <ul className="pricing-features">
+              <li>User accounts, roles, permissions</li>
+              <li>Internal dashboards &amp; admin tools</li>
+              <li>Multi-tenant when you need it</li>
+              <li>Same monthly report &amp; on-call coverage</li>
+            </ul>
+          </div>
         </div>
 
+        <p className="pricing-footnote">
+          <sup>*</sup> All retainers are a 12-month minimum engagement.
+        </p>
+
+        <p className="pricing-addon">
+          Want a live analytics dashboard on top? Add it to any tier &mdash; <em>$50&ndash;75/mo</em>.
+        </p>
+
+        <div className="cta-block">
+          <h3>Got something in mind?</h3>
+          <p>Tell us about it. We&apos;ll tell you straight whether we&apos;re a fit.</p>
+          <a href="mailto:ask@skoobilabs.com?subject=Project idea" className="cta-btn">
+            ask@skoobilabs.com &rarr;
+          </a>
+        </div>
       </section>
+
+      {/* RUNNING IN PRODUCTION — client proof, anonymous until they say otherwise */}
+      <section className="in-production">
+        <div className="section-label">Running in production right now</div>
+        <h2 className="section-heading">Real tools, for real businesses</h2>
+        <div className="prod-grid">
+          <div className="prod-card">
+            <h4>Candidate intelligence</h4>
+            <p>Semantic search over 1,200+ resumes for a Seattle IT consultancy. Recruiters ask in plain English; it answers with the right people &mdash; and the results beat the big-name copilots.</p>
+          </div>
+          <div className="prod-card">
+            <h4>Product configurator</h4>
+            <p>A build-your-rifle configurator for a precision manufacturer &mdash; photo-real previews, custom Cerakote finishes, locked order sheets straight to the shop.</p>
+          </div>
+          <div className="prod-card">
+            <h4>Field-ops platform</h4>
+            <p>Jobs, crews, and schedules for a construction company &mdash; the platform SkoobiBuild grew out of.</p>
+          </div>
+        </div>
+        <p className="prod-note"><em>Client names shared on request &mdash; we let them decide when to be famous.</em></p>
+      </section>
+
 
       {/* SKOOBIBUILD — built it ourselves first */}
       <section className="client-work">
@@ -269,6 +371,41 @@ export default function HomePage() {
         </p>
       </section>
 
+      {/* APPS */}
+      <section className="apps-section">
+        <div className="section-label">We ship our own, too</div>
+        <h2 className="section-heading">The task manager we built for ourselves</h2>
+
+        {/* SkoobiSlate — Hero App */}
+        <div className="hero-app skoobislate-hero">
+          <img src="/icons/skoobislate.png" alt="SkoobiSlate" className="hero-app-icon" />
+          <span className="beta-tag">Private Beta</span>
+          <h3>Skoobi<em>Slate</em></h3>
+          <p className="subtitle">Get things done. For real.</p>
+
+          <div className="hero-app-phones">
+            <div className="phone"><img src="/screenshots/skoobislate-splash.png" alt="SkoobiSlate Splash" /></div>
+            <div className="phone"><img src="/screenshots/skoobislate-inbox.png" alt="SkoobiSlate Inbox" /></div>
+            <div className="phone"><img src="/screenshots/skoobislate-task.png" alt="SkoobiSlate Task" /></div>
+          </div>
+
+          <div className="features">
+            <div className="feature"><span className="feature-dot" />GTD workflow</div>
+            <div className="feature"><span className="feature-dot" />Smart Today view</div>
+            <div className="feature"><span className="feature-dot" />Dependencies</div>
+            <div className="feature"><span className="feature-dot" />5 color themes</div>
+            <div className="feature"><span className="feature-dot" />Streaks &amp; insights</div>
+          </div>
+
+          <p className="tagline">
+            A task manager built on the GTD methodology — capture every loose thread into your inbox, process into actionable next steps, and watch your streak grow as you finish what matters.
+          </p>
+
+          <a href="/skoobislate" className="learn-more">Learn More &rarr;</a>
+        </div>
+
+      </section>
+
       {/* HEAR LINE — the passion project */}
       <section className="hear-line">
         <div className="section-label">Our passion project</div>
@@ -335,90 +472,6 @@ export default function HomePage() {
           See more about the Hear line <span>&rarr;</span>
         </a>
       </section>
-
-      {/* HOW WE WORK + PRICING */}
-      <section className="how-we-work">
-        <div className="section-label">How we work</div>
-        <h2 className="section-heading">We build it. We host it. We watch over it.</h2>
-        <p className="how-lede">
-          Every project we ship goes onto <em>our</em> infrastructure. We host it. We
-          monitor it. If something breaks at 2am, we&apos;re the ones who get the call.
-          Every month, you get a report on uptime, traffic, and how the thing&apos;s
-          actually being used. You stay focused on your business.
-        </p>
-
-        <p className="how-pricing-lede">
-          One build cost up front, plus a small monthly retainer.
-          <em>The numbers below are starting points, not ceilings — they scale with how intense the code gets.</em>
-        </p>
-
-        <div className="pricing-grid">
-          <div className="pricing-card pricing-card-essential">
-            <h3>Essential</h3>
-            <div className="pricing-amount">
-              <span className="pricing-from">From</span>
-              <span className="pricing-num">$2,500</span>
-              <span className="pricing-mo">+ $100<span>/mo</span><sup className="pricing-asterisk">*</sup></span>
-            </div>
-            <p className="pricing-shape">A focused, one-purpose tool.</p>
-            <ul className="pricing-features">
-              <li>Custom configurator, calculator, or branded form</li>
-              <li>Hosted on a subdomain you point at us</li>
-              <li>Monthly uptime &amp; traffic report</li>
-              <li>We maintain it. We&apos;re on call.</li>
-            </ul>
-          </div>
-
-          <div className="pricing-card pricing-card-professional">
-            <h3>Professional</h3>
-            <div className="pricing-amount">
-              <span className="pricing-from">From</span>
-              <span className="pricing-num">$5,000</span>
-              <span className="pricing-mo">+ $150<span>/mo</span><sup className="pricing-asterisk">*</sup></span>
-            </div>
-            <p className="pricing-shape">Interactive. Data-backed. Integrated.</p>
-            <ul className="pricing-features">
-              <li>Database-backed, custom workflows</li>
-              <li>Third-party integrations (Stripe, email, calendars)</li>
-              <li>Custom domain or embeddable widget</li>
-              <li>Same monthly report &amp; on-call coverage</li>
-            </ul>
-          </div>
-
-          <div className="pricing-card pricing-card-advanced">
-            <h3>Advanced</h3>
-            <div className="pricing-amount">
-              <span className="pricing-from">From</span>
-              <span className="pricing-num">$10,000</span>
-              <span className="pricing-mo">+ $250<span>/mo</span><sup className="pricing-asterisk">*</sup></span>
-            </div>
-            <p className="pricing-shape">Full app. Auth, multi-user, dashboards.</p>
-            <ul className="pricing-features">
-              <li>User accounts, roles, permissions</li>
-              <li>Internal dashboards &amp; admin tools</li>
-              <li>Multi-tenant when you need it</li>
-              <li>Same monthly report &amp; on-call coverage</li>
-            </ul>
-          </div>
-        </div>
-
-        <p className="pricing-footnote">
-          <sup>*</sup> All retainers are a 12-month minimum engagement.
-        </p>
-
-        <p className="pricing-addon">
-          Want a live analytics dashboard on top? Add it to any tier &mdash; <em>$50&ndash;75/mo</em>.
-        </p>
-
-        <div className="cta-block">
-          <h3>Got something in mind?</h3>
-          <p>Tell us about it. We&apos;ll tell you straight whether we&apos;re a fit.</p>
-          <a href="mailto:ask@skoobilabs.com?subject=Project idea" className="cta-btn">
-            ask@skoobilabs.com &rarr;
-          </a>
-        </div>
-      </section>
-
       {/* MORE PROJECTS */}
       <section className="more-projects">
         <a href="/projects" className="more-projects-link">

@@ -17,13 +17,14 @@ This product follows the SkoobiLabs Workbench direction. Brand POV and studio to
 - Original static HTML files kept as reference (index.html, privacy.html)
 
 ## Infrastructure
-- Domain: labs.skoobi.com (CNAME → cname.vercel-dns.com)
-- Redirect: skoobilabs.com → labs.skoobi.com (301, GoDaddy)
+- Domains: **skoobilabs.com is the primary** (Vercel production URL) + labs.skoobi.com. The old note that skoobilabs.com 301s away is stale — it serves this site.
 - GitHub: arnegaenz/labs-site
 - Vercel project: labs-site
 
 ## What This Site Does
-- Showcases SkoobiLabs as a mobile app studio
+- **Positions SkoobiLabs as a software company: 'Big-company software. Small-company price.'** (hero rewritten 2026-07-08 — the word 'freelance' is BANNED on this site; it torpedoes B2B client diligence, which is real traffic now that client tools live at *.skoobilabs.com)
+- Page order (2026-07-08): hero → trust grid (single-tenant, encryption, observability, staging, monthly report, human on call — every claim true per D-035/D-038/OBSERVABILITY.md) → pricing → in-production strip (clients anonymous until they approve naming) → SkoobiBuild story → own products (SkoobiSlate, Hear line)
+- The personality stays (bus, wink lines) — sass punches UP at enterprise vendors, never at potential clients
 - Features the bus animation (brand/splash.html) as hero
 - App cards for ConnectionsHelper and HearZ
 - "More coming soon" messaging

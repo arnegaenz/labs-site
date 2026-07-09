@@ -1612,3 +1612,74 @@ body {
   color: rgba(255, 255, 255, 0.35) !important;
   font-style: italic;
 }
+
+/* ── Trust section — the big-league-infrastructure grid (2026-07-08) ── */
+.trust-section {
+  padding: 100px 24px 60px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1060px;
+  margin: 40px auto 0;
+  text-align: left;
+}
+.trust-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 26px 24px;
+}
+.trust-card h3 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.trust-card p {
+  font-size: 0.92rem;
+  color: #a0a0b8;
+  line-height: 1.6;
+}
+
+/* ── In-production strip — anonymous client proof (2026-07-08) ── */
+.in-production {
+  padding: 60px 24px 80px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.prod-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1060px;
+  margin: 40px auto 0;
+  text-align: left;
+}
+.prod-card {
+  background: rgba(0, 229, 160, 0.04);
+  border: 1px solid rgba(0, 229, 160, 0.14);
+  border-radius: 16px;
+  padding: 26px 24px;
+}
+.prod-card h4 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.prod-card p {
+  font-size: 0.92rem;
+  color: #a0a0b8;
+  line-height: 1.6;
+}
+.prod-note {
+  margin-top: 28px;
+  font-size: 0.9rem;
+  color: #7a7a90;
+}
