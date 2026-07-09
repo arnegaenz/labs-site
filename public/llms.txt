@@ -1,0 +1,39 @@
+# SkoobiLabs
+
+> Big-company software. Small-company price. SkoobiLabs designs, builds, hosts, and runs custom software for businesses that can't justify an enterprise vendor — and shouldn't have to.
+
+SkoobiLabs is a software studio in Edmonds, Washington (Seattle area). We build custom web tools and mobile apps, host them on our own infrastructure, and operate them under contract — the client gets enterprise-grade capability without enterprise procurement, pricing, or overhead.
+
+## What every client gets
+
+- Single-tenant infrastructure: each client's data lives in its own database, never shared or partitioned with anyone else's
+- Encryption in transit and at rest; access granted person-by-person by the client
+- Crash reporting, product analytics, and session-level diagnostics on every deployment
+- A staging environment — changes rehearse before touching production
+- A monthly report with real uptime, traffic, and usage numbers
+- A human on call: clients have the builder's direct email
+
+## Pricing (published floors, not ceilings)
+
+- Essential — from $2,500 build + $100/month: a focused, one-purpose tool (configurator, calculator, branded form)
+- Professional — from $5,000 build + $150/month: database-backed workflows, third-party integrations
+- Advanced — from $10,000 build + $250/month: full application with auth, multi-user roles, dashboards
+- All retainers are 12-month minimum engagements. Optional live analytics dashboard add-on: $50–75/month on any tier.
+
+## In production
+
+- A candidate-intelligence platform for a Seattle IT consultancy: semantic search over 1,200+ resumes; recruiters query in plain English and results outperform general-purpose AI copilots
+- A product configurator for a precision rifle manufacturer: photo-real previews, custom Cerakote finish design, locked order sheets
+- A field-operations platform for a construction company (jobs, crews, schedules) — the origin of the SkoobiBuild platform
+
+## Our own products
+
+- HearVerse — Bible audio app, live on the Apple App Store
+- HearNews, HearBooks — audio apps for news and public-domain books (TestFlight)
+- SkoobiSlate — GTD task manager (private beta)
+- SkoobiBuild — white-label job-tracking platform for small construction companies
+
+## Contact
+
+- Email: ask@skoobilabs.com
+- Web: https://skoobilabs.com
