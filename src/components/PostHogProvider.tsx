@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
 import posthog from "posthog-js";
 
 /**
@@ -30,7 +29,12 @@ export function PostHogClient({ children }: { children: React.ReactNode }) {
     posthog.init(POSTHOG_KEY, {
       api_host: POSTHOG_HOST,
       person_profiles: "identified_only",
-      capture_pageview: false,
+      // "history_change" = posthog-js captures the initial pageview AND
+      // SPA navigations itself. The old manual PageviewTracker child fired
+      // its capture BEFORE this parent effect ran init (React runs child
+      // effects first), so the initial $pageview was silently dropped —
+      // the site logged pageleaves with no pageviews (found 2026-07-08).
+      capture_pageview: "history_change",
       capture_pageleave: true,
       loaded: (ph) => {
         ph.register({
@@ -41,26 +45,5 @@ export function PostHogClient({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  return (
-    <>
-      <PageviewTracker />
-      {children}
-    </>
-  );
-}
-
-function PageviewTracker() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    if (!pathname) return;
-    if (typeof window === "undefined") return;
-    const url = searchParams && searchParams.toString().length > 0
-      ? `${pathname}?${searchParams.toString()}`
-      : pathname;
-    posthog.capture("$pageview", { $current_url: window.location.origin + url });
-  }, [pathname, searchParams]);
-
-  return null;
+  return <>{children}</>;
 }
